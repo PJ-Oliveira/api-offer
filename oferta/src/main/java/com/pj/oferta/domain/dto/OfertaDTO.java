@@ -13,6 +13,7 @@ public class OfertaDTO {
     private Date inicio;
     private Date fim;
     private String descricao;
+    private Enum status;
 
 
     public OfertaDTO convertDTO(Oferta oferta){
@@ -21,6 +22,7 @@ public class OfertaDTO {
         dto.setInicio(oferta.getInicio());
         dto.setFim(oferta.getFim());
         dto.setDescricao(oferta.getDescricao());
+        dto.setStatus((oferta.getStatus()));
         return dto;
     }
 
@@ -28,6 +30,13 @@ public class OfertaDTO {
         return oferta.stream().map(oferta1 -> convertDTO(oferta1)).collect(Collectors.toList());
     }
 
+    public Enum getStatus() {
+        return status;
+    }
+
+    public void setStatus(Enum status) {
+        this.status = status;
+    }
 
     public Long getId_Produto() {
         return id_Produto;

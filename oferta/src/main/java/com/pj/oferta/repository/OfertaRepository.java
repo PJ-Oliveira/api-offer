@@ -11,8 +11,7 @@ public interface OfertaRepository extends JpaRepository<Oferta, Long> {
 
     void deleteOfertaById(Long id);
 
-
-
-
     Optional<Oferta> findOfertaById(Long id);
+
+    Oferta getById(Long id);
 }

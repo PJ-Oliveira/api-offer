@@ -28,9 +28,7 @@ public class OfertaService {
 
     }
 
-    /*public Oferta findOfertaById(){
-        return OR.getById();
-    }*/
+
 
     public Oferta updateOferta(Oferta oferta){
         return OR.save(oferta);
@@ -43,5 +41,9 @@ public class OfertaService {
 
     public Optional<Oferta> findOfertaById(Long id){
         return OR.findOfertaById(id);
+    }
+
+    public Oferta getById(Long id){
+        return OR.getById(id);
     }
 }

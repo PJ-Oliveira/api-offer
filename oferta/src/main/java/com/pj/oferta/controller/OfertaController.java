@@ -63,5 +63,27 @@ public class OfertaController {
         return ResponseEntity.ok().body("Essa oferta não existe");
     }
 
+    @ApiOperation(tags = {"Atualização"}, value = "Atualizar oferta pelo ID.")
+    @PutMapping
+    public ResponseEntity<?> AlterOferta(@RequestParam Long id, OfertaFORM FORM) {
+        try {
+            Oferta oferta = OS.getById(id);
+            if (oferta != null) {
+                oferta.setId_Produto(oferta.getId_Produto());
+                oferta.setInicio(oferta.getInicio());
+                oferta.setFim(oferta.getFim());
+                oferta.setDescricao(oferta.getDescricao());
+                oferta.setStatus(oferta.getStatus());
+                OS.addOferta(oferta);
+                OfertaDTO DTO = new OfertaDTO();
+                return ResponseEntity.status(HttpStatus.ACCEPTED).body(DTO.convertDTO(oferta));
+            }
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Oferta não encontrada");
+        } catch (Exception exception) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
+
+    }
+
 
 }

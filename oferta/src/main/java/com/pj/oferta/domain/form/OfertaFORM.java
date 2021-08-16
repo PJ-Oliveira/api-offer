@@ -1,6 +1,7 @@
 package com.pj.oferta.domain.form;
 
 import com.pj.oferta.domain.Oferta;
+import com.pj.oferta.enums.OfertaStatus;
 import com.pj.oferta.repository.OfertaRepository;
 import com.pj.oferta.service.OfertaService;
 
@@ -12,12 +13,21 @@ public class OfertaFORM {
     private Date inicio;
     private Date fim;
     private String descricao;
+    private OfertaStatus status;
 
     public Oferta converterFORM(OfertaService OS)
     {
-        Oferta oferta = new Oferta(id_Produto, inicio, fim, descricao);
+        Oferta oferta = new Oferta(id_Produto, inicio, fim, descricao, status);
         OS.addOferta(oferta);
         return oferta;
+    }
+
+    public OfertaStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(OfertaStatus status) {
+        this.status = status;
     }
 
     public Long getId_Produto() {
