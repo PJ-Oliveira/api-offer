@@ -6,6 +6,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
@@ -18,10 +19,13 @@ public class Oferta {
     @Column(name = "id_oferta")
     private Long id;
     private Long id_Produto;
-    @JsonFormat(pattern = "dd/MM/aaaa") //tentar mudar o formato
-    private Date inicio;
+    //@NotBlank(message = "Informe a data ")
     @JsonFormat(pattern = "dd/MM/aaaa")
-    private Date fim;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME,pattern = "dd/MM/aaaa" )
+    private LocalDate inicio;
+    @JsonFormat(pattern = "dd/MM/aaaa")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME,pattern = "dd/MM/aaaa" )
+    private LocalDate fim;
     private String descricao;
     @Enumerated(EnumType.STRING)
     private OfertaStatus status;
@@ -30,7 +34,7 @@ public class Oferta {
     public Oferta() {
     }
 
-    public Oferta(Long id_Produto, Date inicio, Date fim, String descricao, OfertaStatus status) {
+    public Oferta(Long id_Produto, LocalDate inicio, LocalDate fim, String descricao, OfertaStatus status) {
         this.id_Produto = id_Produto;
         this.inicio = inicio;
         this.fim = fim;
@@ -46,19 +50,19 @@ public class Oferta {
         this.id_Produto = id_Produto;
     }
 
-    public Date getInicio() {
+    public LocalDate getInicio() {
         return inicio;
     }
 
-    public void setInicio(Date inicio) {
+    public void setInicio(LocalDate inicio) {
         this.inicio = inicio;
     }
 
-    public Date getFim() {
+    public LocalDate getFim() {
         return fim;
     }
 
-    public void setFim(Date fim) {
+    public void setFim(LocalDate fim) {
         this.fim = fim;
     }
 

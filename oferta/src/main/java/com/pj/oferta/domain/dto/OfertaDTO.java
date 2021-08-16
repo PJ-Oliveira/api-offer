@@ -2,6 +2,7 @@ package com.pj.oferta.domain.dto;
 
 import com.pj.oferta.domain.Oferta;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -10,8 +11,8 @@ public class OfertaDTO {
 
     private Long id;
     private Long id_Produto;
-    private Date inicio;
-    private Date fim;
+    private LocalDate inicio;
+    private LocalDate fim;
     private String descricao;
     private Enum status;
 
@@ -46,19 +47,19 @@ public class OfertaDTO {
         this.id_Produto = id_Produto;
     }
 
-    public Date getInicio() {
+    public LocalDate getInicio() {
         return inicio;
     }
 
-    public void setInicio(Date inicio) {
+    public void setInicio(LocalDate inicio) {
         this.inicio = inicio;
     }
 
-    public Date getFim() {
+    public LocalDate getFim() {
         return fim;
     }
 
-    public void setFim(Date fim) {
+    public void setFim(LocalDate fim) {
         this.fim = fim;
     }
 
