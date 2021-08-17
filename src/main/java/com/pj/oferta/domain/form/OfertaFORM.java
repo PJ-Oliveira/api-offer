@@ -9,6 +9,7 @@ import com.pj.oferta.domain.Oferta;
 import com.pj.oferta.enums.OfertaStatus;
 import com.pj.oferta.repository.OfertaRepository;
 import com.pj.oferta.service.OfertaService;
+import jdk.jfr.Percentage;
 
 import javax.persistence.Column;
 import javax.validation.constraints.Future;
@@ -21,6 +22,7 @@ import java.util.Date;
 
 public class OfertaFORM {
 
+    private Long id;
     @NotNull(message = "O Id do produto é necessário")
     private Long id_Produto;
     @NotNull(message = "A data de início da oferta é necessária")
@@ -35,13 +37,22 @@ public class OfertaFORM {
     @NotNull(message = "O Status da oferta é necessário")
     private OfertaStatus status;
     @Column(precision = 5, scale = 4)
+    @NotNull(message = "O Desconto é necessário")
     private BigDecimal desconto;
 
     public Oferta converterFORM(OfertaService OS)
     {
-        Oferta oferta = new Oferta(id_Produto, inicio, fim, descricao, status, desconto);
+        Oferta oferta = new Oferta(id, id_Produto, inicio, fim, descricao, status, desconto);
         OS.addOferta(oferta);
         return oferta;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public OfertaStatus getStatus() {

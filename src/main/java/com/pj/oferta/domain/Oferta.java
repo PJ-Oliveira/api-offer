@@ -1,8 +1,12 @@
 package com.pj.oferta.domain;
 
 import com.pj.oferta.enums.OfertaStatus;
+import jdk.jfr.Percentage;
 
 import javax.persistence.*;
+import javax.validation.constraints.Future;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -15,14 +19,7 @@ public class Oferta {
     @Column(name = "id_oferta")
     private Long id;
     private Long id_Produto;
-    //@NotBlank(message = "Informe a data ")
-    //@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
-    //@JsonDeserialize(using = LocalDateDeserializer.class)
-    //@JsonSerialize(using = LocalDateSerializer.class)
     private Date inicio;
-    //@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
-    //@JsonDeserialize(using = LocalDateDeserializer.class)
-    //@JsonSerialize(using = LocalDateSerializer.class)
     private Date fim;
     private String descricao;
     @Enumerated(EnumType.STRING)
@@ -34,7 +31,8 @@ public class Oferta {
     public Oferta() {
     }
 
-    public Oferta(Long id_Produto, Date inicio, Date fim, String descricao, OfertaStatus status, BigDecimal desconto) {
+    public Oferta(Long id, Long id_Produto, Date inicio, Date fim, String descricao, OfertaStatus status, BigDecimal desconto) {
+        this.id = id;
         this.id_Produto = id_Produto;
         this.inicio = inicio;
         this.fim = fim;

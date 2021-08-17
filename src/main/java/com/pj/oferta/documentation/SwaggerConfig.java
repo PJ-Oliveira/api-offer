@@ -29,7 +29,7 @@ public class SwaggerConfig {
 
     private ApiInfo metaInfo() {
         ApiInfo apiInfo = new ApiInfo(
-                "Oferta", "Microservice de oferta", "beta", null,
+                "Projeto Shadow", "Microservice de oferta", "1.0", null,
                 new Contact("Paulo Júnio de Oliveira", "https://nominalistic.wordpress.com/", "paulo.junio@compasso.com.br"),
                 "Apache License", "https://www.apache.org/licenses/LICENSE-2.0.txt", new ArrayList<VendorExtension>()
         );

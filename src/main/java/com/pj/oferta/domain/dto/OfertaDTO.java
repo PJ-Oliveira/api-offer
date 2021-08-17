@@ -19,6 +19,9 @@ public class OfertaDTO {
     private BigDecimal desconto;
 
 
+
+    //TODO: Usar modelmapper
+
     public OfertaDTO convertDTO(Oferta oferta){
         OfertaDTO dto = new OfertaDTO();
         dto.setId_Produto(oferta.getId_Produto());
@@ -27,11 +30,20 @@ public class OfertaDTO {
         dto.setDescricao(oferta.getDescricao());
         dto.setStatus(oferta.getStatus());
         dto.setDesconto(oferta.getDesconto());
+        dto.setId(oferta.getId());
         return dto;
     }
 
     public List<OfertaDTO> convertDTO(List<Oferta> oferta){
         return oferta.stream().map(oferta1 -> convertDTO(oferta1)).collect(Collectors.toList());
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public BigDecimal getDesconto() {
