@@ -1,8 +1,8 @@
 package com.pj.oferta.service;
 
 import com.pj.oferta.domain.Oferta;
+import com.pj.oferta.domain.dto.OfertaDTO;
 import com.pj.oferta.repository.OfertaRepository;
-import com.sun.xml.bind.v2.model.core.ID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +19,7 @@ public class OfertaService {
         this.OR = or;
     }
 
+
     public Oferta addOferta(Oferta oferta){
         return OR.save(oferta);
     }
@@ -27,6 +28,32 @@ public class OfertaService {
         return OR.findAll();
 
     }
+
+    /*public OfertaDTO update(Long id, OfertaFORM ofertaFORM){
+        Oferta oferta = OR.getById(id);
+        oferta.setId_Produto(ofertaFORM.getId_Produto());
+        oferta.setDescricao(ofertaFORM.getDescricao());
+        oferta.setInicio(ofertaFORM.getInicio());
+        oferta.setFim(ofertaFORM.getFim());
+        oferta.setDesconto(ofertaFORM.getDesconto());
+        oferta.setStatus(ofertaFORM.getStatus());
+        this.OR.save(oferta);
+        return new OfertaDTO();
+    }*/
+
+    /*public Oferta update(Long id, OfertaFORM ofertaFORM){
+        Oferta oferta = OR.findOfertaById(id).orElseThrow();
+        //oferta.setId(ofertaFORM.getId());
+        oferta.setDesconto(ofertaFORM.getDesconto());
+        oferta.setStatus(ofertaFORM.getStatus());
+        oferta.setFim(ofertaFORM.getFim());
+        oferta.setInicio(ofertaFORM.getInicio());
+        oferta.setDescricao(ofertaFORM.getDescricao());
+        oferta.setId_Produto(ofertaFORM.getId_Produto());
+        return OR.save(oferta);
+
+    }*/
+
 
 
 

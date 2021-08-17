@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.persistence.EntityNotFoundException;
+import javax.persistence.PreUpdate;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.net.URI;
@@ -25,11 +26,11 @@ import java.util.Optional;
 @CrossOrigin(origins = "*")
 public class OfertaController {
     private final OfertaService OS;
-
+ //TODO: sempre bom escrever OS=ofertaService
     public OfertaController(OfertaService os) {
         this.OS = os;
     }
-//teste
+
 
     @GetMapping
     @ApiOperation(httpMethod = "GET", nickname = "getAllOferta", notes = "Lista todas as ofertas",tags = {"Listagem"}, value="Veja todas as ofertas")
@@ -43,7 +44,7 @@ public class OfertaController {
 
     @GetMapping("{id}")
     @ApiOperation(httpMethod = "GET", nickname = "getByIdOferta", notes = "Busque a oferta pelo seu respectivo ID",tags = {"Busque pelo ID"}, value="Encontre oferta por ID")
-    public ResponseEntity<?> findOneOferta(@PathVariable long id){
+    public ResponseEntity<?> findOneOferta(@Valid @PathVariable long id){
         try {
             Oferta oferta = OS.getById(id);
             OfertaDTO dto = new OfertaDTO();
@@ -57,7 +58,7 @@ public class OfertaController {
 
 
     @PostMapping("/add")
-    @ApiOperation(httpMethod = "POST", nickname = "cadastraOferta", notes = "O formato da data deve ser cadastrado assim: dd/MM/aaaa", tags = {"Cadastro"}, value="Cadastro de Ofertas")
+    @ApiOperation(httpMethod = "POST", nickname = "cadastraOferta", notes = "O formato da data deve ser cadastrado assim: yyyy-MM-dd HH:mm:ss", tags = {"Cadastro"}, value="Cadastro de Ofertas")
     public ResponseEntity<?> addCliente(@Valid @RequestBody OfertaFORM FORM, UriComponentsBuilder uriBuilder){
 
         try{
@@ -72,7 +73,7 @@ public class OfertaController {
     @DeleteMapping("/{id}")
     @ApiOperation(httpMethod = "DELETE", nickname = "deleteOferta", notes = "Delete ofertas pelo seus respectivos IDs",tags = {"Delete"}, value="Delete Ofertas")
     @Transactional
-    public ResponseEntity<?> remover(@PathVariable Long id) {
+    public ResponseEntity<?> remover(@Valid @PathVariable Long id) {
         Optional<Oferta> optional = OS.findOfertaById(id);
         if (optional.isPresent()) {
             OS.deleteOferta(id);
@@ -81,27 +82,52 @@ public class OfertaController {
         return ResponseEntity.ok().body("Essa oferta não existe");
     }
 
+
+    @PutMapping("{id}")
+    @ApiOperation(httpMethod = "PUT", nickname = "atualizeOferta", notes = "Atualize uma oferta especificando seu respectivo ID",tags = {"Atualização"}, value = "Atualizar")
+    public ResponseEntity<?> atualizarCliente(@Valid @RequestBody OfertaFORM FORM, UriComponentsBuilder uriBuilder){
+
+        try{
+            Oferta oferta = FORM.converterFORM(OS);
+            URI uri = uriBuilder.path("{id}").buildAndExpand(oferta.getId()).toUri();
+            return ResponseEntity.created(uri).body(new OfertaDTO().convertDTO(oferta));
+        } catch (DataIntegrityViolationException SQL){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Digite novamente");
+        }
+    }
+
+
+    /*@PutMapping("{id}")
     @ApiOperation(httpMethod = "PUT", nickname = "atualizeOferta", notes = "Atualize uma oferta especificando seu respectivo ID",tags = {"Atualização"}, value = "Atualizar oferta pelo ID.")
-    @PutMapping
-    public ResponseEntity<?> AlterOferta(@RequestParam Long id, OfertaFORM FORM) {
+    public ResponseEntity<OfertaDTO> atualizar(@PathVariable Long id, @RequestBody OfertaFORM ofertaFORM){
+        OfertaDTO ofertaDTO = OS.update(id, ofertaFORM);
+        return ResponseEntity.ok().body(ofertaDTO);
+    }*/
+
+
+    /*@ApiOperation(httpMethod = "PUT", nickname = "atualizeOferta", notes = "Atualize uma oferta especificando seu respectivo ID",tags = {"Atualização"}, value = "Atualizar oferta pelo ID.")
+    @PutMapping("/{id}")
+    public ResponseEntity<OfertaDTO> alterOferta(@PathVariable Long id, OfertaFORM FORM) {
         try {
             Oferta oferta = OS.getById(id);
             if (oferta != null) {
-                oferta.setId_Produto(oferta.getId_Produto());
-                oferta.setInicio(oferta.getInicio());
-                oferta.setFim(oferta.getFim());
-                oferta.setDescricao(oferta.getDescricao());
-                oferta.setStatus(oferta.getStatus());
-                OS.addOferta(oferta);
+                oferta.setId_Produto(FORM.getId_Produto());
+                oferta.setInicio(FORM.getInicio());
+                oferta.setFim(FORM.getFim());
+                oferta.setDescricao(FORM.getDescricao());
+                oferta.setStatus(FORM.getStatus());
+                oferta.setDesconto(FORM.getDesconto());
+                oferta.setId(FORM.getId());
                 OfertaDTO DTO = new OfertaDTO();
-                return ResponseEntity.status(HttpStatus.ACCEPTED).body(DTO.convertDTO(oferta));
+                OS.addOferta(oferta);
+                return ResponseEntity.ok().body(DTO.convertDTO(oferta));
             }
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Oferta não encontrada");
+            return ResponseEntity.notFound().build();
         } catch (Exception exception) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
 
-    }
+    }*/
 
 
 }
