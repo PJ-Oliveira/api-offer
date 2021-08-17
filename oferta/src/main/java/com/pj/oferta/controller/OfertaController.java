@@ -30,6 +30,8 @@ public class OfertaController {
         this.OS = os;
     }
 
+    //teste
+
     @GetMapping
     @ApiOperation(httpMethod = "GET", nickname = "getAllOferta", notes = "Lista todas as ofertas",tags = {"Listagem"}, value="Veja todas as ofertas")
     public ResponseEntity<List<OfertaDTO>> findAll()
