@@ -1,13 +1,8 @@
 package com.pj.oferta.domain;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.pj.oferta.enums.OfertaStatus;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import java.io.Serializable;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 @Entity
@@ -20,12 +15,14 @@ public class Oferta {
     private Long id;
     private Long id_Produto;
     //@NotBlank(message = "Informe a data ")
-    @JsonFormat(pattern = "dd/MM/aaaa")
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME,pattern = "dd/MM/aaaa" )
-    private LocalDate inicio;
-    @JsonFormat(pattern = "dd/MM/aaaa")
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME,pattern = "dd/MM/aaaa" )
-    private LocalDate fim;
+    //@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
+    //@JsonDeserialize(using = LocalDateDeserializer.class)
+    //@JsonSerialize(using = LocalDateSerializer.class)
+    private Date inicio;
+    //@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
+    //@JsonDeserialize(using = LocalDateDeserializer.class)
+    //@JsonSerialize(using = LocalDateSerializer.class)
+    private Date fim;
     private String descricao;
     @Enumerated(EnumType.STRING)
     private OfertaStatus status;
@@ -34,7 +31,7 @@ public class Oferta {
     public Oferta() {
     }
 
-    public Oferta(Long id_Produto, LocalDate inicio, LocalDate fim, String descricao, OfertaStatus status) {
+    public Oferta(Long id_Produto, Date inicio, Date fim, String descricao, OfertaStatus status) {
         this.id_Produto = id_Produto;
         this.inicio = inicio;
         this.fim = fim;
@@ -50,19 +47,19 @@ public class Oferta {
         this.id_Produto = id_Produto;
     }
 
-    public LocalDate getInicio() {
+    public Date getInicio() {
         return inicio;
     }
 
-    public void setInicio(LocalDate inicio) {
+    public void setInicio(Date inicio) {
         this.inicio = inicio;
     }
 
-    public LocalDate getFim() {
+    public Date getFim() {
         return fim;
     }
 
-    public void setFim(LocalDate fim) {
+    public void setFim(Date fim) {
         this.fim = fim;
     }
 

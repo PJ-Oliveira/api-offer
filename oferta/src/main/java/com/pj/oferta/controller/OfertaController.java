@@ -12,7 +12,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;
@@ -38,9 +40,24 @@ public class OfertaController {
         return ResponseEntity.ok().body(dto.convertDTO(findList));
     }
 
+    @GetMapping("{id}")
+    @ApiOperation(httpMethod = "GET", nickname = "getByIdOferta", notes = "Busque a oferta pelo seu respectivo ID",tags = {"Busque pelo ID"}, value="Encontre oferta por ID")
+    public ResponseEntity<?> findOneOferta(@PathVariable long id){
+        try {
+            Oferta oferta = OS.getById(id);
+            OfertaDTO dto = new OfertaDTO();
+            return ResponseEntity.ok().body(dto.convertDTO(oferta));
+        }
+        catch (EntityNotFoundException x){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("O ID " + id + " não existe.");
+        }
+    }
+
+
+
     @PostMapping("/add")
-    @ApiOperation(tags = {"Cadastro"}, value="Cadastro de Ofertas")
-    public ResponseEntity<?> addCliente(@RequestBody OfertaFORM FORM, UriComponentsBuilder uriBuilder){
+    @ApiOperation(httpMethod = "POST", nickname = "cadastraOferta", notes = "O formato da data deve ser cadastrado assim: dd/MM/aaaa", tags = {"Cadastro"}, value="Cadastro de Ofertas")
+    public ResponseEntity<?> addCliente(@Valid @RequestBody OfertaFORM FORM, UriComponentsBuilder uriBuilder){
 
         try{
             Oferta oferta = FORM.converterFORM(OS);
@@ -52,7 +69,7 @@ public class OfertaController {
     }
 
     @DeleteMapping("/{id}")
-    @ApiOperation(tags = {"Delete"}, value="Delete Ofertas")
+    @ApiOperation(httpMethod = "DELETE", nickname = "deleteOferta", notes = "Delete ofertas pelo seus respectivos IDs",tags = {"Delete"}, value="Delete Ofertas")
     @Transactional
     public ResponseEntity<?> remover(@PathVariable Long id) {
         Optional<Oferta> optional = OS.findOfertaById(id);
@@ -63,7 +80,7 @@ public class OfertaController {
         return ResponseEntity.ok().body("Essa oferta não existe");
     }
 
-    @ApiOperation(tags = {"Atualização"}, value = "Atualizar oferta pelo ID.")
+    @ApiOperation(httpMethod = "PUT", nickname = "atualizeOferta", notes = "Atualize uma oferta especificando seu respectivo ID",tags = {"Atualização"}, value = "Atualizar oferta pelo ID.")
     @PutMapping
     public ResponseEntity<?> AlterOferta(@RequestParam Long id, OfertaFORM FORM) {
         try {

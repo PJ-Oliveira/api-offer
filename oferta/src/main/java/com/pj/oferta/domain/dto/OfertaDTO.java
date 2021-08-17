@@ -11,8 +11,8 @@ public class OfertaDTO {
 
     private Long id;
     private Long id_Produto;
-    private LocalDate inicio;
-    private LocalDate fim;
+    private Date inicio;
+    private Date fim;
     private String descricao;
     private Enum status;
 
@@ -47,19 +47,19 @@ public class OfertaDTO {
         this.id_Produto = id_Produto;
     }
 
-    public LocalDate getInicio() {
+    public Date getInicio() {
         return inicio;
     }
 
-    public void setInicio(LocalDate inicio) {
+    public void setInicio(Date inicio) {
         this.inicio = inicio;
     }
 
-    public LocalDate getFim() {
+    public Date getFim() {
         return fim;
     }
 
-    public void setFim(LocalDate fim) {
+    public void setFim(Date fim) {
         this.fim = fim;
     }
 
