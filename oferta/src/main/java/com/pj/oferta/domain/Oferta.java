@@ -3,6 +3,7 @@ package com.pj.oferta.domain;
 import com.pj.oferta.enums.OfertaStatus;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.Date;
 
 @Entity
@@ -26,17 +27,20 @@ public class Oferta {
     private String descricao;
     @Enumerated(EnumType.STRING)
     private OfertaStatus status;
+    @Column(precision = 5, scale = 4)
+    private BigDecimal desconto;
 
 
     public Oferta() {
     }
 
-    public Oferta(Long id_Produto, Date inicio, Date fim, String descricao, OfertaStatus status) {
+    public Oferta(Long id_Produto, Date inicio, Date fim, String descricao, OfertaStatus status, BigDecimal desconto) {
         this.id_Produto = id_Produto;
         this.inicio = inicio;
         this.fim = fim;
         this.descricao = descricao;
         this.status = status;
+        this.desconto = desconto;
     }
 
     public Long getId_Produto() {
@@ -87,6 +91,14 @@ public class Oferta {
         this.status = status;
     }
 
+    public BigDecimal getDesconto() {
+        return desconto;
+    }
+
+    public void setDesconto(BigDecimal desconto) {
+        this.desconto = desconto;
+    }
+
     @Override
     public String toString() {
         return "Oferta{" +
@@ -95,6 +107,7 @@ public class Oferta {
                 ", fim=" + fim +
                 ", descricao='" + descricao + '\'' +
                 ", status=" + status +
+                ", desconto=" + desconto +
                 '}';
     }
 }

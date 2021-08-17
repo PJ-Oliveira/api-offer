@@ -2,6 +2,7 @@ package com.pj.oferta.domain.dto;
 
 import com.pj.oferta.domain.Oferta;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
@@ -15,6 +16,7 @@ public class OfertaDTO {
     private Date fim;
     private String descricao;
     private Enum status;
+    private BigDecimal desconto;
 
 
     public OfertaDTO convertDTO(Oferta oferta){
@@ -23,12 +25,21 @@ public class OfertaDTO {
         dto.setInicio(oferta.getInicio());
         dto.setFim(oferta.getFim());
         dto.setDescricao(oferta.getDescricao());
-        dto.setStatus((oferta.getStatus()));
+        dto.setStatus(oferta.getStatus());
+        dto.setDesconto(oferta.getDesconto());
         return dto;
     }
 
     public List<OfertaDTO> convertDTO(List<Oferta> oferta){
         return oferta.stream().map(oferta1 -> convertDTO(oferta1)).collect(Collectors.toList());
+    }
+
+    public BigDecimal getDesconto() {
+        return desconto;
+    }
+
+    public void setDesconto(BigDecimal desconto) {
+        this.desconto = desconto;
     }
 
     public Enum getStatus() {

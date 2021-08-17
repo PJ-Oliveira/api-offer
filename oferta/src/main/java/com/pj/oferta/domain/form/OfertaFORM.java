@@ -10,10 +10,12 @@ import com.pj.oferta.enums.OfertaStatus;
 import com.pj.oferta.repository.OfertaRepository;
 import com.pj.oferta.service.OfertaService;
 
+import javax.persistence.Column;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Date;
 
@@ -22,24 +24,22 @@ public class OfertaFORM {
     @NotNull(message = "O Id do produto é necessário")
     private Long id_Produto;
     @NotNull(message = "A data de início da oferta é necessária")
-    //@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
-    //@JsonDeserialize(using = LocalDateDeserializer.class)
-    //@JsonSerialize(using = LocalDateSerializer.class)
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss", timezone = "GMT-03")
     private Date inicio;
     @NotNull(message = "A data de fim da oferta é necessária")
     @Future
-    //@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
-    //@JsonDeserialize(using = LocalDateDeserializer.class)
-    //@JsonSerialize(using = LocalDateSerializer.class)
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss", timezone = "GMT-03")
     private Date fim;
     @NotBlank(message = "A descrição da oferta é necessária")
     private String descricao;
     @NotNull(message = "O Status da oferta é necessário")
     private OfertaStatus status;
+    @Column(precision = 5, scale = 4)
+    private BigDecimal desconto;
 
     public Oferta converterFORM(OfertaService OS)
     {
-        Oferta oferta = new Oferta(id_Produto, inicio, fim, descricao, status);
+        Oferta oferta = new Oferta(id_Produto, inicio, fim, descricao, status, desconto);
         OS.addOferta(oferta);
         return oferta;
     }
@@ -82,5 +82,13 @@ public class OfertaFORM {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+
+    public BigDecimal getDesconto() {
+        return desconto;
+    }
+
+    public void setDesconto(BigDecimal desconto) {
+        this.desconto = desconto;
     }
 }
