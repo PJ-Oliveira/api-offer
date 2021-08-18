@@ -2,13 +2,14 @@ package com.pj.oferta.domain.dto;
 
 import com.pj.oferta.domain.Oferta;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class OfertaDTO {
+public class OfertaDTO implements Serializable {
 
     private Long id;
     private Long id_Produto;
@@ -17,8 +18,6 @@ public class OfertaDTO {
     private String descricao;
     private Enum status;
     private BigDecimal desconto;
-
-
 
     //TODO: Usar modelmapper
 

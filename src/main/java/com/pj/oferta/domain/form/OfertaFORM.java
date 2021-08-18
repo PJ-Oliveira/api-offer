@@ -16,11 +16,12 @@ import javax.validation.constraints.Future;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Date;
 
-public class OfertaFORM {
+public class OfertaFORM implements Serializable {
 
     private Long id;
     @NotNull(message = "O Id do produto é necessário")
@@ -40,8 +41,7 @@ public class OfertaFORM {
     @NotNull(message = "O Desconto é necessário")
     private BigDecimal desconto;
 
-    public Oferta converterFORM(OfertaService OS)
-    {
+    public Oferta converterFORM(OfertaService OS) {
         Oferta oferta = new Oferta(id, id_Produto, inicio, fim, descricao, status, desconto);
         OS.addOferta(oferta);
         return oferta;
