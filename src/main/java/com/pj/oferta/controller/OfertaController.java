@@ -1,11 +1,12 @@
 package com.pj.oferta.controller;
 
-import com.pj.oferta.configuration.rabbit.RabbitMQConstantes;
+//import com.pj.oferta.configuration.rabbit.RabbitMQConstantes;
 import com.pj.oferta.domain.Oferta;
 import com.pj.oferta.domain.dto.OfertaDTO;
 import com.pj.oferta.domain.form.OfertaFORM;
+import com.pj.oferta.repository.OfertaRepository;
 import com.pj.oferta.service.OfertaService;
-import com.pj.oferta.service.RabbitMQService;
+//import com.pj.oferta.service.RabbitMQService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,13 +28,14 @@ import java.util.Optional;
 @Api(tags = {"Oferta"}, value = "Controller Offer")
 @CrossOrigin(origins = "*")
 public class OfertaController {
-    @Autowired
-    private RabbitMQService rabbitMQService;
 
     private final OfertaService ofertaService;
 
-    public OfertaController(OfertaService os) {
-        this.ofertaService = os;
+    @Autowired
+    private OfertaRepository ofertaRepository;
+
+    public OfertaController(OfertaService ofertaService) {
+        this.ofertaService = ofertaService;
     }
 
     @GetMapping
@@ -43,7 +45,6 @@ public class OfertaController {
     {
         List<Oferta> findList = ofertaService.findAllOferta();
         OfertaDTO dto = new OfertaDTO();
-        //this.rabbitMQService.enviaMensagem(RabbitMQConstantes.FILA_OFERTA, findAll());
         return ResponseEntity.ok().body(dto.convertDTO(findList));
     }
 
@@ -53,7 +54,6 @@ public class OfertaController {
         try {
             Oferta oferta = ofertaService.getById(id);
             OfertaDTO dto = new OfertaDTO();
-            //this.rabbitMQService.enviaMensagem(RabbitMQConstantes.FILA_OFERTA, id);
             return ResponseEntity.ok().body(dto.convertDTO(oferta));
         }
         catch (EntityNotFoundException x){
@@ -61,23 +61,23 @@ public class OfertaController {
         }
     }
 
-    @PostMapping("/add")
+    @PostMapping("/addOferta")
+    @Transactional
     @ApiOperation(httpMethod = "POST", nickname = "cadastraOferta", notes = "O formato da data deve ser cadastrado assim: yyyy-MM-dd HH:mm:ss", tags = {"Cadastro"}, value="Cadastro de Ofertas")
-    public ResponseEntity<?> addCliente(@Valid @RequestBody OfertaFORM FORM, UriComponentsBuilder uriBuilder){
+    public ResponseEntity<?> addOferta(@Valid @RequestBody OfertaFORM FORM, UriComponentsBuilder uriBuilder){
         try{
             Oferta oferta = FORM.converterFORM(ofertaService);
             URI uri = uriBuilder.path("{id}").buildAndExpand(oferta.getId()).toUri();
-            this.rabbitMQService.enviaMensagem(RabbitMQConstantes.FILA_OFERTA, oferta);
             return ResponseEntity.created(uri).body(new OfertaDTO().convertDTO(oferta));
         } catch (DataIntegrityViolationException SQL){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Oferta já cadastrada");
         }
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("delete/{id}")
     @ApiOperation(httpMethod = "DELETE", nickname = "deleteOferta", notes = "Delete ofertas pelo seus respectivos IDs",tags = {"Delete"}, value="Delete Ofertas")
     @Transactional
-    public ResponseEntity<?> remover(@Valid @PathVariable Long id) {
+    public ResponseEntity<?> deleteOferta(@Valid @PathVariable Long id) {
         Optional<Oferta> optional = ofertaService.findOfertaById(id);
         if (optional.isPresent()) {
             ofertaService.deleteOferta(id);
@@ -86,15 +86,14 @@ public class OfertaController {
         return ResponseEntity.ok().body("Essa oferta não existe");
     }
 
-
     @PutMapping("{id}")
     @ApiOperation(httpMethod = "PUT", nickname = "atualizeOferta", notes = "Atualize uma oferta especificando seu respectivo ID",tags = {"Atualização"}, value = "Atualizar")
-    public ResponseEntity<?> atualizarCliente(@Valid @RequestBody OfertaFORM FORM, UriComponentsBuilder uriBuilder){
+    public ResponseEntity<?> updateOferta(@Valid @RequestBody OfertaFORM FORM, UriComponentsBuilder uriBuilder){
 
         try{
             Oferta oferta = FORM.converterFORM(ofertaService);
             URI uri = uriBuilder.path("{id}").buildAndExpand(oferta.getId()).toUri();
-            this.rabbitMQService.enviaMensagem(RabbitMQConstantes.FILA_OFERTA, oferta);
+            //this.rabbitMQService.enviaMensagem(RabbitMQConstantes.FILA_OFERTA, oferta);
             return ResponseEntity.created(uri).body(new OfertaDTO().convertDTO(oferta));
         } catch (DataIntegrityViolationException SQL){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Digite novamente");
@@ -102,34 +101,4 @@ public class OfertaController {
     }
 
 
-    /*@PutMapping("{id}")
-    @ApiOperation(httpMethod = "PUT", nickname = "atualizeOferta", notes = "Atualize uma oferta especificando seu respectivo ID",tags = {"Atualização"}, value = "Atualizar oferta pelo ID.")
-    public ResponseEntity<OfertaDTO> atualizar(@PathVariable Long id, @RequestBody OfertaFORM ofertaFORM){
-        OfertaDTO ofertaDTO = OS.update(id, ofertaFORM);
-        return ResponseEntity.ok().body(ofertaDTO);
-    }*/
-
-    /*@ApiOperation(httpMethod = "PUT", nickname = "atualizeOferta", notes = "Atualize uma oferta especificando seu respectivo ID",tags = {"Atualização"}, value = "Atualizar oferta pelo ID.")
-    @PutMapping("/{id}")
-    public ResponseEntity<OfertaDTO> alterOferta(@PathVariable Long id, OfertaFORM FORM) {
-        try {
-            Oferta oferta = OS.getById(id);
-            if (oferta != null) {
-                oferta.setId_Produto(FORM.getId_Produto());
-                oferta.setInicio(FORM.getInicio());
-                oferta.setFim(FORM.getFim());
-                oferta.setDescricao(FORM.getDescricao());
-                oferta.setStatus(FORM.getStatus());
-                oferta.setDesconto(FORM.getDesconto());
-                oferta.setId(FORM.getId());
-                OfertaDTO DTO = new OfertaDTO();
-                OS.addOferta(oferta);
-                return ResponseEntity.ok().body(DTO.convertDTO(oferta));
-            }
-            return ResponseEntity.notFound().build();
-        } catch (Exception exception) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-        }
-
-    }*/
 }

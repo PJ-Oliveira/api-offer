@@ -1,46 +1,52 @@
 package com.pj.oferta.service;
 
+import com.pj.oferta.configuration.rabbit.cancelarofertadto.CancelarOfertaDTO;
 import com.pj.oferta.domain.Oferta;
-import com.pj.oferta.domain.dto.OfertaDTO;
 import com.pj.oferta.repository.OfertaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class OfertaService {
 
-    private final OfertaRepository OR;
+    @Autowired
+    private final OfertaRepository ofertaRepository;
 
     @Autowired
-    public OfertaService(OfertaRepository or) {
-        this.OR = or;
+    public OfertaService(OfertaRepository ofertaRepository) {
+        this.ofertaRepository = ofertaRepository;
     }
 
     public Oferta addOferta(Oferta oferta){
-        return OR.save(oferta);
+        return ofertaRepository.save(oferta);
     }
 
-
     public List<Oferta> findAllOferta(){
-        return OR.findAll();
+        return ofertaRepository.findAll();
     }
 
     public Oferta updateOferta(Oferta oferta){
-        return OR.save(oferta);
+        return ofertaRepository.save(oferta);
     }
 
     public void deleteOferta(Long id){
-        OR.deleteOfertaById(id);
+        ofertaRepository.deleteOfertaById(id);
     }
 
     public Optional<Oferta> findOfertaById(Long id){
-        return OR.findOfertaById(id);
+        return ofertaRepository.findOfertaById(id);
     }
 
     public Oferta getById(Long id){
-        return OR.getById(id);
+        return ofertaRepository.getById(id);
+    }
+
+    @Transactional
+    public void cancelaOfertaById_Product(CancelarOfertaDTO cancelarOfertaDTO){
+        ofertaRepository.deleteOfertaByProduct(cancelarOfertaDTO.getProduct());
     }
 }

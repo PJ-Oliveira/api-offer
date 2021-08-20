@@ -1,12 +1,9 @@
 package com.pj.oferta.domain;
 
 import com.pj.oferta.enums.OfertaStatus;
-import jdk.jfr.Percentage;
+import springfox.documentation.spring.web.json.Json;
 
 import javax.persistence.*;
-import javax.validation.constraints.Future;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -19,7 +16,8 @@ public class Oferta implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_oferta")
     private Long id;
-    private Long id_Produto;
+    @Column(name = "id_produto")
+    private Long Product;
     private Date inicio;
     private Date fim;
     private String descricao;
@@ -32,9 +30,9 @@ public class Oferta implements Serializable {
     public Oferta() {
     }
 
-    public Oferta(Long id, Long id_Produto, Date inicio, Date fim, String descricao, OfertaStatus status, BigDecimal desconto) {
+    public Oferta(Long id, Long Product, Date inicio, Date fim, String descricao, OfertaStatus status, BigDecimal desconto) {
         this.id = id;
-        this.id_Produto = id_Produto;
+        this.Product = Product;
         this.inicio = inicio;
         this.fim = fim;
         this.descricao = descricao;
@@ -42,12 +40,12 @@ public class Oferta implements Serializable {
         this.desconto = desconto;
     }
 
-    public Long getId_Produto() {
-        return id_Produto;
+    public Long getProduct() {
+        return Product;
     }
 
-    public void setId_Produto(Long id_Produto) {
-        this.id_Produto = id_Produto;
+    public void setProduct(Long product) {
+        this.Product = product;
     }
 
     public Date getInicio() {
@@ -101,7 +99,7 @@ public class Oferta implements Serializable {
     @Override
     public String toString() {
         return "Oferta{" +
-                "id_Produto=" + id_Produto +
+                "id_Produto=" + Product +
                 ", inicio=" + inicio +
                 ", fim=" + fim +
                 ", descricao='" + descricao + '\'' +

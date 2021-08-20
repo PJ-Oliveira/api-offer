@@ -1,10 +1,10 @@
 package com.pj.oferta.domain.dto;
 
 import com.pj.oferta.domain.Oferta;
+import springfox.documentation.spring.web.json.Json;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 public class OfertaDTO implements Serializable {
 
     private Long id;
-    private Long id_Produto;
+    private Long Product;
     private Date inicio;
     private Date fim;
     private String descricao;
@@ -23,7 +23,7 @@ public class OfertaDTO implements Serializable {
 
     public OfertaDTO convertDTO(Oferta oferta){
         OfertaDTO dto = new OfertaDTO();
-        dto.setId_Produto(oferta.getId_Produto());
+        dto.setProduct(oferta.getProduct());
         dto.setInicio(oferta.getInicio());
         dto.setFim(oferta.getFim());
         dto.setDescricao(oferta.getDescricao());
@@ -61,12 +61,12 @@ public class OfertaDTO implements Serializable {
         this.status = status;
     }
 
-    public Long getId_Produto() {
-        return id_Produto;
+    public Long getProduct() {
+        return Product;
     }
 
-    public void setId_Produto(Long id_Produto) {
-        this.id_Produto = id_Produto;
+    public void setProduct(Long product) {
+        this.Product = product;
     }
 
     public Date getInicio() {
