@@ -23,12 +23,10 @@ public class RabbitMQListener {
     public void listener(String message) {
         try {
             CancelarOfertaDTO cancelarOfertaDTO = new ObjectMapper().readValue(message, CancelarOfertaDTO.class);
-
             //invoca o método cancelar
             ofertaService.cancelaOfertaById_Product(cancelarOfertaDTO);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
     }
-
 }
