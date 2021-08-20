@@ -1,11 +1,11 @@
-package com.pj.offer.configuration.rabbit.rabbitlistener;
+package com.pj.offer.rabbitmq.rabbitlistener;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.pj.offer.configuration.rabbit.cancelarofertadto.DeleteOfferDTO;
-import com.pj.offer.configuration.rabbit.rabbitconfig.RabbitMQConfig;
+import com.pj.offer.rabbitmq.cancelarofertadto.DeleteOfferDTO;
+import com.pj.offer.rabbitmq.rabbitconfig.RabbitMQConfig;
 import com.pj.offer.service.OfferService;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,6 +1,6 @@
 package com.pj.offer.service;
 
-import com.pj.offer.configuration.rabbit.cancelarofertadto.DeleteOfferDTO;
+import com.pj.offer.rabbitmq.cancelarofertadto.DeleteOfferDTO;
 import com.pj.offer.domain.Offer;
 import com.pj.offer.repository.OfferRepository;
 import org.springframework.beans.factory.annotation.Autowired;

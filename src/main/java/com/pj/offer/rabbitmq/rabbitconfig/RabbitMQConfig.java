@@ -1,4 +1,4 @@
-package com.pj.offer.configuration.rabbit.rabbitconfig;
+package com.pj.offer.rabbitmq.rabbitconfig;
 
 import org.springframework.amqp.core.*;
 import org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory;
@@ -75,7 +75,6 @@ public class RabbitMQConfig {
         rabbitTemplate.setMessageConverter(producerJackson2MessageConverter());
         return rabbitTemplate;
     }
-
 
     @Bean
     public Jackson2JsonMessageConverter producerJackson2MessageConverter() {

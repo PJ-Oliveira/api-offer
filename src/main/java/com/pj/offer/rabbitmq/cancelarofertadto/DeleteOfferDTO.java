@@ -1,4 +1,4 @@
-package com.pj.offer.configuration.rabbit.cancelarofertadto;
+package com.pj.offer.rabbitmq.cancelarofertadto;
 
 public class DeleteOfferDTO {
 
