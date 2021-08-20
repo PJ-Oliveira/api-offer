@@ -14,7 +14,7 @@ import javax.validation.Valid;
 import static com.fasterxml.jackson.databind.DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES;
 
 @Component
-public class RabbitMQListener {
+public class DeleteOfferDTOListener {
 
     @Autowired
     private OfferService offerService;

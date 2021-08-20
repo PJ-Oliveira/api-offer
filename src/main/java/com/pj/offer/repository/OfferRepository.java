@@ -11,11 +11,11 @@ import java.util.Optional;
 
 public interface OfferRepository extends JpaRepository<Offer, Long> {
 
-    void deleteOfertaById(Long id);
-
     @Modifying
     @Query("delete from Offer x where x.id_Product=:id_Product")
     void deleteOfferByProduct(@Param("id_Product") Long id_Product);
+
+    void deleteOfertaById(Long id);
 
     Optional<Offer> findOfferById(Long id);
 

@@ -16,11 +16,11 @@ public class Offer implements Serializable {
     private Long id;
     @Column(name = "id_Product")
     private Long id_Product;
-    @Column(name = "Início")
+    @Column(name = "Inicio")
     private Date inicio;
     @Column(name = "Fim")
     private Date fim;
-    @Column(name = "Descrição")
+    @Column(name = "Descricao")
     private String descricao;
     @Enumerated(EnumType.STRING)
     @Column(name = "Status")
