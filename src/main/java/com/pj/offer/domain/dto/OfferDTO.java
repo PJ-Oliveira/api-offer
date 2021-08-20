@@ -1,18 +1,17 @@
-package com.pj.oferta.domain.dto;
+package com.pj.offer.domain.dto;
 
-import com.pj.oferta.domain.Oferta;
+import com.pj.offer.domain.Offer;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class OfertaDTO implements Serializable {
+public class OfferDTO implements Serializable {
 
     private Long id;
-    private Long id_Produto;
+    private Long id_Product;
     private Date inicio;
     private Date fim;
     private String descricao;
@@ -21,20 +20,20 @@ public class OfertaDTO implements Serializable {
 
     //TODO: Usar modelmapper
 
-    public OfertaDTO convertDTO(Oferta oferta){
-        OfertaDTO dto = new OfertaDTO();
-        dto.setId_Produto(oferta.getId_Produto());
-        dto.setInicio(oferta.getInicio());
-        dto.setFim(oferta.getFim());
-        dto.setDescricao(oferta.getDescricao());
-        dto.setStatus(oferta.getStatus());
-        dto.setDesconto(oferta.getDesconto());
-        dto.setId(oferta.getId());
+    public OfferDTO convertDTO(Offer offer){
+        OfferDTO dto = new OfferDTO();
+        dto.setId_Product(offer.getId_Product());
+        dto.setInicio(offer.getInicio());
+        dto.setFim(offer.getFim());
+        dto.setDescricao(offer.getDescricao());
+        dto.setStatus(offer.getStatus());
+        dto.setDesconto(offer.getDesconto());
+        dto.setId(offer.getId());
         return dto;
     }
 
-    public List<OfertaDTO> convertDTO(List<Oferta> oferta){
-        return oferta.stream().map(oferta1 -> convertDTO(oferta1)).collect(Collectors.toList());
+    public List<OfferDTO> convertDTO(List<Offer> offer){
+        return offer.stream().map(oferta1 -> convertDTO(oferta1)).collect(Collectors.toList());
     }
 
     public Long getId() {
@@ -61,12 +60,12 @@ public class OfertaDTO implements Serializable {
         this.status = status;
     }
 
-    public Long getId_Produto() {
-        return id_Produto;
+    public Long getId_Product() {
+        return id_Product;
     }
 
-    public void setId_Produto(Long id_Produto) {
-        this.id_Produto = id_Produto;
+    public void setId_Product(Long id_Product) {
+        this.id_Product = id_Product;
     }
 
     public Date getInicio() {

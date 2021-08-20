@@ -1,31 +1,23 @@
-package com.pj.oferta.domain.form;
+package com.pj.offer.domain.form;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
-import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
-import com.pj.oferta.domain.Oferta;
-import com.pj.oferta.enums.OfertaStatus;
-import com.pj.oferta.repository.OfertaRepository;
-import com.pj.oferta.service.OfertaService;
-import jdk.jfr.Percentage;
+import com.pj.offer.domain.Offer;
+import com.pj.offer.enums.OfertaStatus;
+import com.pj.offer.service.OfferService;
 
 import javax.persistence.Column;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.util.Date;
 
-public class OfertaFORM implements Serializable {
+public class OfferFORM implements  Serializable{
 
     private Long id;
     @NotNull(message = "O Id do produto é necessário")
-    private Long id_Produto;
+    private Long id_Product;
     @NotNull(message = "A data de início da oferta é necessária")
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss", timezone = "GMT-03")
     private Date inicio;
@@ -41,10 +33,13 @@ public class OfertaFORM implements Serializable {
     @NotNull(message = "O Desconto é necessário")
     private BigDecimal desconto;
 
-    public Oferta converterFORM(OfertaService OS) {
-        Oferta oferta = new Oferta(id, id_Produto, inicio, fim, descricao, status, desconto);
-        OS.addOferta(oferta);
-        return oferta;
+    public Offer converterFORM(OfferService OS) {
+        Offer offer = new Offer(id, id_Product, inicio, fim, descricao, status, desconto);
+        OS.addOferta(offer);
+        return offer;
+    }
+
+    public OfferFORM() {
     }
 
     public Long getId() {
@@ -63,12 +58,12 @@ public class OfertaFORM implements Serializable {
         this.status = status;
     }
 
-    public Long getId_Produto() {
-        return id_Produto;
+    public Long getId_Product() {
+        return id_Product;
     }
 
-    public void setId_Produto(Long id_Produto) {
-        this.id_Produto = id_Produto;
+    public void setId_Product(Long id_Product) {
+        this.id_Product = id_Product;
     }
 
     public Date getInicio() {

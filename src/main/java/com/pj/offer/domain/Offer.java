@@ -1,40 +1,39 @@
-package com.pj.oferta.domain;
+package com.pj.offer.domain;
 
-import com.pj.oferta.enums.OfertaStatus;
-import jdk.jfr.Percentage;
-
+import com.pj.offer.enums.OfertaStatus;
 import javax.persistence.*;
-import javax.validation.constraints.Future;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
 @Entity
 @Table
-public class Oferta implements Serializable {
+public class Offer implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id_oferta")
+    @Column(name = "id_Offer")
     private Long id;
-    private Long id_Produto;
+    @Column(name = "id_Product")
+    private Long id_Product;
+    @Column(name = "Inicio")
     private Date inicio;
+    @Column(name = "Fim")
     private Date fim;
+    @Column(name = "Descricao")
     private String descricao;
     @Enumerated(EnumType.STRING)
+    @Column(name = "Status")
     private OfertaStatus status;
-    @Column(precision = 5, scale = 4)
+    @Column(name = "Desconto")
     private BigDecimal desconto;
 
-
-    public Oferta() {
+    public Offer() {
     }
 
-    public Oferta(Long id, Long id_Produto, Date inicio, Date fim, String descricao, OfertaStatus status, BigDecimal desconto) {
+    public Offer(Long id, Long id_Product, Date inicio, Date fim, String descricao, OfertaStatus status, BigDecimal desconto) {
         this.id = id;
-        this.id_Produto = id_Produto;
+        this.id_Product = id_Product;
         this.inicio = inicio;
         this.fim = fim;
         this.descricao = descricao;
@@ -42,12 +41,12 @@ public class Oferta implements Serializable {
         this.desconto = desconto;
     }
 
-    public Long getId_Produto() {
-        return id_Produto;
+    public Long getId_Product() {
+        return id_Product;
     }
 
-    public void setId_Produto(Long id_Produto) {
-        this.id_Produto = id_Produto;
+    public void setId_Product(Long id_Product) {
+        this.id_Product = id_Product;
     }
 
     public Date getInicio() {
@@ -100,8 +99,8 @@ public class Oferta implements Serializable {
 
     @Override
     public String toString() {
-        return "Oferta{" +
-                "id_Produto=" + id_Produto +
+        return "Offer{" +
+                "id_Produto=" + id_Product +
                 ", inicio=" + inicio +
                 ", fim=" + fim +
                 ", descricao='" + descricao + '\'' +

@@ -1,13 +1,13 @@
-package com.pj.oferta;
+package com.pj.offer;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class OfertaApplication {
+public class OfferApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(OfertaApplication.class, args);
+		SpringApplication.run(OfferApplication.class, args);
 	}
 
 }
