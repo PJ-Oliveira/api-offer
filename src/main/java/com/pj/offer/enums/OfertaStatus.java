@@ -1,4 +1,4 @@
-package com.pj.oferta.enums;
+package com.pj.offer.enums;
 
 public enum OfertaStatus {
 

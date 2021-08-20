@@ -1,4 +1,4 @@
-package com.pj.oferta.documentation;
+package com.pj.offer.documentation;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

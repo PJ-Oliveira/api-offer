@@ -1,7 +1,6 @@
-package com.pj.oferta.configuration.rabbit.rabbitconfig;
+package com.pj.offer.configuration.rabbit.rabbitconfig;
 
 import org.springframework.amqp.core.*;
-import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
@@ -11,7 +10,6 @@ import org.springframework.amqp.support.converter.MessageConverter;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
 
 @Configuration
 public class RabbitMQConfig {
@@ -59,7 +57,6 @@ public class RabbitMQConfig {
     }
 
     @Bean(name = "offerContainerFactory")
-    //@Primary
     public SimpleRabbitListenerContainerFactory orderContainerFactory(
             @Qualifier("connectionFactory") ConnectionFactory connectionFactory) {
         SimpleRabbitListenerContainerFactory factory = new SimpleRabbitListenerContainerFactory();
