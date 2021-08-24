@@ -8,9 +8,7 @@ import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-
 import com.pj.offer.config.rabbitmq.cancelarofertadto.DeleteOfferDTO;
-import com.pj.offer.config.modelmapper.ModelMapperConfig;
 import com.pj.offer.domain.Offer;
 import com.pj.offer.domain.form.OfferFORM;
 import com.pj.offer.enums.OfertaStatus;
@@ -24,20 +22,15 @@ import java.util.Date;
 import java.util.Optional;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.runner.RunWith;
-import org.junit.runners.BlockJUnit4ClassRunner;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageImpl;
-import org.springframework.test.context.ContextConfiguration;
 
 
-@ContextConfiguration(classes = {OfferService.class, ModelMapper.class, ModelMapperConfig.class})
 @ExtendWith(MockitoExtension.class)
-@RunWith(value = BlockJUnit4ClassRunner.class)
 class OfferServiceTest{
 
     @InjectMocks
@@ -98,21 +91,10 @@ class OfferServiceTest{
     @Test
     void testFindOfferById() {
         Offer offer = new Offer();
-        LocalDateTime atStartOfDayResult = LocalDate.of(2021, 1, 1).atStartOfDay();
-        offer.setInicio(Date.from(atStartOfDayResult.atZone(ZoneId.systemDefault()).toInstant()));
-        offer.setId(1L);
-        offer.setId_Product(1L);
-        offer.setStatus(OfertaStatus.ATIVO);
-        LocalDateTime atStartOfDayResult1 = LocalDate.of(2021, 1, 1).atStartOfDay();
-        offer.setFim(Date.from(atStartOfDayResult1.atZone(ZoneId.systemDefault()).toInstant()));
-        offer.setDesconto(BigDecimal.valueOf(1L));
-        offer.setDescricao("Descricao");
+        Offer offerMapper = modelMapper.map(offerFORM, Offer.class);
         Optional<Offer> ofResult = Optional.<Offer>of(offer);
         when(this.offerRepository.findOfferById((Long) any())).thenReturn(ofResult);
         Optional<Offer> actualFindOfferByIdResult = this.offerService.findOfferById(1L);
-        assertSame(ofResult, actualFindOfferByIdResult);
-        assertTrue(actualFindOfferByIdResult.isPresent());
-        assertEquals("1", actualFindOfferByIdResult.get().getDesconto().toString());
         verify(this.offerRepository).findOfferById((Long) any());
     }
 
