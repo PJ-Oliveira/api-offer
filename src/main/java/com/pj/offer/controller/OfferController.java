@@ -1,29 +1,20 @@
 package com.pj.offer.controller;
-
-//import com.pj.oferta.configuration.rabbit.RabbitMQConstantes;
-import com.pj.offer.domain.Offer;
 import com.pj.offer.domain.dto.OfferDTO;
 import com.pj.offer.domain.form.OfferFORM;
-import com.pj.offer.repository.OfferRepository;
 import com.pj.offer.service.OfferService;
-//import com.pj.oferta.service.RabbitMQService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.http.HttpStatus;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.util.UriComponentsBuilder;
-
-import javax.persistence.EntityNotFoundException;
-import javax.transaction.Transactional;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/oferta")
@@ -47,12 +38,11 @@ public class OfferController {
             @ApiResponse(code = 404, message = "Recurso não encontrado"),
             @ApiResponse(code = 500, message = "Sistema Indisponível")
     })
-    public ResponseEntity<List<OfferDTO>> findAll()
-    {
-        List<Offer> findList = offerService.findAllOferta();
-        OfferDTO dto = new OfferDTO();
-        return ResponseEntity.ok().body(dto.convertDTO(findList));
+    public ResponseEntity<List<OfferDTO>> getAllPage(@PageableDefault(page = 0, size = 5)Pageable pageable){
+        List<OfferDTO> offerDTO = offerService.findAll(pageable);
+        return ResponseEntity.ok().body(offerDTO);
     }
+
 
     @GetMapping("{id}")
     @ApiOperation(httpMethod = "GET", notes = "Busque a oferta pelo seu respectivo ID",tags = {"Busque pelo ID"}, value="Encontre oferta por ID")
@@ -62,19 +52,12 @@ public class OfferController {
             @ApiResponse(code = 404, message = "Recurso não encontrado"),
             @ApiResponse(code = 500, message = "Sistema Indisponível")
     })
-    public ResponseEntity<?> findOneOffer(@Valid @PathVariable long id){
-        try {
-            Offer offer = offerService.getById(id);
-            OfferDTO dto = new OfferDTO();
-            return ResponseEntity.ok().body(dto.convertDTO(offer));
-        }
-        catch (EntityNotFoundException x){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("O ID " + id + " não existe.");
-        }
+    public ResponseEntity<OfferDTO> findOneOffer(@Valid @PathVariable long id){
+        OfferDTO offerDTO = offerService.getById(id);
+        return ResponseEntity.ok().body(offerDTO);
     }
 
     @PostMapping("/addOffer")
-    @Transactional
     @ApiOperation(httpMethod = "POST", notes = "O formato da data deve seguir esse modelo: 2021-08-25 01:01:01", tags = {"Cadastro"}, value="Cadastro de Ofertas")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Requisição bem sucedida"),
@@ -82,17 +65,14 @@ public class OfferController {
             @ApiResponse(code = 404, message = "Recurso não encontrado"),
             @ApiResponse(code = 500, message = "Sistema Indisponível")
     })
-    public ResponseEntity<?> addOffer(@Valid @RequestBody OfferFORM FORM, UriComponentsBuilder uriBuilder){
-        try{
-            Offer offer = FORM.converterFORM(offerService);
-            URI uri = uriBuilder.path("{id}").buildAndExpand(offer.getId()).toUri();
-            return ResponseEntity.created(uri).body(new OfferDTO().convertDTO(offer));
-        } catch (DataIntegrityViolationException SQL){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Oferta já cadastrada");
-        }
+    public ResponseEntity<OfferDTO> create(@Valid @RequestBody OfferFORM offerFORM){
+        OfferDTO offerDTO = offerService.save(offerFORM);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("{id}")
+                .buildAndExpand(offerDTO.getId()).toUri();
+        return ResponseEntity.created(uri).body(offerDTO);
     }
 
-    @Transactional
+
     @DeleteMapping("delete/{id}")
     @ApiOperation(httpMethod = "DELETE", notes = "Delete ofertas pelo seus respectivos IDs",tags = {"Delete"}, value="Delete Ofertas")
     @ApiResponses(value = {
@@ -101,13 +81,11 @@ public class OfferController {
             @ApiResponse(code = 404, message = "Recurso não encontrado"),
             @ApiResponse(code = 500, message = "Sistema Indisponível")
     })
-    public ResponseEntity<?> deleteOffer(@Valid @PathVariable Long id) {
-        Optional<Offer> optional = offerService.findOfferById(id);
-        if (optional.isPresent()) {
-            offerService.deleteOffer(id);
-            return ResponseEntity.ok().body("Deletado com sucesso");
-        }
-        return ResponseEntity.notFound().build();
+    public ResponseEntity<?> deleteOffer(@Valid @PathVariable Long id)
+    {
+        offerService.deleteOffer(id);
+        return ResponseEntity.noContent().build();
+
     }
 
     @PutMapping("{id}")
@@ -118,13 +96,12 @@ public class OfferController {
             @ApiResponse(code = 404, message = "Recurso não encontrado"),
             @ApiResponse(code = 500, message = "Sistema Indisponível")
     })
-    public ResponseEntity<?> updateOffer(@Valid @RequestBody OfferFORM FORM, UriComponentsBuilder uriBuilder){
-        try{
-            Offer offer = FORM.converterFORM(offerService);
-            URI uri = uriBuilder.path("{id}").buildAndExpand(offer.getId()).toUri();
-            return ResponseEntity.created(uri).body(new OfferDTO().convertDTO(offer));
-        } catch (DataIntegrityViolationException SQL){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Digite novamente");
-        }
+    public ResponseEntity<OfferDTO> updateOffer(@Valid @PathVariable Long id, @RequestBody OfferFORM offerFORM)
+    {
+        OfferDTO offerDTO = offerService.updateOffer(id, offerFORM);
+        return ResponseEntity.ok().body(offerDTO);
+
     }
+
+
 }
