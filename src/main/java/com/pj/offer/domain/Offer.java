@@ -20,7 +20,7 @@ public class Offer implements Serializable {
     @Column(name = "id_Offer")
     private Long id;
     @Column(name = "id_Product")
-    private Long id_Product;
+    private Long idProduct;
     @Column(name = "Inicio")
     private Date inicio;
     @Column(name = "Fim")

@@ -9,10 +9,10 @@ import java.util.Date;
 @Getter
 @Setter
 @ToString
-public class OfferDTO implements Serializable {
+public class OfferDto implements Serializable {
 
     private Long id;
-    private Long id_Product;
+    private Long idProduct;
     private Date inicio;
     private Date fim;
     private String descricao;

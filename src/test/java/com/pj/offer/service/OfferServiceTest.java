@@ -8,17 +8,12 @@ import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import com.pj.offer.config.rabbitmq.cancelarofertadto.DeleteOfferDTO;
+import com.pj.offer.config.rabbitmq.cancelarofertadto.DeleteOfferDto;
 import com.pj.offer.domain.Offer;
-import com.pj.offer.domain.form.OfferFORM;
-import com.pj.offer.enums.OfertaStatus;
+import com.pj.offer.domain.form.OfferForm;
 import com.pj.offer.repository.OfferRepository;
-import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
+
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Optional;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -41,7 +36,7 @@ class OfferServiceTest{
     @Autowired
     private ModelMapper modelMapper;
     @Autowired
-    private OfferFORM offerFORM;
+    private OfferForm offerFORM;
 
     @Test
     void testSave() {
@@ -108,7 +103,7 @@ class OfferServiceTest{
     @Test
     void testDeleteOfferByDeleteOfferDTO() {
         doNothing().when(this.offerRepository).deleteOfferByProduct((Long) any());
-        this.offerService.deleteOfferByDeleteOfferDTO(new DeleteOfferDTO());
+        this.offerService.deleteOfferByDeleteOfferDTO(new DeleteOfferDto());
         verify(this.offerRepository, times(1)).deleteOfferByProduct((Long) any());
     }
 }

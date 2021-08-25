@@ -17,19 +17,20 @@ import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
 @ToString
-public class OfferFORM implements  Serializable{
+public class OfferForm implements  Serializable{
 
     private Long id;
     @NotNull(message = "O Id do produto é necessário")
     @Valid
     @OneToMany
-    private Long id_Product;
+    private List<Long> idProduct;
     @Valid
     @NotNull(message = "A data de início da oferta é necessária")
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss", timezone = "GMT-03")
