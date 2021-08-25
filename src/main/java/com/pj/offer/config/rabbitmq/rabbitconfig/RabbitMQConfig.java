@@ -1,4 +1,4 @@
-package com.pj.offer.rabbitmq.rabbitconfig;
+package com.pj.offer.config.rabbitmq.rabbitconfig;
 
 import org.springframework.amqp.core.*;
 import org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory;
