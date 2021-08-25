@@ -48,7 +48,7 @@ public class OfferFORM implements  Serializable{
     @Column(precision = 5, scale = 4)
     @NotNull(message = "Informe um valor para o campo desconto")
     @Valid
-    @Range(min=1, max=100, message = "O desconto deve ser de no mínimo 1% e no máximo 100%")
+    @Range(min=1, max=50, message = "O desconto deve ser de no mínimo 1% e no máximo 50%")
     private BigDecimal desconto;
 
 }
