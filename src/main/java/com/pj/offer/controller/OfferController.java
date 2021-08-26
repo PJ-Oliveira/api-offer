@@ -63,11 +63,11 @@ public class OfferController {
             @ApiResponse(code = 404, message = "Recurso não encontrado"),
             @ApiResponse(code = 500, message = "Sistema Indisponível")
     })
-    public ResponseEntity<OfferDto> create(@Valid @RequestBody OfferForm offerFORM){
-        OfferDto offerDTO = offerService.save(offerFORM);
+    public ResponseEntity<OfferDto> create(@Valid @RequestBody OfferForm offerForm){
+        OfferDto offerDto = offerService.save(offerForm);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("{id}")
-                .buildAndExpand(offerDTO.getId()).toUri();
-        return ResponseEntity.created(uri).body(offerDTO);
+                .buildAndExpand(offerDto.getId()).toUri();
+        return ResponseEntity.created(uri).body(offerDto);
     }
 
     @DeleteMapping("delete/{id}")
@@ -91,10 +91,10 @@ public class OfferController {
             @ApiResponse(code = 404, message = "Recurso não encontrado"),
             @ApiResponse(code = 500, message = "Sistema Indisponível")
     })
-    public ResponseEntity<OfferDto> updateOffer(@Valid @PathVariable Long id, @RequestBody OfferForm offerFORM)
+    public ResponseEntity<OfferDto> updateOffer(@Valid @PathVariable Long id, @RequestBody OfferForm offerForm)
     {
-        OfferDto offerDTO = offerService.updateOffer(id, offerFORM);
-        return ResponseEntity.ok().body(offerDTO);
+        OfferDto offerDto = offerService.updateOffer(id, offerForm);
+        return ResponseEntity.ok().body(offerDto);
 
     }
 
