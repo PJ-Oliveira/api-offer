@@ -40,7 +40,6 @@ public class OfferService {
         return offer.stream()
                 .map(x -> modelMapper.map(x, OfferDto.class))
                 .collect(Collectors.toList());
-
     }
 
     public OfferDto updateOffer(Long id, OfferForm offerFORM){
@@ -69,6 +68,5 @@ public class OfferService {
 
     public void deleteOfferByDeleteOfferDTO(DeleteOfferDto deleteOfferDTO){
         offerRepository.deleteOfferByProduct(deleteOfferDTO.getIdProduct());
-
     }
 }

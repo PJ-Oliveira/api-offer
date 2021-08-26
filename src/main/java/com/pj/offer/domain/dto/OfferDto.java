@@ -19,5 +19,4 @@ public class OfferDto implements Serializable {
     private String descricao;
     private Enum status;
     private BigDecimal desconto;
-
 }

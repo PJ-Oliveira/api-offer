@@ -25,7 +25,6 @@ public class OfferController {
     @Autowired
     private final OfferService offerService;
 
-
     public OfferController(OfferService offerService) {
         this.offerService = offerService;
     }
@@ -42,7 +41,6 @@ public class OfferController {
         List<OfferDto> offerDTO = offerService.findAll(pageable);
         return ResponseEntity.ok().body(offerDTO);
     }
-
 
     @GetMapping("{id}")
     @ApiOperation(httpMethod = "GET", notes = "Busque a oferta pelo seu respectivo ID",tags = {"Busque pelo ID"}, value="Encontre oferta por ID")
@@ -72,7 +70,6 @@ public class OfferController {
         return ResponseEntity.created(uri).body(offerDTO);
     }
 
-
     @DeleteMapping("delete/{id}")
     @ApiOperation(httpMethod = "DELETE", notes = "Delete ofertas pelo seus respectivos IDs",tags = {"Delete"}, value="Delete Ofertas")
     @ApiResponses(value = {
@@ -81,11 +78,9 @@ public class OfferController {
             @ApiResponse(code = 404, message = "Recurso não encontrado"),
             @ApiResponse(code = 500, message = "Sistema Indisponível")
     })
-    public ResponseEntity<?> deleteOffer(@Valid @PathVariable Long id)
-    {
+    public ResponseEntity<?> deleteOffer(@Valid @PathVariable Long id) {
         offerService.deleteOffer(id);
         return ResponseEntity.noContent().build();
-
     }
 
     @PutMapping("{id}")
@@ -102,6 +97,5 @@ public class OfferController {
         return ResponseEntity.ok().body(offerDTO);
 
     }
-
 
 }
