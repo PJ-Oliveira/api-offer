@@ -1,6 +1,6 @@
 package com.pj.offer.controller;
-import com.pj.offer.domain.dto.OfferDTO;
-import com.pj.offer.domain.form.OfferFORM;
+import com.pj.offer.domain.dto.OfferDto;
+import com.pj.offer.domain.form.OfferForm;
 import com.pj.offer.service.OfferService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -25,7 +25,6 @@ public class OfferController {
     @Autowired
     private final OfferService offerService;
 
-
     public OfferController(OfferService offerService) {
         this.offerService = offerService;
     }
@@ -38,11 +37,10 @@ public class OfferController {
             @ApiResponse(code = 404, message = "Recurso não encontrado"),
             @ApiResponse(code = 500, message = "Sistema Indisponível")
     })
-    public ResponseEntity<List<OfferDTO>> getAllPage(@PageableDefault(page = 0, size = 5)Pageable pageable){
-        List<OfferDTO> offerDTO = offerService.findAll(pageable);
+    public ResponseEntity<List<OfferDto>> getAllPage(@PageableDefault(page = 0, size = 5)Pageable pageable){
+        List<OfferDto> offerDTO = offerService.findAll(pageable);
         return ResponseEntity.ok().body(offerDTO);
     }
-
 
     @GetMapping("{id}")
     @ApiOperation(httpMethod = "GET", notes = "Busque a oferta pelo seu respectivo ID",tags = {"Busque pelo ID"}, value="Encontre oferta por ID")
@@ -52,26 +50,25 @@ public class OfferController {
             @ApiResponse(code = 404, message = "Recurso não encontrado"),
             @ApiResponse(code = 500, message = "Sistema Indisponível")
     })
-    public ResponseEntity<OfferDTO> findOneOffer(@Valid @PathVariable long id){
-        OfferDTO offerDTO = offerService.getById(id);
+    public ResponseEntity<OfferDto> findOneOffer(@Valid @PathVariable long id){
+        OfferDto offerDTO = offerService.getById(id);
         return ResponseEntity.ok().body(offerDTO);
     }
 
     @PostMapping("/addOffer")
-    @ApiOperation(httpMethod = "POST", notes = "O desconto deve ser de no mínimo 1% e no máximo 100%. O formato da data deve seguir esse modelo: 2021-08-25 01:01:01", tags = {"Cadastro"}, value="Cadastro de Ofertas")
+    @ApiOperation(httpMethod = "POST", notes = "O desconto deve ser de no mínimo 1% e no máximo 50%. O formato da data deve seguir esse modelo: 2021-08-25 01:01:01", tags = {"Cadastro"}, value="Cadastro de Ofertas")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Requisição bem sucedida"),
             @ApiResponse(code = 401, message = "Não autorizado"),
             @ApiResponse(code = 404, message = "Recurso não encontrado"),
             @ApiResponse(code = 500, message = "Sistema Indisponível")
     })
-    public ResponseEntity<OfferDTO> create(@Valid @RequestBody OfferFORM offerFORM){
-        OfferDTO offerDTO = offerService.save(offerFORM);
+    public ResponseEntity<OfferDto> create(@Valid @RequestBody OfferForm offerFORM){
+        OfferDto offerDTO = offerService.save(offerFORM);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("{id}")
                 .buildAndExpand(offerDTO.getId()).toUri();
         return ResponseEntity.created(uri).body(offerDTO);
     }
-
 
     @DeleteMapping("delete/{id}")
     @ApiOperation(httpMethod = "DELETE", notes = "Delete ofertas pelo seus respectivos IDs",tags = {"Delete"}, value="Delete Ofertas")
@@ -81,11 +78,9 @@ public class OfferController {
             @ApiResponse(code = 404, message = "Recurso não encontrado"),
             @ApiResponse(code = 500, message = "Sistema Indisponível")
     })
-    public ResponseEntity<?> deleteOffer(@Valid @PathVariable Long id)
-    {
+    public ResponseEntity<?> deleteOffer(@Valid @PathVariable Long id) {
         offerService.deleteOffer(id);
         return ResponseEntity.noContent().build();
-
     }
 
     @PutMapping("{id}")
@@ -96,12 +91,11 @@ public class OfferController {
             @ApiResponse(code = 404, message = "Recurso não encontrado"),
             @ApiResponse(code = 500, message = "Sistema Indisponível")
     })
-    public ResponseEntity<OfferDTO> updateOffer(@Valid @PathVariable Long id, @RequestBody OfferFORM offerFORM)
+    public ResponseEntity<OfferDto> updateOffer(@Valid @PathVariable Long id, @RequestBody OfferForm offerFORM)
     {
-        OfferDTO offerDTO = offerService.updateOffer(id, offerFORM);
+        OfferDto offerDTO = offerService.updateOffer(id, offerFORM);
         return ResponseEntity.ok().body(offerDTO);
 
     }
-
 
 }

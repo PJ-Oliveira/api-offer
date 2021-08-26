@@ -7,7 +7,7 @@ import lombok.*;
 @Getter
 @Setter
 @ToString
-public class DeleteOfferDTO {
+public class DeleteOfferDto {
 
-    private Long id_Product;
+    private Long idProduct;
 }

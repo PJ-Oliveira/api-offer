@@ -12,8 +12,8 @@ import java.util.Optional;
 public interface OfferRepository extends JpaRepository<Offer, Long> {
 
     @Modifying
-    @Query("delete from Offer x where x.id_Product=:id_Product")
-    void deleteOfferByProduct(@Param("id_Product") Long id_Product);
+    @Query("delete from Offer x where x.idProduct=:idProduct")
+    void deleteOfferByProduct(@Param("idProduct") Long idProduct);
 
     void deleteOfertaById(Long id);
 

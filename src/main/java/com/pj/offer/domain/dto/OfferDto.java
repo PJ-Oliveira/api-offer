@@ -3,20 +3,20 @@ import lombok.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
 @ToString
-public class OfferDTO implements Serializable {
+public class OfferDto implements Serializable {
 
     private Long id;
-    private Long id_Product;
+    private Long idProduct;
     private Date inicio;
     private Date fim;
     private String descricao;
     private Enum status;
     private BigDecimal desconto;
-
 }
