@@ -24,13 +24,12 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
-public class OfferForm implements  Serializable{
+public class OfferForm implements Serializable{
 
     private Long id;
     @NotNull(message = "O Id do produto é necessário")
     @Valid
-    @OneToMany
-    private List<Long> idProduct;
+    private Long idProduct;
     @Valid
     @NotNull(message = "A data de início da oferta é necessária")
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss", timezone = "GMT-03")

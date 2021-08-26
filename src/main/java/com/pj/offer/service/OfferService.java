@@ -1,5 +1,6 @@
 package com.pj.offer.service;
 
+import com.pj.offer.config.advice.OfferException;
 import com.pj.offer.config.rabbitmq.cancelarofertadto.DeleteOfferDto;
 import com.pj.offer.config.modelmapper.ModelMapperConfig;
 import com.pj.offer.domain.Offer;
@@ -39,24 +40,24 @@ public class OfferService {
         return offer.stream()
                 .map(x -> modelMapper.map(x, OfferDto.class))
                 .collect(Collectors.toList());
+
     }
 
     public OfferDto updateOffer(Long id, OfferForm offerFORM){
-        Offer offer = offerRepository.findOfferById(id)
-                .orElseThrow(()-> new RuntimeException());
-        offer = modelMapper.map(offerFORM, Offer.class);
+        Offer offer1 = offerRepository.findOfferById(id)
+                .orElseThrow(()-> new OfferException());
+        Offer offer = modelMapper.map(offerFORM, Offer.class);
         this.offerRepository.save(offer);
         return modelMapper.map(offer, OfferDto.class);
     }
 
     public void deleteOffer(Long id){
         Offer offer = offerRepository.findById(id)
-                .orElseThrow(()-> new RuntimeException());
+                .orElseThrow(()-> new OfferException());
         this.offerRepository.delete(offer);
     }
 
     public Optional<Offer> findOfferById(Long id){
-        //Offer offer1 = modelMapper.map(id, Offer.class);
         return offerRepository.findOfferById(id);
     }
 
