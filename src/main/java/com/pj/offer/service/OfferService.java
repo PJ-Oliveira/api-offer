@@ -1,6 +1,6 @@
 package com.pj.offer.service;
 
-import com.pj.offer.config.advice.OfferException;
+import com.pj.offer.config.advice.exception.OfferException;
 import com.pj.offer.config.rabbitmq.cancelarofertadto.DeleteOfferDto;
 import com.pj.offer.config.modelmapper.ModelMapperConfig;
 import com.pj.offer.domain.Offer;
@@ -45,7 +45,7 @@ public class OfferService {
 
     public OfferDto updateOffer(Long id, OfferForm offerFORM){
         Offer offer1 = offerRepository.findOfferById(id)
-                .orElseThrow(()-> new OfferException());
+                .orElseThrow(()-> new OfferException("Resource with id: " + id + "not found"));
         Offer offer = modelMapper.map(offerFORM, Offer.class);
         this.offerRepository.save(offer);
         return modelMapper.map(offer, OfferDto.class);
@@ -53,7 +53,7 @@ public class OfferService {
 
     public void deleteOffer(Long id){
         Offer offer = offerRepository.findById(id)
-                .orElseThrow(()-> new OfferException());
+                .orElseThrow(()-> new OfferException("Resource with id: " + id + "not found"));
         this.offerRepository.delete(offer);
     }
 
@@ -63,7 +63,7 @@ public class OfferService {
 
     public OfferDto getById(Long id){
         Offer offer = offerRepository.findById(id)
-                .orElseThrow(()-> new OfferException());
+                .orElseThrow(()-> new OfferException("Resource with id: " + id + "not found"));
         return modelMapper.map(offer, OfferDto.class);
     }
 

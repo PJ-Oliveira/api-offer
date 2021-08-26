@@ -1,5 +1,6 @@
 package com.pj.offer.config.advice;
 
+import com.pj.offer.config.advice.exception.OfferException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,8 +17,7 @@ public class OfferControllerAdvice
             (value = { IllegalArgumentException.class, IllegalStateException.class, OfferException.class, Exception.class})
     protected ResponseEntity<Object> handleConflict(
             RuntimeException runtimeException, WebRequest request) {
-        String bodyOfResponse = "Controller Advice Exception: ou o Id requerido não existe ou, o Método requerido não é apropriado";
-        return handleExceptionInternal(runtimeException, bodyOfResponse,
+        return handleExceptionInternal(runtimeException, null,
                 new HttpHeaders(), HttpStatus.CONFLICT, request);
     }
 }

@@ -1,4 +1,4 @@
-package com.pj.offer.config.advice;
+package com.pj.offer.config.advice.exception;
 
 import lombok.*;
 
