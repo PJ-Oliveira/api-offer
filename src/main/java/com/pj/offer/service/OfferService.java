@@ -63,7 +63,7 @@ public class OfferService {
 
     public OfferDto getById(Long id){
         Offer offer = offerRepository.findById(id)
-                .orElseThrow(()-> new RuntimeException());
+                .orElseThrow(()-> new OfferException());
         return modelMapper.map(offer, OfferDto.class);
     }
 
