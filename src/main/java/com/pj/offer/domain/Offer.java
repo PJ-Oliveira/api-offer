@@ -1,11 +1,9 @@
 package com.pj.offer.domain;
-import com.pj.offer.enums.OfertaStatus;
 import lombok.*;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.List;
 
 @Entity
 @Table
@@ -28,9 +26,6 @@ public class Offer implements Serializable {
     private Date fim;
     @Column(name = "Descricao")
     private String descricao;
-    @Enumerated(EnumType.STRING)
-    @Column(name = "Status")
-    private OfertaStatus status;
     @Column(name = "Desconto")
     private BigDecimal desconto;
 }

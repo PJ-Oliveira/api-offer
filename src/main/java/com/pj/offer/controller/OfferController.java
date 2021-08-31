@@ -18,6 +18,7 @@ import java.net.URI;
 import java.util.Date;
 import java.util.List;
 
+
 @RestController
 @RequestMapping(value = "/oferta")
 @Api(tags = {"Oferta"}, value = "Controller Offer")
@@ -100,18 +101,6 @@ public class OfferController {
 
     }
 
-    @GetMapping("status/{id}")
-    @ApiOperation(tags = {"Busque pelo ID apenas o Status"}, value="Mostre apenas o status")
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Requisição bem sucedida"),
-            @ApiResponse(code = 401, message = "Não autorizado"),
-            @ApiResponse(code = 404, message = "Recurso não encontrado"),
-            @ApiResponse(code = 500, message = "Sistema Indisponível")
-    })
-    public ResponseEntity<Enum> status(@PathVariable @Valid long id){
-        OfferDto offerDTO = offerService.showJustStatus(id);
-        return ResponseEntity.ok().body(offerDTO.getStatus());
-    }
 
     @GetMapping("fim/{id}")
     @ApiOperation(tags = {"Busque pelo ID apenas a data final da promoção"}, value="Mostre apenas a data final")
@@ -138,6 +127,21 @@ public class OfferController {
         OfferDto offerDTO = offerService.showJustDesconto(id);
         return ResponseEntity.ok().body(offerDTO.getDesconto());
     }
+
+    @GetMapping("existOrNot/{id}")
+    @ApiOperation(tags = {"Verifique se a offer existe"}, value="A offer existe ou não?")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Requisição bem sucedida"),
+            @ApiResponse(code = 401, message = "Não autorizado"),
+            @ApiResponse(code = 404, message = "Recurso não encontrado"),
+            @ApiResponse(code = 500, message = "Sistema Indisponível")
+    })
+    public ResponseEntity<Long> exist(@PathVariable @Valid long id){
+        OfferDto offerDTO = offerService.getById(id);
+        return ResponseEntity.ok().body(offerDTO.getId());
+    }
+
+
 
 
 

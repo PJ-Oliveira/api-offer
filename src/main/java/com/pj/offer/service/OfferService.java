@@ -1,8 +1,5 @@
 package com.pj.offer.service;
 
-import com.fasterxml.jackson.annotation.JsonFilter;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonView;
 import com.pj.offer.config.advice.exception.OfferException;
 import com.pj.offer.config.rabbitmq.cancelarofertadto.DeleteOfferDto;
 import com.pj.offer.config.modelmapper.ModelMapperConfig;
@@ -14,7 +11,9 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
@@ -54,6 +53,14 @@ public class OfferService {
         return modelMapper.map(offer, OfferDto.class);
     }
 
+    //Método para retornar só o id
+    public OfferDto showJustId(Long id){
+        Offer offer = offerRepository.findById(id)
+                .orElseThrow(()-> new OfferException("Resource with id: " + id + "not found"));
+        return modelMapper.map(offer, OfferDto.class);
+    }
+
+
 
     public OfferDto save(OfferForm offerFORM){
         Offer offer = modelMapper.map(offerFORM, Offer.class);
@@ -80,7 +87,7 @@ public class OfferService {
     public void deleteOffer(Long id){
         Offer offer = offerRepository.findById(id)
                 .orElseThrow(()-> new OfferException("Resource with id: " + id + "not found"));
-        this.offerRepository.delete(offer);
+        this.offerRepository.deleteById(id);
     }
 
     public Optional<Offer> findOfferById(Long id){

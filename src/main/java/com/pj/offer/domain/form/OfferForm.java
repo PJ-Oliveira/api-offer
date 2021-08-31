@@ -1,23 +1,17 @@
 package com.pj.offer.domain.form;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.pj.offer.domain.Offer;
-import com.pj.offer.enums.OfertaStatus;
-import com.pj.offer.service.OfferService;
 import lombok.*;
 import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.Column;
-import javax.persistence.OneToMany;
 import javax.validation.Valid;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -42,9 +36,6 @@ public class OfferForm implements Serializable{
     @Valid
     @NotBlank(message = "A descrição da oferta é necessária")
     private String descricao;
-    @Valid
-    @NotNull(message = "O Status da oferta é necessário")
-    private OfertaStatus status;
     @Column(precision = 5, scale = 4)
     @NotNull(message = "Informe um valor para o campo desconto")
     @Valid
