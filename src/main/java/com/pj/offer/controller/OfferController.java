@@ -13,7 +13,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import javax.validation.Valid;
+import java.math.BigDecimal;
 import java.net.URI;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -97,5 +99,46 @@ public class OfferController {
         return ResponseEntity.ok().body(offerDto);
 
     }
+
+    @GetMapping("status/{id}")
+    @ApiOperation(tags = {"Busque pelo ID apenas o Status"}, value="Mostre apenas o status")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Requisição bem sucedida"),
+            @ApiResponse(code = 401, message = "Não autorizado"),
+            @ApiResponse(code = 404, message = "Recurso não encontrado"),
+            @ApiResponse(code = 500, message = "Sistema Indisponível")
+    })
+    public ResponseEntity<Enum> status(@PathVariable @Valid long id){
+        OfferDto offerDTO = offerService.showJustStatus(id);
+        return ResponseEntity.ok().body(offerDTO.getStatus());
+    }
+
+    @GetMapping("fim/{id}")
+    @ApiOperation(tags = {"Busque pelo ID apenas a data final da promoção"}, value="Mostre apenas a data final")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Requisição bem sucedida"),
+            @ApiResponse(code = 401, message = "Não autorizado"),
+            @ApiResponse(code = 404, message = "Recurso não encontrado"),
+            @ApiResponse(code = 500, message = "Sistema Indisponível")
+    })
+    public ResponseEntity<Date> fim(@PathVariable @Valid long id){
+        OfferDto offerDTO = offerService.showJustDataFim(id);
+        return ResponseEntity.ok().body(offerDTO.getFim());
+    }
+
+    @GetMapping("desconto/{id}")
+    @ApiOperation(tags = {"Busque pelo ID apenas o valor do desconto de uma promoção"}, value="Mostre apenas o valor do desconto")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Requisição bem sucedida"),
+            @ApiResponse(code = 401, message = "Não autorizado"),
+            @ApiResponse(code = 404, message = "Recurso não encontrado"),
+            @ApiResponse(code = 500, message = "Sistema Indisponível")
+    })
+    public ResponseEntity<BigDecimal> desconto(@PathVariable @Valid long id){
+        OfferDto offerDTO = offerService.showJustDesconto(id);
+        return ResponseEntity.ok().body(offerDTO.getDesconto());
+    }
+
+
 
 }

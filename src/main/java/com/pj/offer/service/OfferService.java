@@ -1,5 +1,8 @@
 package com.pj.offer.service;
 
+import com.fasterxml.jackson.annotation.JsonFilter;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonView;
 import com.pj.offer.config.advice.exception.OfferException;
 import com.pj.offer.config.rabbitmq.cancelarofertadto.DeleteOfferDto;
 import com.pj.offer.config.modelmapper.ModelMapperConfig;
@@ -27,6 +30,30 @@ public class OfferService {
     private ModelMapperConfig modelMapperConfig;
     @Autowired
     private ModelMapper modelMapper;
+
+
+
+    //Método para retornar só o Status
+    public OfferDto showJustStatus(Long id){
+        Offer offer = offerRepository.findById(id)
+                .orElseThrow(()-> new OfferException("Resource with id: " + id + "not found"));
+        return modelMapper.map(offer, OfferDto.class);
+    }
+
+    //Método para retornar só a data fim
+    public OfferDto showJustDataFim(Long id){
+        Offer offer = offerRepository.findById(id)
+                .orElseThrow(()-> new OfferException("Resource with id: " + id + "not found"));
+        return modelMapper.map(offer, OfferDto.class);
+    }
+
+    //Método para retornar só o valor do desconto
+    public OfferDto showJustDesconto(Long id){
+        Offer offer = offerRepository.findById(id)
+                .orElseThrow(()-> new OfferException("Resource with id: " + id + "not found"));
+        return modelMapper.map(offer, OfferDto.class);
+    }
+
 
     public OfferDto save(OfferForm offerFORM){
         Offer offer = modelMapper.map(offerFORM, Offer.class);
@@ -69,4 +96,7 @@ public class OfferService {
     public void deleteOfferByDeleteOfferDTO(DeleteOfferDto deleteOfferDTO){
         offerRepository.deleteOfferByProduct(deleteOfferDTO.getIdProduct());
     }
+
+
+
 }
