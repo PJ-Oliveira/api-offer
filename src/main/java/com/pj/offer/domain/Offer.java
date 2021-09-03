@@ -3,6 +3,7 @@ import lombok.*;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -21,9 +22,9 @@ public class Offer implements Serializable {
     @Column(name = "id_Product")
     private Long idProduct;
     @Column(name = "Inicio")
-    private Date inicio;
+    private LocalDate inicio;
     @Column(name = "Fim")
-    private Date fim;
+    private LocalDate fim;
     @Column(name = "Descricao")
     private String descricao;
     @Column(name = "Desconto")

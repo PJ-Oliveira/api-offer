@@ -15,6 +15,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import javax.validation.Valid;
 import java.math.BigDecimal;
 import java.net.URI;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -45,7 +46,7 @@ public class OfferController {
         return ResponseEntity.ok().body(offerDTO);
     }
 
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     @ApiOperation(httpMethod = "GET", notes = "Busque a oferta pelo seu respectivo ID",tags = {"Busque pelo ID"}, value="Encontre oferta por ID")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Requisição bem sucedida"),
@@ -57,6 +58,8 @@ public class OfferController {
         OfferDto offerDTO = offerService.getById(id);
         return ResponseEntity.ok().body(offerDTO);
     }
+
+
 
     @PostMapping("/addOffer")
     @ApiOperation(httpMethod = "POST", notes = "O desconto deve ser de no mínimo 1% e no máximo 50%. O formato da data deve seguir esse modelo: 2021-08-25 01:01:01", tags = {"Cadastro"}, value="Cadastro de Ofertas")
@@ -86,7 +89,7 @@ public class OfferController {
         return ResponseEntity.noContent().build();
     }
 
-    @PutMapping("{id}")
+    @PutMapping("atualiza/{id}")
     @ApiOperation(httpMethod = "PUT", notes = "Atualize uma oferta especificando seu respectivo ID",tags = {"Atualização"}, value = "Atualizar")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Requisição bem sucedida"),
@@ -101,8 +104,22 @@ public class OfferController {
 
     }
 
+    @GetMapping("exist/{id}")
+    @ApiOperation(tags = {"Verifique se a Offer existe"}, value="A Offer existe ou não?")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Requisição bem sucedida"),
+            @ApiResponse(code = 401, message = "Não autorizado"),
+            @ApiResponse(code = 404, message = "Recurso não encontrado"),
+            @ApiResponse(code = 500, message = "Sistema Indisponível")
+    })
+    public ResponseEntity<Long> exist(@PathVariable @Valid long id){
+        OfferDto offerDTO = offerService.getById(id);
+        return ResponseEntity.ok().body(offerDTO.getId());
+    }
 
-    @GetMapping("fim/{id}")
+
+    //Talvez para próximos capítulos
+    /*@GetMapping("fim/{id}")
     @ApiOperation(tags = {"Busque pelo ID apenas a data final da promoção"}, value="Mostre apenas a data final")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Requisição bem sucedida"),
@@ -126,23 +143,7 @@ public class OfferController {
     public ResponseEntity<BigDecimal> desconto(@PathVariable @Valid long id){
         OfferDto offerDTO = offerService.showJustDesconto(id);
         return ResponseEntity.ok().body(offerDTO.getDesconto());
-    }
-
-    @GetMapping("existOrNot/{id}")
-    @ApiOperation(tags = {"Verifique se a offer existe"}, value="A offer existe ou não?")
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Requisição bem sucedida"),
-            @ApiResponse(code = 401, message = "Não autorizado"),
-            @ApiResponse(code = 404, message = "Recurso não encontrado"),
-            @ApiResponse(code = 500, message = "Sistema Indisponível")
-    })
-    public ResponseEntity<Long> exist(@PathVariable @Valid long id){
-        OfferDto offerDTO = offerService.getById(id);
-        return ResponseEntity.ok().body(offerDTO.getId());
-    }
-
-
-
+    }*/
 
 
 }

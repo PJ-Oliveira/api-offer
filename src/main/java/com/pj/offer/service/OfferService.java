@@ -15,6 +15,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -31,42 +33,12 @@ public class OfferService {
     private ModelMapper modelMapper;
 
 
-
-    //Método para retornar só o Status
-    public OfferDto showJustStatus(Long id){
-        Offer offer = offerRepository.findById(id)
-                .orElseThrow(()-> new OfferException("Resource with id: " + id + "not found"));
-        return modelMapper.map(offer, OfferDto.class);
-    }
-
-    //Método para retornar só a data fim
-    public OfferDto showJustDataFim(Long id){
-        Offer offer = offerRepository.findById(id)
-                .orElseThrow(()-> new OfferException("Resource with id: " + id + "not found"));
-        return modelMapper.map(offer, OfferDto.class);
-    }
-
-    //Método para retornar só o valor do desconto
-    public OfferDto showJustDesconto(Long id){
-        Offer offer = offerRepository.findById(id)
-                .orElseThrow(()-> new OfferException("Resource with id: " + id + "not found"));
-        return modelMapper.map(offer, OfferDto.class);
-    }
-
-    //Método para retornar só o id
-    public OfferDto showJustId(Long id){
-        Offer offer = offerRepository.findById(id)
-                .orElseThrow(()-> new OfferException("Resource with id: " + id + "not found"));
-        return modelMapper.map(offer, OfferDto.class);
-    }
-
-
-
     public OfferDto save(OfferForm offerFORM){
         Offer offer = modelMapper.map(offerFORM, Offer.class);
         offerRepository.save(offer);
         return modelMapper.map(offer, OfferDto.class);
     }
+
 
     public List<OfferDto> findAll(Pageable pageable){
         Page<Offer> offerPage = offerRepository.findAll(pageable);
@@ -94,11 +66,16 @@ public class OfferService {
         return offerRepository.findOfferById(id);
     }
 
+
     public OfferDto getById(Long id){
         Offer offer = offerRepository.findById(id)
                 .orElseThrow(()-> new OfferException("Resource with id: " + id + "not found"));
+        if(offer.getFim().isBefore(LocalDate.now())) {
+
+        }
         return modelMapper.map(offer, OfferDto.class);
     }
+
 
     public void deleteOfferByDeleteOfferDTO(DeleteOfferDto deleteOfferDTO){
         offerRepository.deleteOfferByProduct(deleteOfferDTO.getIdProduct());
