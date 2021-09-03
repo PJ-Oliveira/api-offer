@@ -11,6 +11,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -70,10 +71,11 @@ public class OfferService {
     public OfferDto getById(Long id){
         Offer offer = offerRepository.findById(id)
                 .orElseThrow(()-> new OfferException("Resource with id: " + id + "not found"));
-        if(offer.getFim().isBefore(LocalDate.now())) {
-
+        if(offer.getFim().isAfter(LocalDate.now()))
+        {
+            return modelMapper.map(offer, OfferDto.class);
         }
-        return modelMapper.map(offer, OfferDto.class);
+        return null;
     }
 
 

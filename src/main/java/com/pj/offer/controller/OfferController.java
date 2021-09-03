@@ -60,7 +60,6 @@ public class OfferController {
     }
 
 
-
     @PostMapping("/addOffer")
     @ApiOperation(httpMethod = "POST", notes = "O desconto deve ser de no mínimo 1% e no máximo 50%. O formato da data deve seguir esse modelo: 2021-08-25 01:01:01", tags = {"Cadastro"}, value="Cadastro de Ofertas")
     @ApiResponses(value = {
