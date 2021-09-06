@@ -7,6 +7,8 @@ import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+
+import com.pj.offer.config.advice.exception.OfferException;
 import com.pj.offer.config.modelmapper.ModelMapperConfig;
 import com.pj.offer.domain.dto.DeleteOfferDto;
 import com.pj.offer.domain.Offer;
@@ -46,11 +48,17 @@ class OfferServiceTest {
     }
 
     @Test
-    public void testDeleteOffer() {
+    public void updateOffer() {
         Offer offer = new Offer();
-        Optional<Offer> ofResult = Optional.<Offer>of(offer);
+        OfferForm offerForm = new OfferForm();
+        when(this.offerRepository.save((any()))).thenReturn(offer);
+        this.offerService.save(offerForm);
+        verify(this.offerRepository, times(1)).save(any());
+    }
+
+    @Test
+    public void testDeleteOffer() {
         doNothing().when(this.offerRepository).deleteById((Long) any());
-        when(this.offerRepository.findById((Long) any())).thenReturn(ofResult);
         this.offerService.deleteOffer(1L);
         verify(this.offerRepository).deleteById((Long) any());
         verify(this.offerRepository).findById((Long) any());
@@ -59,7 +67,7 @@ class OfferServiceTest {
     @Test
     void testGetById() {
         when(this.offerRepository.findById((Long) any())).thenReturn(Optional.<Offer>empty());
-        assertThrows(RuntimeException.class, () -> this.offerService.getById(1L));
+        assertThrows(OfferException.class, () -> this.offerService.getById(1L));
         verify(this.offerRepository, times(1)).findById((Long) any());
     }
 
