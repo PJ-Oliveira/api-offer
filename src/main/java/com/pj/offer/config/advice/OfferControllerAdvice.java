@@ -21,7 +21,7 @@ public class OfferControllerAdvice
             (value = { IllegalArgumentException.class, IllegalStateException.class, OfferException.class, Exception.class})
     protected ResponseEntity<Object> handleConflict(
             RuntimeException runtimeException, WebRequest request) {
-        return handleExceptionInternal(runtimeException, "Resource invalid or problematic",
+        return handleExceptionInternal(runtimeException, "Id Offer invalid",
                 new HttpHeaders(), HttpStatus.CONFLICT, request);
     }
 

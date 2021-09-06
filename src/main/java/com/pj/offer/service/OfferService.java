@@ -11,13 +11,11 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.lang.reflect.Type;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -51,7 +49,7 @@ public class OfferService {
 
     public OfferDto updateOffer(Long id, OfferForm offerFORM){
         Offer offer1 = offerRepository.findOfferById(id)
-                .orElseThrow(()-> new OfferException("Resource with id: " + id + "not found"));
+                .orElseThrow(()-> new OfferException());
         Offer offer = modelMapper.map(offerFORM, Offer.class);
         this.offerRepository.save(offer);
         return modelMapper.map(offer, OfferDto.class);
@@ -59,7 +57,7 @@ public class OfferService {
 
     public void deleteOffer(Long id){
         Offer offer = offerRepository.findById(id)
-                .orElseThrow(()-> new OfferException("Resource with id: " + id + "not found"));
+                .orElseThrow(()-> new OfferException());
         this.offerRepository.deleteById(id);
     }
 
@@ -70,13 +68,28 @@ public class OfferService {
 
     public OfferDto getById(Long id){
         Offer offer = offerRepository.findById(id)
-                .orElseThrow(()-> new OfferException("Resource with id: " + id + "not found"));
+                .orElseThrow(()-> new OfferException());
+
         if(offer.getFim().isAfter(LocalDate.now()))
         {
             return modelMapper.map(offer, OfferDto.class);
         }
         return null;
     }
+
+    /*public OfferDto getById(Long id){
+        Offer offer = offerRepository.findById(id)
+                .orElseThrow(()-> new OfferException());
+
+        if(offer.getFim().isAfter(LocalDate.now()))
+        {
+            return modelMapper.map(offer, OfferDto.class);
+        }
+        return null;
+    }*/
+
+
+
 
     public void deleteOfferByDeleteOfferDTO(DeleteOfferDto deleteOfferDTO){
         offerRepository.deleteOfferByProduct(deleteOfferDTO.getIdProduct());

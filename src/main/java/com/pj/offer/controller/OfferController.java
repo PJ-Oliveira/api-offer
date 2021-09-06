@@ -15,11 +15,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import java.math.BigDecimal;
 import java.net.URI;
-import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 
 @Validated
@@ -56,9 +54,11 @@ public class OfferController {
             @ApiResponse(code = 404, message = "Recurso não encontrado"),
             @ApiResponse(code = 500, message = "Sistema Indisponível")
     })
-    public ResponseEntity<OfferDto> findOneOffer(@Valid @NotNull @PathVariable long id){
+    public ResponseEntity<?> findOneOffer(@Valid @NotNull @PathVariable long id){
         OfferDto offerDTO = offerService.getById(id);
-        return ResponseEntity.ok().body(offerDTO);
+        if(offerDTO != null) {
+            return ResponseEntity.ok().body(offerDTO);
+        } return ResponseEntity.ok().body("Offer Id invalid");
     }
 
 
@@ -105,7 +105,7 @@ public class OfferController {
 
     }
 
-    @GetMapping("exist/{id}")
+    /*@GetMapping("exist/{id}")
     @ApiOperation(tags = {"Verifique se a Offer existe"}, value="A Offer existe ou não?")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Requisição bem sucedida"),
@@ -116,6 +116,6 @@ public class OfferController {
     public ResponseEntity<Long> exist(@PathVariable @Valid long id){
         OfferDto offerDTO = offerService.getById(id);
         return ResponseEntity.ok().body(offerDTO.getId());
-    }
+    }*/
 
 }
