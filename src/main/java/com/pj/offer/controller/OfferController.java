@@ -19,8 +19,6 @@ import javax.validation.constraints.NotNull;
 import java.net.URI;
 import java.util.List;
 
-
-@Validated
 @RestController
 @RequestMapping(value = "/oferta")
 @Api(tags = {"Oferta"}, value = "Controller Offer")

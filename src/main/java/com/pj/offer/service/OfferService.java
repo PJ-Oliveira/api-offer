@@ -44,7 +44,7 @@ public class OfferService {
 
 
     public void deleteOffer(Long id){
-        Optional<Offer> offer = offerRepository.findById(id);
+        Offer offer = offerRepository.getById(id);
         this.offerRepository.deleteById(id);
     }
 
