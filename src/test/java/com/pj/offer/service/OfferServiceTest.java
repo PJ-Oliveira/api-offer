@@ -1,40 +1,25 @@
 package com.pj.offer.service;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.Mockito.*;
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-
-import com.pj.offer.config.advice.exception.OfferException;
 import com.pj.offer.config.modelmapper.ModelMapperConfig;
 import com.pj.offer.domain.dto.DeleteOfferDto;
 import com.pj.offer.domain.Offer;
-import com.pj.offer.domain.dto.OfferDto;
 import com.pj.offer.domain.form.OfferForm;
 import com.pj.offer.repository.OfferRepository;
-
-import java.math.BigDecimal;
-import java.time.LocalDate;
-
 import java.util.ArrayList;
 import java.util.Optional;
-
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.test.context.ContextConfiguration;
 
@@ -44,20 +29,13 @@ import org.springframework.test.context.ContextConfiguration;
 @ExtendWith(MockitoExtension.class)
 class OfferServiceTest {
 
-    @MockBean
-    private ModelMapperConfig modelMapperConfig;
 
     @InjectMocks
     private OfferService offerService;
     @Mock
     private OfferRepository offerRepository;
     @Mock
-    @Autowired
     private ModelMapper modelMapper;
-    @Autowired
-    private OfferForm offerFORM;
-    @Mock
-    private Offer offer;
 
     @Test
     void testFindAll() {
@@ -70,12 +48,6 @@ class OfferServiceTest {
     @Test
     public void testDeleteOffer() {
         Offer offer = new Offer();
-        offer.setIdProduct(1L);
-        offer.setFim(LocalDate.ofEpochDay(1L));
-        offer.setId(1L);
-        offer.setInicio(LocalDate.ofEpochDay(1L));
-        offer.setDesconto(BigDecimal.valueOf(1L));
-        offer.setDescricao("Descricao");
         Optional<Offer> ofResult = Optional.<Offer>of(offer);
         doNothing().when(this.offerRepository).deleteById((Long) any());
         when(this.offerRepository.findById((Long) any())).thenReturn(ofResult);
@@ -100,12 +72,12 @@ class OfferServiceTest {
     }
 
     @Test
-    public void save() {
-        when(this.offerRepository.save((Offer) any())).thenReturn(offer);
-        this.offerService.save(offerFORM);
-        verify(this.offerRepository, times(1)).save((Offer) any());
+    void save() {
+        Offer offer = new Offer();
+        OfferForm offerForm = new OfferForm();
+        when(this.offerRepository.save((any()))).thenReturn(offer);
+        this.offerService.save(offerForm);
+        verify(this.offerRepository, times(1)).save(any());
     }
-
-
 
 }
