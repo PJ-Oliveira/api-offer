@@ -10,9 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.net.URI;
 import java.time.LocalDate;
@@ -20,6 +22,7 @@ import java.util.Date;
 import java.util.List;
 
 
+@Validated
 @RestController
 @RequestMapping(value = "/oferta")
 @Api(tags = {"Oferta"}, value = "Controller Offer")
@@ -28,7 +31,6 @@ public class OfferController {
 
     @Autowired
     private final OfferService offerService;
-
     public OfferController(OfferService offerService) {
         this.offerService = offerService;
     }
@@ -41,7 +43,7 @@ public class OfferController {
             @ApiResponse(code = 404, message = "Recurso não encontrado"),
             @ApiResponse(code = 500, message = "Sistema Indisponível")
     })
-    public ResponseEntity<List<OfferDto>> getAllPage(@PageableDefault(page = 0, size = 5)Pageable pageable){
+    public ResponseEntity<List<OfferDto>> getAllPage(@Valid @NotNull @PageableDefault(page = 0, size = 5)Pageable pageable){
         List<OfferDto> offerDTO = offerService.findAll(pageable);
         return ResponseEntity.ok().body(offerDTO);
     }
@@ -54,7 +56,7 @@ public class OfferController {
             @ApiResponse(code = 404, message = "Recurso não encontrado"),
             @ApiResponse(code = 500, message = "Sistema Indisponível")
     })
-    public ResponseEntity<OfferDto> findOneOffer(@Valid @PathVariable long id){
+    public ResponseEntity<OfferDto> findOneOffer(@Valid @NotNull @PathVariable long id){
         OfferDto offerDTO = offerService.getById(id);
         return ResponseEntity.ok().body(offerDTO);
     }
@@ -115,34 +117,5 @@ public class OfferController {
         OfferDto offerDTO = offerService.getById(id);
         return ResponseEntity.ok().body(offerDTO.getId());
     }
-
-
-    //Talvez para próximos capítulos
-    /*@GetMapping("fim/{id}")
-    @ApiOperation(tags = {"Busque pelo ID apenas a data final da promoção"}, value="Mostre apenas a data final")
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Requisição bem sucedida"),
-            @ApiResponse(code = 401, message = "Não autorizado"),
-            @ApiResponse(code = 404, message = "Recurso não encontrado"),
-            @ApiResponse(code = 500, message = "Sistema Indisponível")
-    })
-    public ResponseEntity<Date> fim(@PathVariable @Valid long id){
-        OfferDto offerDTO = offerService.showJustDataFim(id);
-        return ResponseEntity.ok().body(offerDTO.getFim());
-    }
-
-    @GetMapping("desconto/{id}")
-    @ApiOperation(tags = {"Busque pelo ID apenas o valor do desconto de uma promoção"}, value="Mostre apenas o valor do desconto")
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Requisição bem sucedida"),
-            @ApiResponse(code = 401, message = "Não autorizado"),
-            @ApiResponse(code = 404, message = "Recurso não encontrado"),
-            @ApiResponse(code = 500, message = "Sistema Indisponível")
-    })
-    public ResponseEntity<BigDecimal> desconto(@PathVariable @Valid long id){
-        OfferDto offerDTO = offerService.showJustDesconto(id);
-        return ResponseEntity.ok().body(offerDTO.getDesconto());
-    }*/
-
 
 }

@@ -78,7 +78,6 @@ public class OfferService {
         return null;
     }
 
-
     public void deleteOfferByDeleteOfferDTO(DeleteOfferDto deleteOfferDTO){
         offerRepository.deleteOfferByProduct(deleteOfferDTO.getIdProduct());
     }
