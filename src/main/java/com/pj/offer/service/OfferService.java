@@ -1,8 +1,7 @@
 package com.pj.offer.service;
 
 import com.pj.offer.config.advice.exception.OfferException;
-import com.pj.offer.config.rabbitmq.cancelarofertadto.DeleteOfferDto;
-import com.pj.offer.config.modelmapper.ModelMapperConfig;
+import com.pj.offer.domain.dto.DeleteOfferDto;
 import com.pj.offer.domain.Offer;
 import com.pj.offer.domain.dto.OfferDto;
 import com.pj.offer.domain.form.OfferForm;
@@ -26,8 +25,6 @@ public class OfferService {
     @Autowired
     private OfferRepository offerRepository;
     @Autowired
-    private ModelMapperConfig modelMapperConfig;
-    @Autowired
     private ModelMapper modelMapper;
 
 
@@ -47,28 +44,20 @@ public class OfferService {
     }
 
     public OfferDto updateOffer(Long id, OfferForm offerFORM){
-        Offer offer1 = offerRepository.findOfferById(id)
-                .orElseThrow(()-> new OfferException());
         Offer offer = modelMapper.map(offerFORM, Offer.class);
         this.offerRepository.save(offer);
         return modelMapper.map(offer, OfferDto.class);
     }
 
     public void deleteOffer(Long id){
-        Offer offer = offerRepository.findById(id)
-                .orElseThrow(()-> new OfferException());
+        Optional<Offer> offer = offerRepository.findById(id);
         this.offerRepository.deleteById(id);
-    }
-
-    public Optional<Offer> findOfferById(Long id){
-        return offerRepository.findOfferById(id);
     }
 
 
     public OfferDto getById(Long id){
         Offer offer = offerRepository.findById(id)
                 .orElseThrow(()-> new OfferException());
-
         if(offer.getFim().isAfter(LocalDate.now()))
         {
             return modelMapper.map(offer, OfferDto.class);
@@ -76,12 +65,8 @@ public class OfferService {
         return null;
     }
 
-
-
     public void deleteOfferByDeleteOfferDTO(DeleteOfferDto deleteOfferDTO){
         offerRepository.deleteOfferByProduct(deleteOfferDTO.getIdProduct());
     }
-
-
 
 }

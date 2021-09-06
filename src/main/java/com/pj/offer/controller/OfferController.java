@@ -9,6 +9,7 @@ import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +18,6 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import java.net.URI;
 import java.util.List;
-import java.util.Optional;
 
 
 @Validated
@@ -58,7 +58,7 @@ public class OfferController {
         OfferDto offerDTO = offerService.getById(id);
         if(offerDTO != null) {
             return ResponseEntity.ok().body(offerDTO);
-        } return ResponseEntity.ok().body("Offer Id invalid");
+        } return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Offer invalid or expired");
     }
 
 
@@ -104,18 +104,5 @@ public class OfferController {
         return ResponseEntity.ok().body(offerDto);
 
     }
-
-    /*@GetMapping("exist/{id}")
-    @ApiOperation(tags = {"Verifique se a Offer existe"}, value="A Offer existe ou não?")
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Requisição bem sucedida"),
-            @ApiResponse(code = 401, message = "Não autorizado"),
-            @ApiResponse(code = 404, message = "Recurso não encontrado"),
-            @ApiResponse(code = 500, message = "Sistema Indisponível")
-    })
-    public ResponseEntity<Long> exist(@PathVariable @Valid long id){
-        OfferDto offerDTO = offerService.getById(id);
-        return ResponseEntity.ok().body(offerDTO.getId());
-    }*/
 
 }
