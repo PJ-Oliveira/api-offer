@@ -14,7 +14,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.lang.reflect.Type;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -76,18 +75,6 @@ public class OfferService {
         }
         return null;
     }
-
-    /*public OfferDto getById(Long id){
-        Offer offer = offerRepository.findById(id)
-                .orElseThrow(()-> new OfferException());
-
-        if(offer.getFim().isAfter(LocalDate.now()))
-        {
-            return modelMapper.map(offer, OfferDto.class);
-        }
-        return null;
-    }*/
-
 
 
 

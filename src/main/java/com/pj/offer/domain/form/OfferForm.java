@@ -5,14 +5,10 @@ import lombok.*;
 import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.Column;
-import javax.validation.Valid;
-import javax.validation.constraints.Future;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.Date;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -26,6 +22,7 @@ public class OfferForm implements Serializable{
     private Long idProduct;
     @NotNull(message = "A data de início da oferta é necessária")
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss", timezone = "GMT-03")
+    @FutureOrPresent
     private LocalDate inicio;
     @NotNull(message = "A data de fim da oferta é necessária")
     @Future
@@ -36,6 +33,7 @@ public class OfferForm implements Serializable{
     @Column(precision = 5, scale = 4)
     @NotNull(message = "Informe um valor para o campo desconto")
     @Range(min=1, max=50, message = "O desconto deve ser de no mínimo 1% e no máximo 50%")
+    @Positive
     private BigDecimal desconto;
 
 }
