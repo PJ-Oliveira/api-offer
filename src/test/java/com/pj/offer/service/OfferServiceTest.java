@@ -7,7 +7,6 @@ import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-
 import com.pj.offer.config.advice.exception.OfferException;
 import com.pj.offer.config.modelmapper.ModelMapperConfig;
 import com.pj.offer.domain.dto.DeleteOfferDto;
@@ -47,14 +46,7 @@ class OfferServiceTest {
         verify(this.offerRepository, times(1)).findAll((org.springframework.data.domain.Pageable) any());
     }
 
-    @Test
-    public void updateOffer() {
-        Offer offer = new Offer();
-        OfferForm offerForm = new OfferForm();
-        when(this.offerRepository.save((any()))).thenReturn(offer);
-        this.offerService.save(offerForm);
-        verify(this.offerRepository, times(1)).save(any());
-    }
+
 
     @Test
     public void testDeleteOffer() {

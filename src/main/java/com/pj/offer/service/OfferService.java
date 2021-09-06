@@ -42,11 +42,6 @@ public class OfferService {
                 .collect(Collectors.toList());
     }
 
-    public OfferDto updateOffer(Long id, OfferForm offerFORM){
-        Offer offer = modelMapper.map(offerFORM, Offer.class);
-        this.offerRepository.save(offer);
-        return modelMapper.map(offer, OfferDto.class);
-    }
 
     public void deleteOffer(Long id){
         Optional<Offer> offer = offerRepository.findById(id);

@@ -90,19 +90,5 @@ public class OfferController {
         return ResponseEntity.noContent().build();
     }
 
-    @PutMapping("atualiza/{id}")
-    @ApiOperation(httpMethod = "PUT", notes = "Atualize uma oferta especificando seu respectivo ID",tags = {"Atualização"}, value = "Atualizar")
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Requisição bem sucedida"),
-            @ApiResponse(code = 401, message = "Não autorizado"),
-            @ApiResponse(code = 404, message = "Recurso não encontrado"),
-            @ApiResponse(code = 500, message = "Sistema Indisponível")
-    })
-    public ResponseEntity<OfferDto> updateOffer(@Valid @PathVariable Long id, @RequestBody OfferForm offerForm)
-    {
-        OfferDto offerDto = offerService.updateOffer(id, offerForm);
-        return ResponseEntity.ok().body(offerDto);
-
-    }
 
 }
