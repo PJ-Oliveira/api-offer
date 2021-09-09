@@ -6,8 +6,10 @@ import com.pj.offer.domain.Offer;
 import com.pj.offer.domain.dto.OfferDto;
 import com.pj.offer.domain.form.OfferForm;
 import com.pj.offer.repository.OfferRepository;
+import com.pj.offer.validator.OfferValidation;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Conditional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -25,6 +27,8 @@ public class OfferService {
     private OfferRepository offerRepository;
     @Autowired
     private ModelMapper modelMapper;
+
+
 
 
     public OfferDto save(OfferForm offerFORM){
@@ -48,16 +52,15 @@ public class OfferService {
         this.offerRepository.deleteById(id);
     }
 
-
     public OfferDto getById(Long id){
         Offer offer = offerRepository.findById(id)
                 .orElseThrow(()-> new OfferException());
-        if(offer.getFim().isAfter(LocalDate.now()))
-        {
-            return modelMapper.map(offer, OfferDto.class);
-        }
-        return null;
+        OfferValidation offerValidation = new OfferValidation();
+        offerValidation.validate(offer);
+        return offerValidation.validate(offer);
     }
+
+
 
     public void deleteOfferByDeleteOfferDTO(DeleteOfferDto deleteOfferDTO){
         offerRepository.deleteOfferByProduct(deleteOfferDTO.getIdProduct());

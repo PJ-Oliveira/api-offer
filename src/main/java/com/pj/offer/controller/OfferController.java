@@ -54,10 +54,7 @@ public class OfferController {
     })
     public ResponseEntity<?> findOneOffer(@Valid @NotNull @PathVariable long id){
         OfferDto offerDTO = offerService.getById(id);
-        if(offerDTO != null)
-        {
-            return ResponseEntity.ok().body(offerDTO);
-        } return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Offer invalid or expired");
+        return ResponseEntity.ok().body(offerDTO);
     }
 
     @PostMapping("/addOffer")

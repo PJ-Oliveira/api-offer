@@ -12,6 +12,7 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import javax.validation.ConstraintViolationException;
+import java.lang.reflect.InvocationTargetException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,22 +21,12 @@ import java.util.List;
 public class OfferControllerAdvice
         extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler(OfferException.class)
-    protected ResponseEntity<Object> handleConflict(OfferException offerException, WebRequest request) {
-        ExceptionResponse response = new ExceptionResponse();
-        response.setDateTime(LocalDate.now());
-        response.setMessage("Invalid");
-        ResponseEntity<Object> objectResponseEntity = new ResponseEntity<>(response,HttpStatus.BAD_REQUEST);
-        return objectResponseEntity;
+    @ExceptionHandler
+            (value = { IllegalArgumentException.class, IllegalStateException.class, OfferException.class, InvocationTargetException.class})
+    protected ResponseEntity<Object> handleConflict(
+            OfferException offerException, WebRequest request) {
+        return handleExceptionInternal(offerException, "Offer invalid or expired",
+                new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
     }
 
-    //qual dos dois melhor se adequaria aqui?
-
-    @ExceptionHandler(OfferException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    ResponseEntity<String> handleOfferException(OfferException offerException)
-    {
-        return new ResponseEntity<>
-                ("invalid due to error: " + offerException.getMessage(), HttpStatus.BAD_REQUEST);
-    }
 }
