@@ -54,11 +54,11 @@ public class OfferController {
     })
     public ResponseEntity<?> findOneOffer(@Valid @NotNull @PathVariable long id){
         OfferDto offerDTO = offerService.getById(id);
-        if(offerDTO != null) {
+        if(offerDTO != null)
+        {
             return ResponseEntity.ok().body(offerDTO);
         } return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Offer invalid or expired");
     }
-
 
     @PostMapping("/addOffer")
     @ApiOperation(httpMethod = "POST", notes = "O desconto deve ser de no mínimo 1% e no máximo 50%. O formato da data deve seguir esse modelo: 2021-08-25 01:01:01", tags = {"Cadastro"}, value="Cadastro de Ofertas")
@@ -87,6 +87,5 @@ public class OfferController {
         offerService.deleteOffer(id);
         return ResponseEntity.noContent().build();
     }
-
 
 }
