@@ -84,6 +84,7 @@ public class OfferController {
 
 
 
+    //Método chamado na MicroService Order.
     @GetMapping("exist/{id}")
     public ResponseEntity<?> findOneOffer(@PathVariable long id){
         OfferDto offerDTO = offerService.getById(id);
