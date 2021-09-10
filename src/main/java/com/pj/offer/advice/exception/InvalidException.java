@@ -1,10 +1,10 @@
 package com.pj.offer.advice.exception;
 
-public class OfferException extends RuntimeException {
+public class InvalidException extends RuntimeException {
 
 	private static final long serialVersionUID = 8857758950933747662L;
 	
-	public OfferException(String message) {
+	public InvalidException(String message) {
 		super(message);
 	}
 

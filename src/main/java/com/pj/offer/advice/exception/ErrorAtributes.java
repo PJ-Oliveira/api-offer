@@ -11,9 +11,14 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class StandardError {
+public class ErrorAtributes {
 
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
+	private Instant timestamp;
 	private String message;
 	private String path;
+	private int status;
+	private String detail;
+
 
 }

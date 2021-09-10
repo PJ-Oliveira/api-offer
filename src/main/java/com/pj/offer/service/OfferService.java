@@ -1,7 +1,8 @@
 package com.pj.offer.service;
 
 
-import com.pj.offer.advice.exception.OfferException;
+import com.pj.offer.advice.exception.NotFoundException;
+import com.pj.offer.advice.exception.InvalidException;
 import com.pj.offer.domain.dto.DeleteOfferDto;
 import com.pj.offer.domain.Offer;
 import com.pj.offer.domain.dto.OfferDto;
@@ -14,7 +15,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -43,13 +46,14 @@ public class OfferService {
                 .collect(Collectors.toList());
     }
 
+
     public void deleteOffer(Long id){
         Offer offer = offerRepository.getById(id);
         this.offerRepository.deleteById(id);
     }
 
-    public OfferDto getById(Long id){
-        Offer offer = offerRepository.findById(id).orElseThrow(()-> new OfferException("Id " + id + " Not Found"));;
+    public OfferDto getById(Long id) {
+        Offer offer = offerRepository.findById(id).orElseThrow(()-> new NotFoundException("Id " + id + " Not Found"));
         offerValidation.validate(offer);
         return offerValidation.validate(offer);
     }

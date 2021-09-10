@@ -82,6 +82,8 @@ public class OfferController {
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
+
+
     @GetMapping("exist/{id}")
     public ResponseEntity<?> findOneOffer(@PathVariable long id){
         OfferDto offerDTO = offerService.getById(id);

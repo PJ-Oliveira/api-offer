@@ -8,7 +8,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import com.pj.offer.advice.exception.OfferException;
+import com.pj.offer.advice.exception.InvalidException;
 import com.pj.offer.config.modelmapper.ModelMapperConfig;
 import com.pj.offer.domain.dto.DeleteOfferDto;
 import com.pj.offer.domain.Offer;
@@ -60,7 +60,7 @@ class OfferServiceTest {
     @Test
     void testGetById() {
         when(this.offerRepository.findById((Long) any())).thenReturn(Optional.<Offer>empty());
-        assertThrows(OfferException.class, () -> this.offerService.getById(1L));
+        assertThrows(InvalidException.class, () -> this.offerService.getById(1L));
         verify(this.offerRepository, times(1)).findById((Long) any());
     }
 
