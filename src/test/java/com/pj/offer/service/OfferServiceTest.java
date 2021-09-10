@@ -7,7 +7,8 @@ import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import com.pj.offer.config.advice.exception.OfferException;
+
+import com.pj.offer.advice.exception.OfferException;
 import com.pj.offer.config.modelmapper.ModelMapperConfig;
 import com.pj.offer.domain.dto.DeleteOfferDto;
 import com.pj.offer.domain.Offer;
