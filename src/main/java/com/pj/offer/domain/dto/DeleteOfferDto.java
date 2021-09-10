@@ -1,4 +1,4 @@
-package com.pj.offer.config.rabbitmq.cancelarofertadto;
+package com.pj.offer.domain.dto;
 
 import lombok.*;
 

@@ -2,8 +2,8 @@ package com.pj.offer.domain.dto;
 import lombok.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Date;
-import java.util.List;
+import java.time.LocalDate;
+
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -14,9 +14,8 @@ public class OfferDto implements Serializable {
 
     private Long id;
     private Long idProduct;
-    private Date inicio;
-    private Date fim;
+    private LocalDate inicio;
+    private LocalDate fim;
     private String descricao;
-    private Enum status;
     private BigDecimal desconto;
 }

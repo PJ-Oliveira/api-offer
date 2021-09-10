@@ -1,11 +1,9 @@
 package com.pj.offer.domain;
-import com.pj.offer.enums.OfertaStatus;
 import lombok.*;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Date;
-import java.util.List;
+import java.time.LocalDate;
 
 @Entity
 @Table
@@ -23,14 +21,11 @@ public class Offer implements Serializable {
     @Column(name = "id_Product")
     private Long idProduct;
     @Column(name = "Inicio")
-    private Date inicio;
+    private LocalDate inicio;
     @Column(name = "Fim")
-    private Date fim;
+    private LocalDate fim;
     @Column(name = "Descricao")
     private String descricao;
-    @Enumerated(EnumType.STRING)
-    @Column(name = "Status")
-    private OfertaStatus status;
     @Column(name = "Desconto")
     private BigDecimal desconto;
 }
