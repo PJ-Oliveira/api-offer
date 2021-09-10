@@ -4,8 +4,11 @@ import lombok.*;
 
 import java.time.LocalDate;
 
-@Data
-public class ExceptionResponse {
+@NoArgsConstructor
+@Getter
+@Setter
+@ToString
+public class ExceptionResponse extends Exception {
 
     private String message;
     private LocalDate dateTime;

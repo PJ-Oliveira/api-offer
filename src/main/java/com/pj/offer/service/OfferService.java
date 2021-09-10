@@ -9,14 +9,12 @@ import com.pj.offer.repository.OfferRepository;
 import com.pj.offer.validator.OfferValidation;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Conditional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
-import java.time.LocalDate;
+import java.lang.reflect.Type;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -27,9 +25,8 @@ public class OfferService {
     private OfferRepository offerRepository;
     @Autowired
     private ModelMapper modelMapper;
-
-
-
+    @Autowired
+    private OfferValidation offerValidation;
 
     public OfferDto save(OfferForm offerFORM){
         Offer offer = modelMapper.map(offerFORM, Offer.class);
@@ -46,21 +43,16 @@ public class OfferService {
                 .collect(Collectors.toList());
     }
 
-
     public void deleteOffer(Long id){
         Offer offer = offerRepository.getById(id);
         this.offerRepository.deleteById(id);
     }
 
     public OfferDto getById(Long id){
-        Offer offer = offerRepository.findById(id)
-                .orElseThrow(()-> new OfferException());
-        OfferValidation offerValidation = new OfferValidation();
+        Offer offer = offerRepository.findById(id).orElseThrow(()-> new OfferException());;
         offerValidation.validate(offer);
         return offerValidation.validate(offer);
     }
-
-
 
     public void deleteOfferByDeleteOfferDTO(DeleteOfferDto deleteOfferDTO){
         offerRepository.deleteOfferByProduct(deleteOfferDTO.getIdProduct());

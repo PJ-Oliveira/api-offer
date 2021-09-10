@@ -39,7 +39,7 @@ public class OfferController {
             @ApiResponse(code = 404, message = "Recurso não encontrado"),
             @ApiResponse(code = 500, message = "Sistema Indisponível")
     })
-    public ResponseEntity<List<OfferDto>> getAllPage(@Valid @NotNull @PageableDefault(page = 0, size = 5)Pageable pageable){
+    public ResponseEntity<List<OfferDto>> getAllPage(@PageableDefault(page = 0, size = 5)Pageable pageable){
         List<OfferDto> offerDTO = offerService.findAll(pageable);
         return ResponseEntity.ok().body(offerDTO);
     }
@@ -52,7 +52,7 @@ public class OfferController {
             @ApiResponse(code = 404, message = "Recurso não encontrado"),
             @ApiResponse(code = 500, message = "Sistema Indisponível")
     })
-    public ResponseEntity<?> findOneOffer(@Valid @NotNull @PathVariable long id){
+    public ResponseEntity<?> findOfferByID(@PathVariable long id){
         OfferDto offerDTO = offerService.getById(id);
         return ResponseEntity.ok().body(offerDTO);
     }
@@ -83,6 +83,12 @@ public class OfferController {
     public ResponseEntity<?> deleteOffer(@Valid @PathVariable Long id) {
         offerService.deleteOffer(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("exist/{id}")
+    public ResponseEntity<?> findOneOffer(@PathVariable long id){
+        OfferDto offerDTO = offerService.getById(id);
+        return ResponseEntity.ok().body(offerDTO);
     }
 
 }

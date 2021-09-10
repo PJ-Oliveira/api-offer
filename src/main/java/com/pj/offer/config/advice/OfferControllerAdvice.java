@@ -22,11 +22,10 @@ public class OfferControllerAdvice
         extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler
-            (value = { IllegalArgumentException.class, IllegalStateException.class, OfferException.class, InvocationTargetException.class})
+            (value = { IllegalArgumentException.class, ExceptionResponse.class, OfferException.class, InvocationTargetException.class})
     protected ResponseEntity<Object> handleConflict(
             OfferException offerException, WebRequest request) {
-        return handleExceptionInternal(offerException, "Offer invalid or expired",
-                new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
+        return handleExceptionInternal(offerException, "Inexistent or expired Id",
+                new HttpHeaders(), HttpStatus.NOT_FOUND, request);
     }
-
 }

@@ -14,4 +14,6 @@ public interface OfferRepository extends JpaRepository<Offer, Long> {
     @Query("delete from Offer x where x.idProduct=:idProduct")
     void deleteOfferByProduct(@Param("idProduct") Long idProduct);
 
+
+
 }
