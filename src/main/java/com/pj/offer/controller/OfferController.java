@@ -11,11 +11,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 import java.net.URI;
 import java.util.List;
 
@@ -50,7 +48,7 @@ public class OfferController {
             @ApiResponse(code = 500, message = "Sistema Indisponível")
     })
     public ResponseEntity<?> findOfferByID(@PathVariable long id){
-        OfferDto offerDTO = offerService.getById(id);
+        OfferDto offerDTO = offerService.getOfferByValidId(id);
         return ResponseEntity.status(HttpStatus.OK).body(offerDTO);
     }
 
@@ -87,7 +85,7 @@ public class OfferController {
     //Método chamado na MicroService Order.
     @GetMapping("exist/{id}")
     public ResponseEntity<?> findOneOffer(@PathVariable long id){
-        OfferDto offerDTO = offerService.getById(id);
+        OfferDto offerDTO = offerService.getOfferByValidId(id);
         return ResponseEntity.status(HttpStatus.OK).body(offerDTO);
     }
 

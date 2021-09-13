@@ -17,6 +17,7 @@ import java.time.LocalDate;
 @ToString
 public class OfferForm implements Serializable{
 
+
     private Long id;
     @NotNull(message = "O Id do produto é necessário")
     private Long idProduct;

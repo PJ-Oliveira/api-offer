@@ -20,5 +20,4 @@ public class ErrorAtributes {
 	private int status;
 	private String detail;
 
-
 }

@@ -1,19 +1,18 @@
 package com.pj.offer.service;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-
-import com.pj.offer.advice.exception.InvalidException;
 import com.pj.offer.config.modelmapper.ModelMapperConfig;
 import com.pj.offer.domain.dto.DeleteOfferDto;
 import com.pj.offer.domain.Offer;
 import com.pj.offer.domain.form.OfferForm;
 import com.pj.offer.repository.OfferRepository;
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Optional;
 import org.junit.jupiter.api.Test;
@@ -24,7 +23,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.test.context.ContextConfiguration;
-
 
 
 @ContextConfiguration(classes = {OfferService.class, ModelMapper.class, ModelMapperConfig.class})
@@ -47,21 +45,26 @@ class OfferServiceTest {
         verify(this.offerRepository, times(1)).findAll((org.springframework.data.domain.Pageable) any());
     }
 
-
-
     @Test
     public void testDeleteOffer() {
+        Offer offer = new Offer();
         doNothing().when(this.offerRepository).deleteById((Long) any());
+        when(this.offerRepository.getById((Long) any())).thenReturn(offer);
         this.offerService.deleteOffer(1L);
         verify(this.offerRepository).deleteById((Long) any());
-        verify(this.offerRepository).findById((Long) any());
+        verify(this.offerRepository).getById((Long) any());
     }
 
+
     @Test
-    void testGetById() {
-        when(this.offerRepository.findById((Long) any())).thenReturn(Optional.<Offer>empty());
-        assertThrows(InvalidException.class, () -> this.offerService.getById(1L));
-        verify(this.offerRepository, times(1)).findById((Long) any());
+    public void testGetOfferByValidId() {
+        LocalDate inicio = LocalDate.ofEpochDay(1L);
+        LocalDate fim = LocalDate.ofEpochDay(1L);
+        Offer offer = new Offer(1L, 1L, inicio, fim, "Descricao", BigDecimal.valueOf(1L));
+        Optional<Offer> ofResult = Optional.<Offer>of(offer);
+        when(this.offerRepository.getOnlyUnexpiredOfferById((Long) any())).thenReturn(ofResult);
+        this.offerService.getOfferByValidId(1L);
+        verify(this.offerRepository).getOnlyUnexpiredOfferById((Long) any());
     }
 
 
@@ -71,6 +74,7 @@ class OfferServiceTest {
         this.offerService.deleteOfferByDeleteOfferDTO(new DeleteOfferDto());
         verify(this.offerRepository, times(1)).deleteOfferByProduct((Long) any());
     }
+
 
     @Test
     void save() {
