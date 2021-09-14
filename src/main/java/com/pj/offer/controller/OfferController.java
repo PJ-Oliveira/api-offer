@@ -54,7 +54,9 @@ public class OfferController {
 
     @PostMapping("/addOffer")
     @ApiOperation(httpMethod = "POST",
-            notes = "O desconto deve ser de no mínimo 1% e no máximo 50%. O formato da data deve seguir esse modelo: 2021-08-25 01:01:01. Não é possível iniciar uma oferta antes do dia de hoje",
+            notes = "O desconto deve ser de no mínimo 1% e no máximo 50%." +
+                    "O formato da data deve seguir esse modelo: 2021-08-25 01:01:01." +
+                    "Não é possível iniciar uma oferta antes do dia de hoje",
             tags = {"Cadastro"}, value="Cadastro de Ofertas")
     @ApiResponses(value = {
             @ApiResponse(code = 201, message = "Recurso criado"),
@@ -80,9 +82,6 @@ public class OfferController {
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
-
-
-    //Método chamado na MicroService Order.
     @GetMapping("exist/{id}")
     public ResponseEntity<?> findOneOffer(@PathVariable long id){
         OfferDto offerDTO = offerService.getOfferByValidId(id);

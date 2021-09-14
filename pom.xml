@@ -115,53 +115,27 @@
 						<exclude>**/*/domain/**</exclude>
 						<exclude>**/*advice/**</exclude>
 						<exclude>**/*documentation/**</exclude>
+						<exclude>**/*config/**</exclude>
+						<exclude>**/*controller/**</exclude>
 					</excludes>
 				</configuration>
 				<executions>
 					<execution>
-						<id>prepare-agent</id>
+						<id>check</id>
 						<goals>
 							<goal>prepare-agent</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>report</id>
-						<phase>prepare-package</phase>
-						<goals>
 							<goal>report</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>default-report</id>
-						<goals>
-							<goal>report</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>post-unit-test</id>
-						<phase>prepare-package</phase>
-						<goals>
-							<goal>report</goal>
-						</goals>
-						<configuration>
-							<dataFile>target/jacoco-ut.exec</dataFile>
-							<outputDirectory>target/myreports</outputDirectory>
-						</configuration>
-					</execution>
-					<execution>
-						<id>default-check</id>
-						<goals>
 							<goal>check</goal>
 						</goals>
 						<configuration>
 							<rules>
 								<rule>
-									<element>METHOD</element>
+									<element>CLASS</element>
 									<limits>
 										<limit>
-											<counter>COMPLEXITY</counter>
+											<counter>LINE</counter>
 											<value>COVEREDRATIO</value>
-											<minimum>0.60</minimum>
+											<minimum>0.80</minimum>
 										</limit>
 									</limits>
 								</rule>

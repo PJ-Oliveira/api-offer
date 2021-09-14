@@ -25,7 +25,7 @@ public class OfferService {
     @Autowired
     private ModelMapper modelMapper;
 
-    public OfferDto save(OfferForm offerFORM){
+    public OfferDto save(OfferForm offerFORM) {
         Offer offer = modelMapper.map(offerFORM, Offer.class);
         offerRepository.save(offer);
         return modelMapper.map(offer, OfferDto.class);
@@ -47,7 +47,7 @@ public class OfferService {
         return modelMapper.map(offer, OfferDto.class);
     }
 
-    public void deleteOfferByDeleteOfferDTO(DeleteOfferDto deleteOfferDTO){
+    public void listenDeleteOfferByIdProduct(DeleteOfferDto deleteOfferDTO){
         offerRepository.deleteOfferByProduct(deleteOfferDTO.getIdProduct());
     }
 }
