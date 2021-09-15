@@ -1,6 +1,5 @@
 package com.pj.offer.service;
 
-
 import com.pj.offer.advice.exception.NotFoundException;
 import com.pj.offer.domain.dto.DeleteOfferDto;
 import com.pj.offer.domain.Offer;
@@ -47,7 +46,7 @@ public class OfferService {
         return modelMapper.map(offer, OfferDto.class);
     }
 
-    public void listenDeleteOfferByIdProduct(DeleteOfferDto deleteOfferDTO){
+    public void deleteOfferByIdProduct(DeleteOfferDto deleteOfferDTO){
         offerRepository.deleteOfferByProduct(deleteOfferDTO.getIdProduct());
     }
 }

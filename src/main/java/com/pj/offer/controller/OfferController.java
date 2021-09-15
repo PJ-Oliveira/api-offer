@@ -30,7 +30,8 @@ public class OfferController {
     }
 
     @GetMapping
-    @ApiOperation(httpMethod = "GET", notes = "Lista todas as ofertas",tags = {"Listagem"}, value="Veja todas as ofertas")
+    @ApiOperation(httpMethod = "GET", notes = "Lista todas as ofertas",
+            tags = {"Listagem"}, value="Veja todas as ofertas")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Requisição bem sucedida"),
             @ApiResponse(code = 404, message = "Recurso não encontrado"),
@@ -41,7 +42,8 @@ public class OfferController {
         return ResponseEntity.ok().body(offerDTO);
     }
     @GetMapping("/{id}")
-    @ApiOperation(httpMethod = "GET", notes = "Busque a oferta pelo seu respectivo ID",tags = {"Busque pelo ID"}, value="Encontre oferta por ID")
+    @ApiOperation(httpMethod = "GET", notes = "Busque a oferta pelo seu respectivo ID",
+            tags = {"Busque pelo ID"}, value="Encontre oferta por ID")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Requisição bem sucedida"),
             @ApiResponse(code = 404, message = "Recurso não encontrado"),
@@ -71,7 +73,8 @@ public class OfferController {
     }
 
     @DeleteMapping("delete/{id}")
-    @ApiOperation(httpMethod = "DELETE", notes = "Delete ofertas pelo seus respectivos IDs",tags = {"Delete"}, value="Delete Ofertas")
+    @ApiOperation(httpMethod = "DELETE", notes = "Delete ofertas pelo seus respectivos IDs",
+            tags = {"Delete"}, value="Delete Ofertas")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Requisição bem sucedida"),
             @ApiResponse(code = 404, message = "Recurso não encontrado"),

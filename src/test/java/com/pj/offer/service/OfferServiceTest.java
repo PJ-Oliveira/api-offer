@@ -83,9 +83,9 @@ class OfferServiceTest {
 
 
     @Test
-    void listenToDeleteOfferByIdProduct_WhenDeleteOfferByIdProduct_ExpectedSuccess() {
+    void deleteOfferByIdProduct_WhenDeleteOfferByIdProduct_ExpectedSuccess() {
         doNothing().when(this.offerRepository).deleteOfferByProduct((Long) any());
-        this.offerService.listenDeleteOfferByIdProduct(new DeleteOfferDto());
+        this.offerService.deleteOfferByIdProduct(new DeleteOfferDto());
         verify(this.offerRepository, times(1)).deleteOfferByProduct((Long) any());}
 
     @Test
