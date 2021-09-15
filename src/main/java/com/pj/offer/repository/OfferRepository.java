@@ -13,7 +13,6 @@ public interface OfferRepository extends JpaRepository<Offer, Long> {
     @Query("delete from Offer x where x.idProduct=:idProduct")
     void deleteOfferByProduct(@Param("idProduct") Long idProduct);
 
-    @Query(value = "select * from Offer x where x.fim >= CURRENT_TIMESTAMP and x.id_offer=:id", nativeQuery = true)
+    @Query("select offer from Offer offer where offer.fim >= CURRENT_TIMESTAMP and offer.id=:id")
     Optional<Offer> getOnlyUnexpiredOfferById(@Param("id") Long id);
-
 }
