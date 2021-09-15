@@ -1,4 +1,5 @@
 package com.pj.offer.controller;
+import com.pj.offer.domain.dto.DeleteOfferDto;
 import com.pj.offer.domain.dto.OfferDto;
 import com.pj.offer.domain.form.OfferForm;
 import com.pj.offer.service.OfferService;
@@ -28,6 +29,8 @@ public class OfferController {
     public OfferController(OfferService offerService) {
         this.offerService = offerService;
     }
+
+
 
     @GetMapping
     @ApiOperation(httpMethod = "GET", notes = "Lista todas as ofertas",

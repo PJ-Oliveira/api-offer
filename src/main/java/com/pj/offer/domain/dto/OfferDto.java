@@ -18,4 +18,5 @@ public class OfferDto implements Serializable {
     private LocalDate fim;
     private String descricao;
     private BigDecimal desconto;
+    private Boolean active;
 }

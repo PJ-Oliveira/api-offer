@@ -36,5 +36,6 @@ public class OfferForm implements Serializable{
     @Range(min=1, max=50, message = "O desconto deve ser de no mínimo 1% e no máximo 50%")
     @Positive
     private BigDecimal desconto;
+    private Boolean active;
 
 }

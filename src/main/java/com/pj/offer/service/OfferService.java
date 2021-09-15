@@ -46,7 +46,8 @@ public class OfferService {
         return modelMapper.map(offer, OfferDto.class);
     }
 
-    public void deleteOfferByIdProduct(DeleteOfferDto deleteOfferDTO){
-        offerRepository.deleteOfferByProduct(deleteOfferDTO.getIdProduct());
+    public void disableOffer(DeleteOfferDto deleteOfferDTO){
+        offerRepository.disableOfferByIdProduct(deleteOfferDTO.getIdProduct());
     }
+
 }

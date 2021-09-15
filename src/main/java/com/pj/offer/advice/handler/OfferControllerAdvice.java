@@ -15,7 +15,7 @@ public class OfferControllerAdvice {
 
     @ExceptionHandler(NotFoundException.class)
     public ResponseEntity<ErrorAtributes> notFoundException(NotFoundException notFoundException, HttpServletRequest request){
-        String detail = "Warning: NotFound. Ensure that the Id included in the request exist or is unexpired";
+        String detail = "Warning: NotFound. Ensure that the Id included in the request exist, is active or is unexpired";
         HttpStatus status = HttpStatus.NOT_FOUND;
         ErrorAtributes errorAtributes = new ErrorAtributes(Instant.now(), notFoundException.getMessage(), request.getRequestURI(), status.value(), detail);
         return ResponseEntity.status(status).body(errorAtributes);

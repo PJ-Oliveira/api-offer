@@ -28,4 +28,6 @@ public class Offer implements Serializable {
     private String descricao;
     @Column(name = "Desconto")
     private BigDecimal desconto;
+    private Boolean active;
+
 }
