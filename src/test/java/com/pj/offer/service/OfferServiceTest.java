@@ -46,7 +46,7 @@ class OfferServiceTest {
 
     @Test
     void save_WhenSaveOffer_ExpectedSuccess() {
-        var offer = TestTemplet.newOffer();
+        var offer = ScenarioFactory.newOffer();
         OfferForm offerForm = new OfferForm();
         when(this.offerRepository.save((any()))).thenReturn(offer);
         this.offerService.save(offerForm);
@@ -64,8 +64,8 @@ class OfferServiceTest {
 
     @Test
     void testFindAll_WhenFindEachOfferWithPageable_ExpectedSuccess() {
-        var pageable = TestTemplet.newPageable();
-        var page = TestTemplet.newPage();
+        var pageable = ScenarioFactory.newPageable();
+        var page = ScenarioFactory.newPage();
         when(offerRepository.findAll(pageable)).thenReturn(page);
         offerService.findAll(pageable);
         verify(this.offerRepository, times(1)).findAll(pageable);
@@ -73,7 +73,7 @@ class OfferServiceTest {
 
     @Test
     void deleteOffer_WhenDeleteOfferById_ExpectedSuccess() {
-        var offer = TestTemplet.newOffer();
+        var offer = ScenarioFactory.newOffer();
         doNothing().when(this.offerRepository).deleteById((Long) any());
         when(this.offerRepository.getById((Long) any())).thenReturn(offer);
         this.offerService.deleteOffer(1l);
@@ -84,8 +84,8 @@ class OfferServiceTest {
 
     @Test
     void getOptionalOfferByValidId_WhenFindOfferUnexpired_ExpectedSuccess() {
-        var offer = TestTemplet.newOffer();
-        var optionalOffer = TestTemplet.newOptionalOffer();
+        var offer = ScenarioFactory.newOffer();
+        var optionalOffer = ScenarioFactory.newOptionalOffer();
         when(this.offerRepository.getOnlyUnexpiredOfferById((Long) any())).thenReturn(optionalOffer);
         Optional<Offer> actualOptionalOfferByValidId = this.offerService.getOptionalOfferByValidId(1L);
         assertSame(optionalOffer, actualOptionalOfferByValidId);
@@ -96,8 +96,8 @@ class OfferServiceTest {
 
     @Test
     void findOfferByValidId_WhenFindOfferByValidId_ExpectedSuccess() {
-        var offer = TestTemplet.newOffer();
-        var optionalOffer = TestTemplet.newOptionalOffer();
+        var offer = ScenarioFactory.newOffer();
+        var optionalOffer = ScenarioFactory.newOptionalOffer();
         when(this.offerRepository.getOnlyUnexpiredOfferById((Long) any())).thenReturn(optionalOffer);
         when(this.modelMapper.map((Object) any(), (Class<Object>) any()))
                 .thenThrow(new NotFoundException("Id " + offer.getId() + " Not Found"));
@@ -108,7 +108,7 @@ class OfferServiceTest {
 
     @Test
     void getOfferByValidId_WhenFindOfferUnexpiredAndThrowingException_ExpectedSuccess1() {
-        var offer = TestTemplet.emptyOffer();
+        var offer = ScenarioFactory.emptyOffer();
         when(offerRepository.getOnlyUnexpiredOfferById(eq(offer.getId()))).thenReturn(Optional.empty());
         assertThatThrownBy(()-> offerService.findOfferByValidId(any()))
                 .isInstanceOf(NotFoundException.class)
@@ -118,7 +118,7 @@ class OfferServiceTest {
 
     @Test
     void getOfferByValidId_WhenFindOfferByValidId_ExpectedSuccess() {
-        var optionalOffer = TestTemplet.newOptionalOffer();
+        var optionalOffer = ScenarioFactory.newOptionalOffer();
         when(this.offerRepository.getOnlyUnexpiredOfferById((Long) any())).thenReturn(optionalOffer);
         when(this.modelMapper.map((Object) any(), (Class<Object>) any())).thenReturn(null);
         assertNull(this.offerService.findOfferByValidId(1L));

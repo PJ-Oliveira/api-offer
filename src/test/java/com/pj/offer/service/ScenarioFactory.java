@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class TestTemplet {
+public class ScenarioFactory {
 
     public static Offer newOffer(){
         Offer offer = new Offer();
