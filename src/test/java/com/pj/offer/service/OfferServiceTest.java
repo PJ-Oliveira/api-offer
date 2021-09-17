@@ -101,7 +101,7 @@ class OfferServiceTest {
         when(this.offerRepository.getOnlyUnexpiredOfferById((Long) any())).thenReturn(optionalOffer);
         when(this.modelMapper.map((Object) any(), (Class<Object>) any()))
                 .thenThrow(new NotFoundException("Id " + offer.getId() + " Not Found"));
-        assertThrows(NotFoundException.class, () -> this.offerService.findOfferByValidId(123L));
+        assertThrows(NotFoundException.class, () -> this.offerService.findOfferByValidId(1l));
         verify(this.offerRepository).getOnlyUnexpiredOfferById((Long) any());
         verify(this.modelMapper).map((Object) any(), (Class<Object>) any());
     }
