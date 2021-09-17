@@ -1,5 +1,6 @@
 package com.pj.offer.controller;
-import com.pj.offer.domain.dto.DeleteOfferDto;
+
+import com.pj.offer.domain.Offer;
 import com.pj.offer.domain.dto.OfferDto;
 import com.pj.offer.domain.form.OfferForm;
 import com.pj.offer.service.OfferService;
@@ -14,9 +15,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
 import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/oferta")
@@ -53,7 +56,7 @@ public class OfferController {
             @ApiResponse(code = 500, message = "Sistema Indisponível")
     })
     public ResponseEntity<?> findOfferByID(@PathVariable long id){
-        OfferDto offerDTO = offerService.getOfferByValidId(id);
+        OfferDto offerDTO = offerService.findOfferByValidId(id);
         return ResponseEntity.status(HttpStatus.OK).body(offerDTO);
     }
 
@@ -88,10 +91,17 @@ public class OfferController {
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
+    @GetMapping("active/{id}")
+    @ApiOperation(httpMethod = "GET", notes = "Ative ou desative a oferta",
+            tags = {"Ligue ou desligue"}, value="Ative ou desative a oferta pelo IdProduct")
+    public void ativa(Long idProduct) {
+        offerService.offerActivation(idProduct, true);
+
+    }
+
     @GetMapping("exist/{id}")
-    public ResponseEntity<?> findOneOffer(@PathVariable long id){
-        OfferDto offerDTO = offerService.getOfferByValidId(id);
-        return ResponseEntity.status(HttpStatus.OK).body(offerDTO);
+    public Optional<Offer> findOneOffer(@PathVariable long id){
+        return offerService.getOptionalOfferByValidId(id);
     }
 
 }

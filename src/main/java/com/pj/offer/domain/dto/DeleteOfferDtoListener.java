@@ -23,7 +23,7 @@ public class DeleteOfferDtoListener {
     public void listener(@Valid String message) {
         try {
             DeleteOfferDto deleteOfferDto = new ObjectMapper().configure(FAIL_ON_UNKNOWN_PROPERTIES, false).readValue(message, DeleteOfferDto.class);
-            offerService.disableOffer(deleteOfferDto);
+            offerService.offerDeActivation(deleteOfferDto);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }

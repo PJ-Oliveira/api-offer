@@ -1,5 +1,6 @@
 package com.pj.offer.domain;
 import lombok.*;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
