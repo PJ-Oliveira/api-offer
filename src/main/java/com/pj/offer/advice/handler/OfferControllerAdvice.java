@@ -8,16 +8,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-import java.time.Instant;
 
 @ControllerAdvice
 public class OfferControllerAdvice {
 
     @ExceptionHandler(NotFoundException.class)
     public ResponseEntity<ErrorAtributes> notFoundException(NotFoundException notFoundException, HttpServletRequest request){
-        String detail = "Warning: NotFound. Ensure that the Id included in the request exist, is active or is unexpired";
-        HttpStatus status = HttpStatus.NOT_FOUND;
-        ErrorAtributes errorAtributes = new ErrorAtributes(Instant.now(), notFoundException.getMessage(), request.getRequestURI(), status.value(), detail);
-        return ResponseEntity.status(status).body(errorAtributes);
+        String description = "Warning: NotFound. Ensure that the Id included in the request exist, is active or is unexpired";
+        //HttpStatus code = HttpStatus.NOT_FOUND;
+        ErrorAtributes errorAtributes = new ErrorAtributes(description, notFoundException.getMessage());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorAtributes);
     }
 }
