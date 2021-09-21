@@ -21,7 +21,7 @@ public class OfferForm implements Serializable{
     @NotNull(message = "O Id do produto é necessário")
     private Long idProduct;
     @NotNull(message = "A data de início da oferta é necessária")
-    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss", timezone = "GMT-03")
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd", timezone = "GMT-03")
     @FutureOrPresent
     private LocalDate inicio;
     @NotNull(message = "A data de fim da oferta é necessária")

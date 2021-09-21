@@ -24,9 +24,12 @@ public class OfferService {
     private OfferRepository offerRepository;
     @Autowired
     private ModelMapper modelMapper;
+    @Autowired
+    private OfferValidation offerValidation;
 
     public OfferDto save(OfferForm offerFORM) {
         Offer offer = modelMapper.map(offerFORM, Offer.class);
+        offerValidation.validateDate(offer);
         offerRepository.save(offer);
         return modelMapper.map(offer, OfferDto.class);
     }

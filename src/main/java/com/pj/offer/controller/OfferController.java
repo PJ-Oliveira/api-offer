@@ -32,8 +32,6 @@ public class OfferController {
         this.offerService = offerService;
     }
 
-
-
     @GetMapping
     @ApiOperation(httpMethod = "GET", notes = "Lista todas as ofertas",
             tags = {"Listagem"}, value="Veja todas as ofertas")
