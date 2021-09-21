@@ -43,18 +43,21 @@ class OfferServiceTest {
     private OfferRepository offerRepository;
     @Mock
     private ModelMapper modelMapper;
+    @Mock
+    private OfferValidation offerValidation;
 
     @Test
     void save_WhenSaveOffer_ExpectedSuccess() {
         var offer = ScenarioFactory.newOffer();
         OfferForm offerForm = new OfferForm();
         when(this.offerRepository.save((any()))).thenReturn(offer);
+        this.offerValidation.validateDate(offer);
         this.offerService.save(offerForm);
         verify(this.offerRepository, times(1)).save(any());
     }
 
     @Test
-    void testFindAll_WhenFindEachOffer_ExpectedSuccess() {
+    void findAll_WhenFindEachOffer_ExpectedSuccess() {
         when(this.offerRepository.findAll((org.springframework.data.domain.Pageable) any()))
                 .thenReturn(new PageImpl<>(new ArrayList<>()));
         assertTrue(this.offerService.findAll(null).isEmpty());
@@ -63,7 +66,7 @@ class OfferServiceTest {
 
 
     @Test
-    void testFindAll_WhenFindEachOfferWithPageable_ExpectedSuccess() {
+    void findAll_WhenFindEachOfferWithPageable_ExpectedSuccess() {
         var pageable = ScenarioFactory.newPageable();
         var page = ScenarioFactory.newPage();
         when(offerRepository.findAll(pageable)).thenReturn(page);
@@ -85,7 +88,7 @@ class OfferServiceTest {
     @Test
     void getOptionalOfferByValidId_WhenFindOfferUnexpired_ExpectedSuccess() {
         var offer = ScenarioFactory.newOffer();
-        var optionalOffer = ScenarioFactory.newOptionalOffer();
+        Optional<Offer> optionalOffer = Optional.of(offer);
         when(this.offerRepository.getOnlyUnexpiredOfferById((Long) any())).thenReturn(optionalOffer);
         Optional<Offer> actualOptionalOfferByValidId = this.offerService.getOptionalOfferByValidId(1L);
         assertSame(optionalOffer, actualOptionalOfferByValidId);
@@ -97,7 +100,7 @@ class OfferServiceTest {
     @Test
     void findOfferByValidId_WhenFindOfferByValidId_ExpectedSuccess() {
         var offer = ScenarioFactory.newOffer();
-        var optionalOffer = ScenarioFactory.newOptionalOffer();
+        Optional<Offer> optionalOffer = Optional.of(offer);
         when(this.offerRepository.getOnlyUnexpiredOfferById((Long) any())).thenReturn(optionalOffer);
         when(this.modelMapper.map((Object) any(), (Class<Object>) any()))
                 .thenThrow(new NotFoundException("Id " + offer.getId() + " Not Found"));
@@ -118,7 +121,8 @@ class OfferServiceTest {
 
     @Test
     void getOfferByValidId_WhenFindOfferByValidId_ExpectedSuccess() {
-        var optionalOffer = ScenarioFactory.newOptionalOffer();
+        var offer = ScenarioFactory.newOffer();
+        Optional<Offer> optionalOffer = Optional.of(offer);
         when(this.offerRepository.getOnlyUnexpiredOfferById((Long) any())).thenReturn(optionalOffer);
         when(this.modelMapper.map((Object) any(), (Class<Object>) any())).thenReturn(null);
         assertNull(this.offerService.findOfferByValidId(1L));

@@ -5,37 +5,20 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 
 import java.math.BigDecimal;
+import java.time.Clock;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
+
 
 public class ScenarioFactory {
 
     public static Offer newOffer(){
         Offer offer = new Offer();
         offer.setId(1L);
-        offer.setIdProduct(1L);
-        offer.setActive(true);
-        offer.setFim(LocalDate.ofEpochDay(1L));
-        offer.setId(1L);
-        offer.setInicio(LocalDate.ofEpochDay(1L));
         offer.setDesconto(BigDecimal.valueOf(1L));
-        offer.setDescricao("Descricao");
         return offer;
-    }
-
-    public static Optional<Offer> newOptionalOffer(){
-        Offer offer = new Offer();
-        offer.setId(1L);
-        offer.setIdProduct(1L);
-        offer.setActive(true);
-        offer.setFim(LocalDate.ofEpochDay(1L));
-        offer.setId(1L);
-        offer.setInicio(LocalDate.ofEpochDay(1L));
-        offer.setDesconto(BigDecimal.valueOf(1L));
-        offer.setDescricao("Descricao");
-        return Optional.of(offer);
     }
 
     public static Offer emptyOffer(){
@@ -54,4 +37,38 @@ public class ScenarioFactory {
         return offerPage;
     }
 
+    public static Offer fimIsEqualToInicio(){
+        Offer offer = new Offer();
+        offer.setFim(LocalDate.ofYearDay(2020, 30)); //fim
+        offer.setInicio(LocalDate.ofYearDay(2020, 30)); //inicio
+        return offer;
+    }
+
+    public static Offer fimIsBeforeToInicio(){
+        Offer offer = new Offer();
+        offer.setFim(LocalDate.ofYearDay(2018, 30));
+        offer.setInicio(LocalDate.ofYearDay(2020, 30));
+        return offer;
+    }
+
+    public static Offer fimIsBeforeToNow(){
+        Offer offer = new Offer();
+        offer.setFim(LocalDate.of(2020, 12, 12));
+        offer.setInicio(LocalDate.of(1990, 12, 12));
+        return offer;
+    }
+
+    public static Offer inicioIsBeforeToNow(){
+        Offer offer = new Offer();
+        offer.setFim(LocalDate.ofYearDay(2035, 30));
+        offer.setInicio(LocalDate.of(1990, 12, 12));
+        return offer;
+    }
+
+    public static Offer validDateRange(){
+        Offer offer = new Offer();
+        offer.setFim(LocalDate.ofYearDay(2035, 30));
+        offer.setInicio(LocalDate.of(2021, 12, 12));
+        return offer;
+    }
 }
