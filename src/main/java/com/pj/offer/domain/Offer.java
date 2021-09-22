@@ -1,5 +1,6 @@
 package com.pj.offer.domain;
 import lombok.*;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -28,4 +29,6 @@ public class Offer implements Serializable {
     private String descricao;
     @Column(name = "Desconto")
     private BigDecimal desconto;
+    private Boolean active;
+
 }
