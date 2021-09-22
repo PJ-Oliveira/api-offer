@@ -8,6 +8,7 @@ import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -18,6 +19,9 @@ public class OfferForm implements Serializable{
 
 
     private Long id;
+
+    private List<ProductForm> products;
+
     @NotNull(message = "O Id do produto é necessário")
     private Long idProduct;
     @NotNull(message = "A data de início da oferta é necessária")

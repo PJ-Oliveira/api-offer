@@ -5,6 +5,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table
@@ -19,6 +20,10 @@ public class Offer implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_Offer")
     private Long id;
+
+    @OneToMany(cascade =  CascadeType.ALL)
+    private List<Product> products;
+
     @Column(name = "id_Product")
     private Long idProduct;
     @Column(name = "Inicio")
