@@ -69,17 +69,17 @@ public class RabbitMQConfig {
         return factory;
     }
 
-    @Bean
-    public RabbitTemplate rabbitTemplate(final ConnectionFactory connectionFactory) {
-        final var rabbitTemplate = new RabbitTemplate(connectionFactory);
-        rabbitTemplate.setMessageConverter(producerJackson2MessageConverter());
-        return rabbitTemplate;
-    }
-
-    @Bean
-    public Jackson2JsonMessageConverter producerJackson2MessageConverter() {
-        return new Jackson2JsonMessageConverter();
-    }
+//    @Bean
+//    public RabbitTemplate rabbitTemplate(final ConnectionFactory connectionFactory) {
+//        final var rabbitTemplate = new RabbitTemplate(connectionFactory);
+//        rabbitTemplate.setMessageConverter(producerJackson2MessageConverter());
+//        return rabbitTemplate;
+//    }
+// talvez use ambos. veremos
+//    @Bean
+//    public Jackson2JsonMessageConverter producerJackson2MessageConverter() {
+//        return new Jackson2JsonMessageConverter();
+//    }
 
 }
 

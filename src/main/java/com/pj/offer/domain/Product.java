@@ -1,8 +1,6 @@
 package com.pj.offer.domain;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -11,6 +9,8 @@ import java.io.Serializable;
 @Getter
 @Setter
 @ToString
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "tb_product")
 @Entity
 public class Product implements Serializable {
@@ -24,12 +24,5 @@ public class Product implements Serializable {
     @Column(name = "type_Product")
     private String type;
 
-    //o problema é que ele ta recebendo mais que o id lá
-    //verificando como resolver esse problema com o RABBITMQ
-    public Product(Long idProduct) {
-        this.idProduct = idProduct;
-    }
 
-    public Product() {
-    }
 }

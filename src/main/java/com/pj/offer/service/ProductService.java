@@ -6,6 +6,8 @@ import com.pj.offer.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class ProductService {
 
@@ -17,8 +19,11 @@ public class ProductService {
     }
 
     public void findProductByIdProduct(Long idProduct) {
-        Product product = productRepository.getProductByIdProduct(idProduct).
-                orElseThrow(()-> new NotFoundException("Id " + idProduct + " Not Found"));
 
+        Optional<Product> product = productRepository.getProductByIdProduct(idProduct);
+
+        /*if(!productRepository.getProductByIdProduct(idProduct).isPresent()) {
+            throw new NotFoundException("Id " + idProduct + " Not Found");
+        }*/
     }
 }
