@@ -2,6 +2,7 @@ package com.pj.offer.domain.dto;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.pj.offer.advice.exception.NotFoundException;
 import com.pj.offer.config.rabbitmq.rabbitconfig.RabbitMQConfig;
 import com.pj.offer.domain.Product;
 import com.pj.offer.service.ProductService;
@@ -11,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Component;
 
+import java.io.PrintWriter;
+
 import static com.fasterxml.jackson.databind.DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES;
 
 @Component
@@ -18,7 +21,6 @@ public class DeleteOfferDtoListener {
 
     @Autowired
     private ProductService productService;
-
 
     @RabbitListener(queues = RabbitMQConfig.QUEUE, containerFactory = "offerContainerFactory")
     public void listener(String message) {
@@ -32,10 +34,11 @@ public class DeleteOfferDtoListener {
             }
         } catch (ListenerExecutionFailedException |
                 JsonProcessingException |
-                EmptyResultDataAccessException
-                listenerExecutionFailedException)
+                EmptyResultDataAccessException |
+                NotFoundException
+                exceptionsOfRabbitMqList)
         {
-            listenerExecutionFailedException.getLocalizedMessage();
+        exceptionsOfRabbitMqList.getStackTrace();
         }
 
     }

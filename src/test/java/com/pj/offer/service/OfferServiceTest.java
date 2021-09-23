@@ -127,22 +127,6 @@ class OfferServiceTest {
         verify(this.modelMapper).map((Object) any(), (Class<Object>) any());
     }
 
-//    @Test
-//    void offerDeActivation_WhenDeActiveOffer_ExpectedSuccess() {
-//        doNothing().when(this.offerRepository).toggleOfferActivation((Long) any(), (Boolean) any());
-//        this.offerService.offerDeActivation(new Product();
-//        verify(this.offerRepository).toggleOfferActivation((Long) any(), (Boolean) any());
-//    }
-
-//    @Test
-//    void offerDeActivation_WhenDeActiveOffer_ExpectedSuccess2() {
-//        doNothing().when(this.offerRepository).toggleOfferActivation((Long) any(), (Boolean) any());
-//        Product product = mock(Product.class);
-//        when(product.getIdProduct()).thenReturn(1L);
-//        this.offerService.offerDeActivation(deleteOfferDto);
-//        verify(this.offerRepository).toggleOfferActivation((Long) any(), (Boolean) any());
-//        verify(deleteOfferDto).getIdProduct();
-//    }
 
     @Test
     void offerActivation_WhenActiveOffer_ExpectedSuccess() {

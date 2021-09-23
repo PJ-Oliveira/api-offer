@@ -53,11 +53,6 @@ public class OfferService {
         return modelMapper.map(offer, OfferDto.class);
     }
 
-
-    public void offerDeActivation(Long id, Boolean status){
-        offerRepository.toggleOfferActivation(id, false);
-    }
-
     public void offerActivation(Long id, Boolean status){
         offerRepository.toggleOfferActivation(id, status);
     }
