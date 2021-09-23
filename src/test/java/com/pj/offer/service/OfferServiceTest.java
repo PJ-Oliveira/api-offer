@@ -75,11 +75,11 @@ class OfferServiceTest {
     @Test
     void deleteOffer_WhenDeleteOfferById_ExpectedSuccess() {
         var offer = ScenarioFactory.newOffer();
-        doNothing().when(this.offerRepository).deleteById((Long) any());
-        when(this.offerRepository.getById((Long) any())).thenReturn(offer);
-        this.offerService.deleteOffer(1l);
-        verify(this.offerRepository).deleteById((Long) any());
-        verify(this.offerRepository).getById((Long) any());
+        doNothing().when(this.offerRepository).deleteById((Long) offer.getId());
+        when(this.offerRepository.getById((Long) offer.getId())).thenReturn(offer);
+        this.offerService.deleteOffer(offer.getId());
+        verify(this.offerRepository).deleteById((Long) offer.getId());
+        verify(this.offerRepository).getById((Long) offer.getId());
     }
 
 
@@ -87,22 +87,22 @@ class OfferServiceTest {
     void getOptionalOfferByValidId_WhenFindOfferUnexpired_ExpectedSuccess() {
         var offer = ScenarioFactory.newOffer();
         Optional<Offer> optionalOffer = Optional.of(offer);
-        when(this.offerRepository.getOnlyUnexpiredOfferById((Long) any())).thenReturn(optionalOffer);
-        Optional<Offer> actualOptionalOfferByValidId = this.offerService.getOptionalOfferByValidId(1L);
+        when(this.offerRepository.getOnlyUnexpiredOfferById((Long) offer.getId())).thenReturn(optionalOffer);
+        Optional<Offer> actualOptionalOfferByValidId = this.offerService.getOptionalOfferByValidId(offer.getId());
         assertSame(optionalOffer, actualOptionalOfferByValidId);
         assertTrue(actualOptionalOfferByValidId.isPresent());
         assertEquals("1", actualOptionalOfferByValidId.get().getDesconto().toString());
-        verify(this.offerRepository).getOnlyUnexpiredOfferById((Long) any());
+        verify(this.offerRepository).getOnlyUnexpiredOfferById((Long) offer.getId());
     }
 
     @Test
     void findOfferByValidId_WhenFindOfferByValidId_ExpectedSuccess() {
         var offer = ScenarioFactory.newOffer();
         Optional<Offer> optionalOffer = Optional.of(offer);
-        when(this.offerRepository.getOnlyUnexpiredOfferById((Long) any())).thenReturn(optionalOffer);
+        when(this.offerRepository.getOnlyUnexpiredOfferById((Long) offer.getId())).thenReturn(optionalOffer);
         when(this.modelMapper.map((Object) any(), (Class<Object>) any()))
                 .thenThrow(new NotFoundException("Id " + offer.getId() + " Not Found"));
-        assertThrows(NotFoundException.class, () -> this.offerService.findOfferByValidId(1l));
+        assertThrows(NotFoundException.class, () -> this.offerService.findOfferByValidId(offer.getId()));
         verify(this.offerRepository).getOnlyUnexpiredOfferById((Long) any());
         verify(this.modelMapper).map((Object) any(), (Class<Object>) any());
     }
@@ -111,17 +111,17 @@ class OfferServiceTest {
     void getOfferByValidId_WhenFindOfferUnexpiredAndThrowingException_ExpectedSuccess1() {
         var offer = ScenarioFactory.emptyOffer();
         when(offerRepository.getOnlyUnexpiredOfferById(eq(offer.getId()))).thenReturn(Optional.empty());
-        assertThatThrownBy(()-> offerService.findOfferByValidId(any()))
+        assertThatThrownBy(()-> offerService.findOfferByValidId(offer.getId()))
                 .isInstanceOf(NotFoundException.class)
                 .hasMessageContaining("Id " + offer.getId() + " Not Found");
-        verify(this.offerRepository, times(1)).getOnlyUnexpiredOfferById(any());
+        verify(this.offerRepository, times(1)).getOnlyUnexpiredOfferById(offer.getId());
     }
 
     @Test
     void getOfferByValidId_WhenFindOfferByValidId_ExpectedSuccess() {
         var offer = ScenarioFactory.newOffer();
         Optional<Offer> optionalOffer = Optional.of(offer);
-        when(this.offerRepository.getOnlyUnexpiredOfferById((Long) any())).thenReturn(optionalOffer);
+        when(this.offerRepository.getOnlyUnexpiredOfferById((Long) offer.getId())).thenReturn(optionalOffer);
         when(this.modelMapper.map((Object) any(), (Class<Object>) any())).thenReturn(null);
         assertNull(this.offerService.findOfferByValidId(1L));
         verify(this.modelMapper).map((Object) any(), (Class<Object>) any());
@@ -130,9 +130,10 @@ class OfferServiceTest {
 
     @Test
     void offerActivation_WhenActiveOffer_ExpectedSuccess() {
-        doNothing().when(this.offerRepository).toggleOfferActivation((Long) any(), (Boolean) any());
-        this.offerService.offerActivation(1L, true);
-        verify(this.offerRepository).toggleOfferActivation((Long) any(), (Boolean) any());
+        var offer = ScenarioFactory.newOffer();
+        doNothing().when(this.offerRepository).toggleOfferActivation((Long) offer.getId(), (Boolean) offer.getActive());
+        this.offerService.offerActivation(offer.getId(), offer.getActive());
+        verify(this.offerRepository).toggleOfferActivation((Long) offer.getId(), (Boolean) offer.getActive());
     }
 
 }

@@ -118,7 +118,8 @@
 						<exclude>**/*documentation/**</exclude>
 						<exclude>**/*config/**</exclude>
 						<exclude>**/*controller/**</exclude>
-						<exclude>**/*ProductService.class/**</exclude>
+
+
 					</excludes>
 				</configuration>
 				<executions>

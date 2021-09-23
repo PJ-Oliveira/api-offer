@@ -20,8 +20,6 @@ public class ProductService {
 
     public void findProductByIdProduct(Long idProduct) {
         Optional<Product> product = productRepository.getProductByIdProduct(idProduct);
-        if(!productRepository.getProductByIdProduct(idProduct).isPresent()) {
-            throw new NotFoundException("Id " + idProduct + " Not Found");
-        }
+
     }
 }
