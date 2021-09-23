@@ -1,5 +1,7 @@
 package com.pj.offer.domain;
 import lombok.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -24,8 +26,6 @@ public class Offer implements Serializable {
     @OneToMany(cascade =  CascadeType.ALL)
     private List<Product> products;
 
-    @Column(name = "id_Product")
-    private Long idProduct;
     @Column(name = "Inicio")
     private LocalDate inicio;
     @Column(name = "Fim")

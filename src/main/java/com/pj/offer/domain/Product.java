@@ -1,24 +1,35 @@
 package com.pj.offer.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
+
+@Getter
+@Setter
+@ToString
 @Table(name = "tb_product")
 @Entity
-public class Product {
+public class Product implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_Product")
-    private Long id;
+    private Long idProduct;
     @Column(name = "name_Product")
     private String name;
     @Column(name = "type_Product")
     private String type;
+
+    //o problema é que ele ta recebendo mais que o id lá
+    //verificando como resolver esse problema com o RABBITMQ
+    public Product(Long idProduct) {
+        this.idProduct = idProduct;
+    }
+
+    public Product() {
+    }
 }

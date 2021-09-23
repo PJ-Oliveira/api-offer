@@ -5,7 +5,6 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
-
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -15,7 +14,7 @@ public class OfferDto implements Serializable {
 
     private Long id;
     private List<ProductDto> products;
-    private Long idProduct;
+
     private LocalDate inicio;
     private LocalDate fim;
     private String descricao;
