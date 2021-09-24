@@ -1,6 +1,5 @@
 package com.pj.offer.service;
 
-import com.pj.offer.advice.exception.NotFoundException;
 import com.pj.offer.domain.Product;
 import com.pj.offer.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,11 +14,10 @@ public class ProductService {
     private ProductRepository productRepository;
 
     public void deleteProductByIdProduct(Long idProduct) {
-        productRepository.deleteById(idProduct);
+         productRepository.deleteById(idProduct);
     }
 
     public void findProductByIdProduct(Long idProduct) {
         Optional<Product> product = productRepository.getProductByIdProduct(idProduct);
-
     }
 }

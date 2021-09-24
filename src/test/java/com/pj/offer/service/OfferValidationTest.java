@@ -40,6 +40,7 @@ class OfferValidationTest {
         var offer = ScenarioFactory.fimIsBeforeToNow();
         assertThrows(OfferException.class, () -> this.offerValidation.validateDate(offer));
     }
+
     @Test
     void validateDate_WhenInicioIsBeforeToNow_ExpectedSuccess() {
         var offer = ScenarioFactory.inicioIsBeforeToNow();

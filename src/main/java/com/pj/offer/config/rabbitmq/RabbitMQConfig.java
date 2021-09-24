@@ -1,4 +1,4 @@
-package com.pj.offer.config.rabbitmq.rabbitconfig;
+package com.pj.offer.config.rabbitmq;
 
 import org.springframework.amqp.core.*;
 import org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory;
@@ -67,6 +67,18 @@ public class RabbitMQConfig {
         factory.setRecoveryInterval(15000L);
         factory.setChannelTransacted(true);
         return factory;
+    }
+
+    @Bean
+    public RabbitTemplate rabbitTemplate(final ConnectionFactory connectionFactory) {
+        final var rabbitTemplate = new RabbitTemplate(connectionFactory);
+        rabbitTemplate.setMessageConverter(producerJackson2MessageConverter());
+        return rabbitTemplate;
+    }
+
+    @Bean
+    public Jackson2JsonMessageConverter producerJackson2MessageConverter() {
+        return new Jackson2JsonMessageConverter();
     }
 
 

@@ -24,5 +24,4 @@ public class Product implements Serializable {
     @Column(name = "type_Product")
     private String type;
 
-
 }

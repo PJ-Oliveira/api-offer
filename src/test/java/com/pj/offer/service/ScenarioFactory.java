@@ -22,7 +22,6 @@ public class ScenarioFactory {
     }
 
 
-
     public static Offer newOffer(){
         Offer offer = new Offer();
         offer.setId(1L);

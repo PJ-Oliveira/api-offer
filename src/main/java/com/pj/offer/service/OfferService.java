@@ -57,8 +57,4 @@ public class OfferService {
         offerRepository.toggleOfferActivation(id, status);
     }
 
-
-
-
-
 }
