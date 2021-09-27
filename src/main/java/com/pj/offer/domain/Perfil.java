@@ -17,7 +17,8 @@ public class Perfil implements GrantedAuthority {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_perfil")
-    private String idPerfil;
+    private Long idPerfil;
+    @Column(name = "type")
     private String type;
 
     @Override

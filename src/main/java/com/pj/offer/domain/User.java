@@ -24,6 +24,7 @@ public class User implements UserDetails {
     private String username;
     private String password;
     @ManyToMany(fetch = FetchType.EAGER)
+    @Column(name = "user_perfil")
     private List<Perfil> perfis = new ArrayList<>();
 
     @Override
