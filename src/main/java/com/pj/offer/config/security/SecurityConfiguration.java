@@ -20,6 +20,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Autowired
     private AuthenticationService authenticationService;
 
+
     @Override
     @Bean
     protected AuthenticationManager authenticationManager() throws Exception {
