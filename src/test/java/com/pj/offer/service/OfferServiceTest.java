@@ -29,8 +29,6 @@ import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.test.context.ContextConfiguration;
 
-
-
 @ContextConfiguration(classes = {OfferService.class, ModelMapper.class, ModelMapperConfig.class})
 @ExtendWith(MockitoExtension.class)
 class OfferServiceTest {
