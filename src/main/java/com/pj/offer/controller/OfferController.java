@@ -94,7 +94,7 @@ public class OfferController {
     @PutMapping("/{id}")
     @ApiOperation(httpMethod = "PUT", notes = "Ative a oferta",
             tags = {"Ativar"}, value="Ative a oferta pelo IdProduct")
-    public void activeOffer(Long id) {
+    public void activeOffer(@Valid @PathVariable Long id) {
         offerService.offerActivation(id, true);
 
     }
