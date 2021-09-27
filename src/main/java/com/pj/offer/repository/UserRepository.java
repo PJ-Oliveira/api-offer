@@ -1,6 +1,6 @@
 package com.pj.offer.repository;
 
-import com.pj.offer.domain.User;
+import com.pj.offer.domain.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

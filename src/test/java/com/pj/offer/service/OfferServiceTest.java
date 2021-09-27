@@ -15,7 +15,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import com.pj.offer.advice.exception.NotFoundException;
 import com.pj.offer.config.modelmapper.ModelMapperConfig;
-import com.pj.offer.domain.Offer;
+import com.pj.offer.domain.model.Offer;
 import com.pj.offer.domain.form.OfferForm;
 import com.pj.offer.repository.OfferRepository;
 import java.util.ArrayList;

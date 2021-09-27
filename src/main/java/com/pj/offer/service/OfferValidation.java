@@ -1,7 +1,7 @@
 package com.pj.offer.service;
 
 import com.pj.offer.advice.exception.OfferException;
-import com.pj.offer.domain.Offer;
+import com.pj.offer.domain.model.Offer;
 import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 

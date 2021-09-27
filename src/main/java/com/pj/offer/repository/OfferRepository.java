@@ -1,6 +1,6 @@
 package com.pj.offer.repository;
 
-import com.pj.offer.domain.Offer;
+import com.pj.offer.domain.model.Offer;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;

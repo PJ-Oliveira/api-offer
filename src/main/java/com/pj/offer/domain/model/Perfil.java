@@ -1,4 +1,4 @@
-package com.pj.offer.domain;
+package com.pj.offer.domain.model;
 
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;

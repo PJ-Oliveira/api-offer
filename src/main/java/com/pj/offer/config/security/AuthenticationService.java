@@ -1,6 +1,6 @@
 package com.pj.offer.config.security;
 
-import com.pj.offer.domain.User;
+import com.pj.offer.domain.model.User;
 import com.pj.offer.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
