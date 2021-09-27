@@ -101,6 +101,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
+				<version>3.0.0-M5</version>
 				<configuration>
 					<!-- no argLine here -->
 				</configuration>
@@ -117,6 +118,8 @@
 						<exclude>**/*documentation/**</exclude>
 						<exclude>**/*config/**</exclude>
 						<exclude>**/*controller/**</exclude>
+
+
 					</excludes>
 				</configuration>
 				<executions>

@@ -3,13 +3,14 @@ package com.pj.offer.advice.exception;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import java.util.List;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-public class ErrorAtributes {
+@NoArgsConstructor
+public class MessageError {
 
-	private String error;
-	private String details;
+    private String error;
+    private List<String> details;
 
 }

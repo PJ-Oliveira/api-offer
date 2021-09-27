@@ -10,9 +10,10 @@ import java.util.Optional;
 public interface OfferRepository extends JpaRepository<Offer, Long> {
 
     @Modifying
-    @Query("delete from Offer x where x.idProduct=:idProduct")
-    void deleteOfferByProduct(@Param("idProduct") Long idProduct);
+    @Query("update Offer offer SET offer.active=:status where offer.id=:id")
+    void toggleOfferActivation(@Param("id") Long id, @Param("status") Boolean status);
 
-    @Query("select offer from Offer offer where offer.fim >= CURRENT_TIMESTAMP and offer.id=:id")
+    @Query("select offer from Offer offer where offer.fim >= CURRENT_TIMESTAMP and offer.active = true and offer.id=:id")
     Optional<Offer> getOnlyUnexpiredOfferById(@Param("id") Long id);
+
 }
