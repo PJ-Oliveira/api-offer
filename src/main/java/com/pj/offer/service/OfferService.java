@@ -1,7 +1,7 @@
 package com.pj.offer.service;
 
 import com.pj.offer.advice.exception.NotFoundException;
-import com.pj.offer.domain.Offer;
+import com.pj.offer.domain.model.Offer;
 import com.pj.offer.domain.dto.OfferDto;
 import com.pj.offer.domain.form.OfferForm;
 import com.pj.offer.repository.OfferRepository;

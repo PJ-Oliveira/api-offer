@@ -1,6 +1,6 @@
 package com.pj.offer.service;
-import com.pj.offer.domain.Offer;
-import com.pj.offer.domain.Product;
+import com.pj.offer.domain.model.Offer;
+import com.pj.offer.domain.model.Product;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;

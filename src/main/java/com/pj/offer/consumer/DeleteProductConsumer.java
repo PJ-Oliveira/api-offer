@@ -3,7 +3,7 @@ package com.pj.offer.consumer;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pj.offer.config.rabbitmq.RabbitMQConfig;
-import com.pj.offer.domain.Product;
+import com.pj.offer.domain.model.Product;
 import com.pj.offer.service.ProductService;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;

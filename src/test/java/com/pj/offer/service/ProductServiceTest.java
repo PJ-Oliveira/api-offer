@@ -7,8 +7,7 @@ import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import com.pj.offer.advice.exception.NotFoundException;
-import com.pj.offer.domain.Product;
+import com.pj.offer.domain.model.Product;
 import com.pj.offer.repository.ProductRepository;
 
 import java.util.Optional;

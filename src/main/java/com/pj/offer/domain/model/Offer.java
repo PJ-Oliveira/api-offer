@@ -1,7 +1,5 @@
-package com.pj.offer.domain;
+package com.pj.offer.domain.model;
 import lombok.*;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.io.Serializable;

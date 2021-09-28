@@ -1,6 +1,6 @@
 package com.pj.offer.service;
 
-import com.pj.offer.domain.Product;
+import com.pj.offer.domain.model.Product;
 import com.pj.offer.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

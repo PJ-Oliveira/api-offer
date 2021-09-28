@@ -1,6 +1,6 @@
 package com.pj.offer.controller;
 
-import com.pj.offer.domain.Offer;
+import com.pj.offer.domain.model.Offer;
 import com.pj.offer.domain.dto.OfferDto;
 import com.pj.offer.domain.form.OfferForm;
 import com.pj.offer.service.OfferService;
