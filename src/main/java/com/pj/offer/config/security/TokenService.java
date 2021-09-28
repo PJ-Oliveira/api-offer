@@ -48,4 +48,12 @@ public class TokenService {
         return Long.parseLong(claims.getSubject());
     }
 
+    public boolean isValid(String token) {
+        try{
+            Jwts.parser().setSigningKey(this.secret).parseClaimsJws(token);
+            return true;
+        } catch (Exception exception) {
+            return false;
+        }
+    }
 }
