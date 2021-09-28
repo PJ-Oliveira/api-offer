@@ -50,7 +50,7 @@ public class TokenService {
 
     public boolean isValid(String token) {
         try{
-            Jwts.parser().setSigningKey(this.secret).parseClaimsJws(token);
+            Jwts.parser().setSigningKey(this.secret).parseClaimsJws(token).getBody();
             return true;
         } catch (Exception exception) {
             return false;

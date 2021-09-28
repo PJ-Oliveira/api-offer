@@ -28,22 +28,20 @@ public class AuthenticationByTokenFilter extends OncePerRequestFilter {
         boolean valid = tokenService.isValid(token);
         if(valid){
             authenticate(token);
-
         }
         filterChain.doFilter(httpServletRequest, httpServletResponse);
     }
 
     private void authenticate (String token){
-        Long id = tokenService.getId(token);
+        Long idUser = tokenService.getId(token);
         try {
-            User user = userRepository.findById(id).get();
-            UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken
+            User user = userRepository.findById(idUser).get();
+            UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken
                     (user.getIdUser(), null, user.getAuthorities());
-            SecurityContextHolder.getContext().setAuthentication(authentication);
+            SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
         }
         catch (NoSuchElementException noSuchElementException) {
             System.out.println("Forbid Acess" + "Invalid Token");
-            //noSuchElementException.printStackTrace("Forbid Acess" + "Invalid Token");
         }
     }
 
