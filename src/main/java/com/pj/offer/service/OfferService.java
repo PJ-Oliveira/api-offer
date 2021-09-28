@@ -1,10 +1,12 @@
 package com.pj.offer.service;
 
 import com.pj.offer.advice.exception.NotFoundException;
+import com.pj.offer.advice.exception.OfferException;
 import com.pj.offer.domain.model.Offer;
 import com.pj.offer.domain.dto.OfferDto;
 import com.pj.offer.domain.form.OfferForm;
 import com.pj.offer.repository.OfferRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -17,6 +19,7 @@ import java.util.stream.Collectors;
 
 @Service
 @Transactional
+@Slf4j
 public class OfferService {
 
     @Autowired
@@ -50,6 +53,7 @@ public class OfferService {
 
     public OfferDto findOfferByValidId(Long id) {
         Offer offer = offerRepository.getOnlyUnexpiredOfferById(id).orElseThrow(()-> new NotFoundException("Id " + id + " Not Found"));
+        log.error("An exception occurred", new OfferException("Please, verify the date"));
         return modelMapper.map(offer, OfferDto.class);
     }
 
