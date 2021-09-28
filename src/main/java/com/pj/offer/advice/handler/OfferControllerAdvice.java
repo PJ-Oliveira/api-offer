@@ -23,14 +23,14 @@ public class OfferControllerAdvice extends ResponseEntityExceptionHandler {
     @ExceptionHandler(NotFoundException.class)
     public ResponseEntity<ErrorAtributes> notFoundException(NotFoundException notFoundException, HttpServletRequest httpServletRequest){
         ErrorAtributes errorAtributes = new ErrorAtributes("Exception: Offer Not Found", notFoundException.getMessage());
-        log.error("An exception occurred", new NotFoundException("Please, verify the integrity of the data"));
+        log.error("{}!", errorAtributes);
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorAtributes);
     }
 
     @ExceptionHandler(OfferException.class)
     public ResponseEntity<ErrorAtributes> offerException(OfferException offerException, HttpServletRequest httpServletRequest){
-        ErrorAtributes errorAtributes = new ErrorAtributes("Date Validation: Please, verify the Dates atributes", offerException.getMessage());
-        log.error("An exception occurred", new OfferException("Please, verify the integrity of the data"));
+        ErrorAtributes errorAtributes = new ErrorAtributes("Date Validation: Please, verify the Date atributes", offerException.getMessage());
+        log.error("{}!", errorAtributes);
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorAtributes);
     }
 
@@ -44,7 +44,7 @@ public class OfferControllerAdvice extends ResponseEntityExceptionHandler {
             }
         var message = "Validation Error";
         MessageError messageError = new MessageError(message, details);
-        log.error("{}, {}!", message, details);
+        log.error("{}: {}!", message, details);
         return new ResponseEntity<>(messageError, HttpStatus.BAD_REQUEST);
     }
 }

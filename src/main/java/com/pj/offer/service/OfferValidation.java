@@ -11,7 +11,6 @@ import java.time.LocalDate;
 public class OfferValidation {
 
     public void validateDate(Offer offer){
-        log.error("An exception occurred", new OfferException("Please, verify the date"));
        if(offer.getFim().equals(offer.getInicio()))
        {
            throw new OfferException("OfferException: Date Fim  cannot be equals  to Date Inicio");

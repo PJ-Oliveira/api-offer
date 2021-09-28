@@ -53,7 +53,6 @@ public class OfferService {
 
     public OfferDto findOfferByValidId(Long id) {
         Offer offer = offerRepository.getOnlyUnexpiredOfferById(id).orElseThrow(()-> new NotFoundException("Id " + id + " Not Found"));
-        log.error("An exception occurred", new OfferException("Please, verify the date"));
         return modelMapper.map(offer, OfferDto.class);
     }
 
