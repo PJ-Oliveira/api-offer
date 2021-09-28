@@ -1,12 +1,10 @@
 package com.pj.offer.service;
 import com.pj.offer.domain.Offer;
+import com.pj.offer.domain.Product;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
-
 import java.math.BigDecimal;
-import java.time.Clock;
-import java.time.Instant;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,10 +12,24 @@ import java.util.List;
 
 public class ScenarioFactory {
 
+
+    public static Product newProduct() {
+        Product product = new Product();
+        product.setIdProduct(17L);
+        product.setName("Colgate");
+        product.setType("Toothpaste");
+        return product;
+    }
+
+
     public static Offer newOffer(){
         Offer offer = new Offer();
         offer.setId(1L);
         offer.setDesconto(BigDecimal.valueOf(1L));
+        offer.setFim(LocalDate.ofYearDay(2035, 30));
+        offer.setInicio(LocalDate.of(2021, 12, 12));
+        offer.setActive(true);
+        offer.setDescricao("Descrição");
         return offer;
     }
 

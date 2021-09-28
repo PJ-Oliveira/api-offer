@@ -3,7 +3,7 @@ import lombok.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -13,7 +13,8 @@ import java.time.LocalDate;
 public class OfferDto implements Serializable {
 
     private Long id;
-    private Long idProduct;
+    private List<ProductDto> products;
+
     private LocalDate inicio;
     private LocalDate fim;
     private String descricao;

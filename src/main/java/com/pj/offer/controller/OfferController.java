@@ -15,6 +15,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
@@ -57,6 +59,7 @@ public class OfferController {
         return ResponseEntity.status(HttpStatus.OK).body(offerDTO);
     }
 
+    @Transactional
     @PostMapping
     @ApiOperation(httpMethod = "POST",
             notes = "O desconto deve ser de no mínimo 1% e no máximo 50%." +
@@ -91,8 +94,8 @@ public class OfferController {
     @PutMapping("/{id}")
     @ApiOperation(httpMethod = "PUT", notes = "Ative a oferta",
             tags = {"Ativar"}, value="Ative a oferta pelo IdProduct")
-    public void activeOffer(Long idProduct) {
-        offerService.offerActivation(idProduct, true);
+    public void activeOffer(@PathVariable Long id) {
+        offerService.offerActivation(id, true);
 
     }
 

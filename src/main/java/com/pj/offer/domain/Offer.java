@@ -1,10 +1,13 @@
 package com.pj.offer.domain;
 import lombok.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table
@@ -19,8 +22,10 @@ public class Offer implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_Offer")
     private Long id;
-    @Column(name = "id_Product")
-    private Long idProduct;
+
+    @OneToMany(cascade =  CascadeType.ALL)
+    private List<Product> products;
+
     @Column(name = "Inicio")
     private LocalDate inicio;
     @Column(name = "Fim")

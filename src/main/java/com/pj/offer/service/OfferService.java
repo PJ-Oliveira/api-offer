@@ -1,7 +1,6 @@
 package com.pj.offer.service;
 
 import com.pj.offer.advice.exception.NotFoundException;
-import com.pj.offer.domain.dto.DeleteOfferDto;
 import com.pj.offer.domain.Offer;
 import com.pj.offer.domain.dto.OfferDto;
 import com.pj.offer.domain.form.OfferForm;
@@ -54,15 +53,8 @@ public class OfferService {
         return modelMapper.map(offer, OfferDto.class);
     }
 
-
-    public void offerDeActivation(DeleteOfferDto deleteOfferDTO){
-        offerRepository.toggleOfferActivation(deleteOfferDTO.getIdProduct(), false);
+    public void offerActivation(Long id, Boolean status){
+        offerRepository.toggleOfferActivation(id, status);
     }
-
-    public void offerActivation(Long idProduct, Boolean status){
-        offerRepository.toggleOfferActivation(idProduct, status);
-    }
-
-
 
 }
