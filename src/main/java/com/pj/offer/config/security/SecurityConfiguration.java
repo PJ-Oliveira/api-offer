@@ -44,7 +44,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and().csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and().addFilterBefore(new AuthenticationByTokenFilter(tokenService, userRepository), UsernamePasswordAuthenticationFilter.class);
-
     }
 
     @Override
@@ -57,7 +56,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         webSecurity.ignoring().antMatchers
                 ("/**.html", "/v2/api-docs", "/webjars/**", "/configuration/**", "/swagger-resources/**");
     }
-
 
 
 }
