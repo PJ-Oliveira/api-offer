@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
-
     <property name="DEV_HOME" value="logs" />
 
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
-        <filter class="com.pj.offer.config.LogFilter" />
+
+        <!-- disable debug -->
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>DEBUG</level>
+            <onMatch>DENY</onMatch>
+            <onMismatch>ACCEPT</onMismatch>
+        </filter>
+
         <layout class="ch.qos.logback.classic.PatternLayout">
             <Pattern>
                 %d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} -
@@ -15,6 +21,14 @@
 
     <appender name="FILE-AUDIT"
               class="ch.qos.logback.core.rolling.RollingFileAppender">
+
+        <!-- disable debug -->
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>DEBUG</level>
+            <onMatch>DENY</onMatch>
+            <onMismatch>ACCEPT</onMismatch>
+        </filter>
+
         <file>${DEV_HOME}/debug.log</file>
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
             <Pattern>
@@ -37,6 +51,14 @@
 
     <appender name="FILE-ERROR"
               class="ch.qos.logback.core.rolling.RollingFileAppender">
+
+        <!-- disable debug -->
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>DEBUG</level>
+            <onMatch>DENY</onMatch>
+            <onMismatch>ACCEPT</onMismatch>
+        </filter>
+
         <file>${DEV_HOME}/error.log</file>
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
             <Pattern>
@@ -54,7 +76,6 @@
                 <maxFileSize>10MB</maxFileSize>
             </timeBasedFileNamingAndTriggeringPolicy>
         </rollingPolicy>
-
     </appender>
 
     <!-- Send logs to both console and file audit -->
