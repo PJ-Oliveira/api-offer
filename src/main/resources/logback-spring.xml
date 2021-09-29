@@ -1,23 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
+
+    <include resource="org/springframework/boot/logging/logback/base.xml"/>
+
     <property name="DEV_HOME" value="logs" />
 
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
 
-        <!-- disable debug -->
-        <filter class="ch.qos.logback.classic.filter.LevelFilter">
-            <level>DEBUG</level>
-            <onMatch>DENY</onMatch>
-            <onMismatch>ACCEPT</onMismatch>
-        </filter>
-
         <layout class="ch.qos.logback.classic.PatternLayout">
             <Pattern>
-                %d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{10} -
+                %d{yyyy-MM-dd HH:mm:ss}:
+                [%thread]  %-5level %logger{10}:
                 %msg%n
             </Pattern>
         </layout>
     </appender>
+
 
     <appender name="FILE-AUDIT"
               class="ch.qos.logback.core.rolling.RollingFileAppender">
@@ -32,7 +30,8 @@
         <file>${DEV_HOME}/debug.log</file>
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
             <Pattern>
-                %d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} -
+                %d{yyyy-MM-dd HH:mm:ss}:
+                [%thread]  %-5level %logger{10}:
                 %msg%n
             </Pattern>
         </encoder>
@@ -62,7 +61,8 @@
         <file>${DEV_HOME}/error.log</file>
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
             <Pattern>
-                %d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} -
+                %d{yyyy-MM-dd HH:mm:ss}:
+                [%thread]  %-5level %logger{10}:
                 %msg%n
             </Pattern>
         </encoder>

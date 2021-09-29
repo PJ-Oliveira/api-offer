@@ -114,6 +114,22 @@
 		</dependency>
 
 		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-sleuth</artifactId>
+			<version>3.0.4</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/io.opentelemetry.instrumentation/opentelemetry-logback-1.0 -->
+		<dependency>
+			<groupId>io.opentelemetry.instrumentation</groupId>
+			<artifactId>opentelemetry-logback-1.0</artifactId>
+			<version>0.16.1</version>
+			<scope>runtime</scope>
+		</dependency>
+
+
+
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>

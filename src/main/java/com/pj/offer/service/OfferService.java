@@ -1,7 +1,6 @@
 package com.pj.offer.service;
 
 import com.pj.offer.advice.exception.NotFoundException;
-import com.pj.offer.advice.exception.OfferException;
 import com.pj.offer.domain.model.Offer;
 import com.pj.offer.domain.dto.OfferDto;
 import com.pj.offer.domain.form.OfferForm;
@@ -52,20 +51,22 @@ public class OfferService {
     public void deleteOffer(Long id){
         Offer offer = offerRepository.getById(id);
         log.info("Such offer will be deleted: {}!", id);
-        log.warn("If Id Offer {} does not exist, then a exception will be thrown!", id);
+        log.warn("If {} does not exist, then a exception will be thrown!", id);
         this.offerRepository.deleteById(id);
+        log.info("Offer {} successfully deleted", id);
     }
 
     public Optional<Offer> getOptionalOfferByValidId(Long id) {
-        log.info("Id Offer {} will be search for!", id);
+        log.info("Id {} will be search for!", id);
         log.warn("If {} does not exist, then a exception will be thrown!", id);
         return offerRepository.getOnlyUnexpiredOfferById(id);
     }
 
     public OfferDto findOfferByValidId(Long id) {
-        log.info("Id Offer {} will be search for!", id);
-        log.warn("If {} does not exist, will throw NotFoundException", id);
+        log.info("Id {} will be search for!", id);
+        log.warn("If {} does not exist, will throw exception!", id);
         Offer offer = offerRepository.getOnlyUnexpiredOfferById(id).orElseThrow(()-> new NotFoundException("Id " + id + " Not Found"));
+        log.info("Printing offerDto value: {}!" + offer);
         return modelMapper.map(offer, OfferDto.class);
     }
 

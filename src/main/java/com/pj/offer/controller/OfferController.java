@@ -29,7 +29,6 @@ import java.util.Optional;
 @RequestMapping(value = "/offers/api/v1")
 @Api(tags = {"Oferta"}, value = "Controller Offer")
 @CrossOrigin(origins = "*")
-@Slf4j
 public class OfferController {
 
     @Autowired
@@ -46,7 +45,6 @@ public class OfferController {
     })
     public ResponseEntity<?> getOfferByID(@PathVariable long id){
         OfferDto offerDto = offerService.findOfferByValidId(id);
-        log.info("Printing offerDto value: " + offerDto);
         return ResponseEntity.status(HttpStatus.OK).body(offerDto);
     }
 
@@ -92,7 +90,6 @@ public class OfferController {
     })
     public ResponseEntity<?> deleteOffer(@Valid @PathVariable Long id) {
         offerService.deleteOffer(id);
-        log.info("Offer {} successfully deleted", id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
