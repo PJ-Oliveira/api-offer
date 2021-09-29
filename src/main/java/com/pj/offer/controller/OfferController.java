@@ -34,7 +34,7 @@ public class OfferController {
 
     @Autowired
     private OfferService offerService;
-    //info, error, warn
+    //info, warn, error
 
     @GetMapping("/{id}")
     @ApiOperation(httpMethod = "GET", notes = "Busque a oferta pelo seu respectivo ID",
@@ -45,10 +45,8 @@ public class OfferController {
             @ApiResponse(code = 500, message = "Sistema Indisponível")
     })
     public ResponseEntity<?> getOfferByID(@PathVariable long id){
-        log.info("method={} event={} message={} offerId={}", "getOfferByID", "INFO", "Search a Offfer by Id", id);
-        log.error("message={}", "If id does not exist, will throw NotFoundException");
         OfferDto offerDto = offerService.findOfferByValidId(id);
-        log.debug("Printing offerDto value: " + offerDto);
+        log.info("Printing offerDto value: " + offerDto);
         return ResponseEntity.status(HttpStatus.OK).body(offerDto);
     }
 
@@ -94,6 +92,7 @@ public class OfferController {
     })
     public ResponseEntity<?> deleteOffer(@Valid @PathVariable Long id) {
         offerService.deleteOffer(id);
+        log.info("Offer {} successfully deleted", id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 

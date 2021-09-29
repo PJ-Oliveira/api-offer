@@ -31,27 +31,40 @@ public class OfferService {
 
     public OfferDto save(OfferForm offerFORM) {
         Offer offer = modelMapper.map(offerFORM, Offer.class);
+        log.info("Will be saved: {} ", offer);
         offerValidation.validateDate(offer);
+        log.info("{} will be validate!", offer.getId());
+        log.warn("If data integrity is affected, then an exception will be thrown.");
         offerRepository.save(offer);
+        log.info("{} successfully saved!}", offer.getId());
         return modelMapper.map(offer, OfferDto.class);
     }
 
     public List<OfferDto> findAll(Pageable pageable){
         Page<Offer> offerPage = offerRepository.findAll(pageable);
+        log.info("All offer will be listed in a pageable way");
+        log.warn("If offers does not exist at all, then a exception will be thrown");
         List<Offer> offer = offerPage.getContent();
+        log.info("{}", offer);
         return offer.stream().map(x -> modelMapper.map(x, OfferDto.class)).collect(Collectors.toList());
     }
 
     public void deleteOffer(Long id){
         Offer offer = offerRepository.getById(id);
+        log.info("Such offer will be deleted: {}!", id);
+        log.warn("If Id Offer {} does not exist, then a exception will be thrown!", id);
         this.offerRepository.deleteById(id);
     }
 
     public Optional<Offer> getOptionalOfferByValidId(Long id) {
+        log.info("Id Offer {} will be search for!", id);
+        log.warn("If {} does not exist, then a exception will be thrown!", id);
         return offerRepository.getOnlyUnexpiredOfferById(id);
     }
 
     public OfferDto findOfferByValidId(Long id) {
+        log.info("Id Offer {} will be search for!", id);
+        log.warn("If {} does not exist, will throw NotFoundException", id);
         Offer offer = offerRepository.getOnlyUnexpiredOfferById(id).orElseThrow(()-> new NotFoundException("Id " + id + " Not Found"));
         return modelMapper.map(offer, OfferDto.class);
     }

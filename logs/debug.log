@@ -42,3 +42,131 @@
                 message=If id does not exist, will throw NotFoundException
 2021-09-29 09:41:04 [http-nio-8080-exec-2] ERROR c.p.o.a.h.OfferControllerAdvice -
                 ErrorAtributes(error=Exception: Offer Not Found, details=Id 88 Not Found)!
+2021-09-29 10:26:18 [main] INFO  com.pj.offer.OfferApplication -
+                Starting OfferApplication using Java 11.0.11 on CTNDELLHQR5WF3 with PID 1388 (C:\Users\paulo.junio\Desktop\Works\oferta\target\classes started by paulo.junio in C:\Users\paulo.junio\Desktop\Works\oferta)
+2021-09-29 10:26:18 [main] INFO  com.pj.offer.OfferApplication -
+                No active profile set, falling back to default profiles: default
+2021-09-29 10:26:25 [main] INFO  com.pj.offer.OfferApplication -
+                Started OfferApplication in 7.341 seconds (JVM running for 8.0)
+2021-09-29 10:32:08 [http-nio-8080-exec-4] INFO  com.pj.offer.service.OfferService -
+                Offer will be saved
+2021-09-29 10:32:08 [http-nio-8080-exec-4] INFO  com.pj.offer.service.OfferService -
+                Offer will be validade
+2021-09-29 10:32:08 [http-nio-8080-exec-4] WARN  com.pj.offer.service.OfferService -
+                If data integrity is affected then an exception will be thrown.
+2021-09-29 10:32:08 [http-nio-8080-exec-4] INFO  com.pj.offer.service.OfferService -
+                Offer saved: 
+2021-09-29 10:32:37 [main] INFO  com.pj.offer.OfferApplication -
+                Starting OfferApplication using Java 11.0.11 on CTNDELLHQR5WF3 with PID 924 (C:\Users\paulo.junio\Desktop\Works\oferta\target\classes started by paulo.junio in C:\Users\paulo.junio\Desktop\Works\oferta)
+2021-09-29 10:32:37 [main] INFO  com.pj.offer.OfferApplication -
+                No active profile set, falling back to default profiles: default
+2021-09-29 10:32:42 [main] INFO  com.pj.offer.OfferApplication -
+                Started OfferApplication in 5.906 seconds (JVM running for 6.382)
+2021-09-29 10:35:31 [http-nio-8080-exec-1] INFO  com.pj.offer.service.OfferService -
+                Offer will be saved
+2021-09-29 10:35:31 [http-nio-8080-exec-1] INFO  com.pj.offer.service.OfferService -
+                Offer will be validade
+2021-09-29 10:35:31 [http-nio-8080-exec-1] WARN  com.pj.offer.service.OfferService -
+                If data integrity is affected then an exception will be thrown.
+2021-09-29 10:35:31 [http-nio-8080-exec-1] INFO  com.pj.offer.service.OfferService -
+                Offer saved: 
+2021-09-29 10:45:49 [main] INFO  com.pj.offer.OfferApplication -
+                Starting OfferApplication using Java 11.0.11 on CTNDELLHQR5WF3 with PID 8960 (C:\Users\paulo.junio\Desktop\Works\oferta\target\classes started by paulo.junio in C:\Users\paulo.junio\Desktop\Works\oferta)
+2021-09-29 10:45:49 [main] INFO  com.pj.offer.OfferApplication -
+                No active profile set, falling back to default profiles: default
+2021-09-29 10:45:56 [main] INFO  com.pj.offer.OfferApplication -
+                Started OfferApplication in 7.417 seconds (JVM running for 7.991)
+2021-09-29 10:45:59 [http-nio-8080-exec-2] INFO  com.pj.offer.service.OfferService -
+                Offer will be saved
+2021-09-29 10:45:59 [http-nio-8080-exec-2] INFO  com.pj.offer.service.OfferService -
+                Offer will be validate
+2021-09-29 10:45:59 [http-nio-8080-exec-2] WARN  com.pj.offer.service.OfferService -
+                If data integrity is affected then an exception will be thrown.
+2021-09-29 10:45:59 [http-nio-8080-exec-2] INFO  com.pj.offer.service.OfferService -
+                Offer saved:Offer(id=13, products=[Product(idProduct=25, name=Pasta de Dente, type=Higiene Bucal), Product(idProduct=26, name=Shampoo, type=Higiene Capilar)], inicio=2021-12-31, fim=2031-12-31, descricao=Desconto de 10, desconto=10.00, active=true) 
+2021-09-29 10:50:26 [main] INFO  com.pj.offer.OfferApplication -
+                Starting OfferApplication using Java 11.0.11 on CTNDELLHQR5WF3 with PID 9296 (C:\Users\paulo.junio\Desktop\Works\oferta\target\classes started by paulo.junio in C:\Users\paulo.junio\Desktop\Works\oferta)
+2021-09-29 10:50:26 [main] INFO  com.pj.offer.OfferApplication -
+                No active profile set, falling back to default profiles: default
+2021-09-29 10:50:33 [main] INFO  com.pj.offer.OfferApplication -
+                Started OfferApplication in 6.895 seconds (JVM running for 7.422)
+2021-09-29 10:51:12 [main] INFO  com.pj.offer.OfferApplication -
+                Starting OfferApplication using Java 11.0.11 on CTNDELLHQR5WF3 with PID 13584 (C:\Users\paulo.junio\Desktop\Works\oferta\target\classes started by paulo.junio in C:\Users\paulo.junio\Desktop\Works\oferta)
+2021-09-29 10:51:12 [main] INFO  com.pj.offer.OfferApplication -
+                No active profile set, falling back to default profiles: default
+2021-09-29 10:51:21 [main] INFO  com.pj.offer.OfferApplication -
+                Started OfferApplication in 8.741 seconds (JVM running for 9.255)
+2021-09-29 10:51:49 [http-nio-8080-exec-2] INFO  com.pj.offer.service.OfferService -
+                Offer(id=null, products=[Product(idProduct=null, name=Pasta de Dente, type=Higiene Bucal), Product(idProduct=null, name=Shampoo, type=Higiene Capilar)], inicio=2021-12-31, fim=2031-12-31, descricao=Desconto de 10, desconto=10.00, active=true) : such offer will be saved
+2021-09-29 10:51:49 [http-nio-8080-exec-2] INFO  com.pj.offer.service.OfferService -
+                Offer will be validate: Offer(id=null, products=[Product(idProduct=null, name=Pasta de Dente, type=Higiene Bucal), Product(idProduct=null, name=Shampoo, type=Higiene Capilar)], inicio=2021-12-31, fim=2031-12-31, descricao=Desconto de 10, desconto=10.00, active=true) 
+2021-09-29 10:51:49 [http-nio-8080-exec-2] WARN  com.pj.offer.service.OfferService -
+                If data integrity is affected then an exception will be thrown.
+2021-09-29 10:51:49 [http-nio-8080-exec-2] INFO  com.pj.offer.service.OfferService -
+                Offer saved: Offer(id=14, products=[Product(idProduct=27, name=Pasta de Dente, type=Higiene Bucal), Product(idProduct=28, name=Shampoo, type=Higiene Capilar)], inicio=2021-12-31, fim=2031-12-31, descricao=Desconto de 10, desconto=10.00, active=true) 
+2021-09-29 10:56:24 [main] INFO  com.pj.offer.OfferApplication -
+                Starting OfferApplication using Java 11.0.11 on CTNDELLHQR5WF3 with PID 13484 (C:\Users\paulo.junio\Desktop\Works\oferta\target\classes started by paulo.junio in C:\Users\paulo.junio\Desktop\Works\oferta)
+2021-09-29 10:56:24 [main] INFO  com.pj.offer.OfferApplication -
+                No active profile set, falling back to default profiles: default
+2021-09-29 10:56:31 [main] INFO  com.pj.offer.OfferApplication -
+                Started OfferApplication in 7.104 seconds (JVM running for 7.63)
+2021-09-29 10:56:38 [http-nio-8080-exec-1] WARN  com.pj.offer.service.OfferService -
+                If offers does not exist at all, then a exception will be thrown
+2021-09-29 10:56:38 [http-nio-8080-exec-1] INFO  com.pj.offer.service.OfferService -
+                All offer will be listed in a pageable way
+2021-09-29 10:56:38 [http-nio-8080-exec-1] INFO  com.pj.offer.service.OfferService -
+                Page 1 of 3 containing com.pj.offer.domain.model.Offer instances
+2021-09-29 10:57:30 [main] INFO  com.pj.offer.OfferApplication -
+                Starting OfferApplication using Java 11.0.11 on CTNDELLHQR5WF3 with PID 9740 (C:\Users\paulo.junio\Desktop\Works\oferta\target\classes started by paulo.junio in C:\Users\paulo.junio\Desktop\Works\oferta)
+2021-09-29 10:57:30 [main] INFO  com.pj.offer.OfferApplication -
+                No active profile set, falling back to default profiles: default
+2021-09-29 10:57:37 [main] INFO  com.pj.offer.OfferApplication -
+                Started OfferApplication in 6.71 seconds (JVM running for 7.227)
+2021-09-29 10:59:40 [http-nio-8080-exec-2] INFO  com.pj.offer.service.OfferService -
+                All offer will be listed in a pageable way
+2021-09-29 10:59:40 [http-nio-8080-exec-2] WARN  com.pj.offer.service.OfferService -
+                If offers does not exist at all, then a exception will be thrown
+2021-09-29 10:59:40 [http-nio-8080-exec-2] INFO  com.pj.offer.service.OfferService -
+                [Offer(id=1, products=[Product(idProduct=1, name=Pasta de Dente, type=Higiene Bucal), Product(idProduct=2, name=Shampoo, type=Higiene Capilar)], inicio=2021-12-31, fim=2025-09-30, descricao=Desconto de 10, desconto=10.00, active=true), Offer(id=2, products=[Product(idProduct=3, name=Pasta de Dente, type=Higiene Bucal), Product(idProduct=4, name=Shampoo, type=Higiene Capilar)], inicio=2021-12-31, fim=2025-09-30, descricao=Desconto de 10, desconto=10.00, active=true), Offer(id=3, products=[Product(idProduct=5, name=Pasta de Dente, type=Higiene Bucal), Product(idProduct=6, name=Shampoo, type=Higiene Capilar)], inicio=2021-12-31, fim=2025-09-30, descricao=Desconto de 10, desconto=10.00, active=true), Offer(id=4, products=[Product(idProduct=7, name=Pasta de Dente, type=Higiene Bucal), Product(idProduct=8, name=Shampoo, type=Higiene Capilar)], inicio=2021-12-31, fim=2025-09-30, descricao=Desconto de 10, desconto=10.00, active=true), Offer(id=5, products=[Product(idProduct=9, name=Pasta de Dente, type=Higiene Bucal), Product(idProduct=10, name=Shampoo, type=Higiene Capilar)], inicio=2021-12-31, fim=2025-09-30, descricao=Desconto de 10, desconto=10.00, active=true)]
+2021-09-29 11:01:35 [main] INFO  com.pj.offer.OfferApplication -
+                Starting OfferApplication using Java 11.0.11 on CTNDELLHQR5WF3 with PID 6640 (C:\Users\paulo.junio\Desktop\Works\oferta\target\classes started by paulo.junio in C:\Users\paulo.junio\Desktop\Works\oferta)
+2021-09-29 11:01:35 [main] INFO  com.pj.offer.OfferApplication -
+                No active profile set, falling back to default profiles: default
+2021-09-29 11:01:41 [main] INFO  com.pj.offer.OfferApplication -
+                Started OfferApplication in 6.913 seconds (JVM running for 7.471)
+2021-09-29 11:01:46 [http-nio-8080-exec-3] INFO  com.pj.offer.service.OfferService -
+                All offer will be listed in a pageable way
+2021-09-29 11:01:46 [http-nio-8080-exec-3] WARN  com.pj.offer.service.OfferService -
+                If offers does not exist at all, then a exception will be thrown
+2021-09-29 11:01:46 [http-nio-8080-exec-3] INFO  com.pj.offer.service.OfferService -
+                [Offer(id=1, products=[Product(idProduct=1, name=Pasta de Dente, type=Higiene Bucal), Product(idProduct=2, name=Shampoo, type=Higiene Capilar)], inicio=2021-12-31, fim=2025-09-30, descricao=Desconto de 10, desconto=10.00, active=true), Offer(id=2, products=[Product(idProduct=3, name=Pasta de Dente, type=Higiene Bucal), Product(idProduct=4, name=Shampoo, type=Higiene Capilar)], inicio=2021-12-31, fim=2025-09-30, descricao=Desconto de 10, desconto=10.00, active=true), Offer(id=3, products=[Product(idProduct=5, name=Pasta de Dente, type=Higiene Bucal), Product(idProduct=6, name=Shampoo, type=Higiene Capilar)], inicio=2021-12-31, fim=2025-09-30, descricao=Desconto de 10, desconto=10.00, active=true), Offer(id=4, products=[Product(idProduct=7, name=Pasta de Dente, type=Higiene Bucal), Product(idProduct=8, name=Shampoo, type=Higiene Capilar)], inicio=2021-12-31, fim=2025-09-30, descricao=Desconto de 10, desconto=10.00, active=true), Offer(id=5, products=[Product(idProduct=9, name=Pasta de Dente, type=Higiene Bucal), Product(idProduct=10, name=Shampoo, type=Higiene Capilar)], inicio=2021-12-31, fim=2025-09-30, descricao=Desconto de 10, desconto=10.00, active=true)]
+2021-09-29 11:08:49 [main] INFO  com.pj.offer.OfferApplication -
+                Starting OfferApplication using Java 11.0.11 on CTNDELLHQR5WF3 with PID 1388 (C:\Users\paulo.junio\Desktop\Works\oferta\target\classes started by paulo.junio in C:\Users\paulo.junio\Desktop\Works\oferta)
+2021-09-29 11:08:49 [main] INFO  com.pj.offer.OfferApplication -
+                No active profile set, falling back to default profiles: default
+2021-09-29 11:08:55 [main] INFO  com.pj.offer.OfferApplication -
+                Started OfferApplication in 6.632 seconds (JVM running for 7.097)
+2021-09-29 11:14:06 [http-nio-8080-exec-5] INFO  com.pj.offer.service.OfferService -
+                Such offer will be deleted: Offer(id=12, products=[Product(idProduct=23, name=Pasta de Dente, type=Higiene Bucal), Product(idProduct=24, name=Shampoo, type=Higiene Capilar)], inicio=2021-12-31, fim=2031-12-31, descricao=Desconto de 10, desconto=10.00, active=true)
+2021-09-29 11:14:06 [http-nio-8080-exec-5] WARN  com.pj.offer.service.OfferService -
+                If such offer with id {} does not exist, then a exception will be thrown
+2021-09-29 11:14:06 [http-nio-8080-exec-5] INFO  c.p.offer.controller.OfferController -
+                Offer 12 successfully deleted
+2021-09-29 11:23:39 [main] INFO  com.pj.offer.OfferApplication -
+                Starting OfferApplication using Java 11.0.11 on CTNDELLHQR5WF3 with PID 18040 (C:\Users\paulo.junio\Desktop\Works\oferta\target\classes started by paulo.junio in C:\Users\paulo.junio\Desktop\Works\oferta)
+2021-09-29 11:23:39 [main] INFO  com.pj.offer.OfferApplication -
+                No active profile set, falling back to default profiles: default
+2021-09-29 11:23:46 [main] INFO  com.pj.offer.OfferApplication -
+                Started OfferApplication in 7.269 seconds (JVM running for 7.803)
+2021-09-29 11:24:18 [main] INFO  com.pj.offer.OfferApplication -
+                Starting OfferApplication using Java 11.0.11 on CTNDELLHQR5WF3 with PID 13004 (C:\Users\paulo.junio\Desktop\Works\oferta\target\classes started by paulo.junio in C:\Users\paulo.junio\Desktop\Works\oferta)
+2021-09-29 11:24:18 [main] INFO  com.pj.offer.OfferApplication -
+                No active profile set, falling back to default profiles: default
+2021-09-29 11:24:24 [main] INFO  com.pj.offer.OfferApplication -
+                Started OfferApplication in 6.7 seconds (JVM running for 7.176)
+2021-09-29 11:24:38 [http-nio-8080-exec-1] INFO  com.pj.offer.service.OfferService -
+                88 will be search for!
+2021-09-29 11:24:38 [http-nio-8080-exec-1] WARN  com.pj.offer.service.OfferService -
+                If 88 does not exist, will throw NotFoundException
+2021-09-29 11:24:38 [http-nio-8080-exec-1] ERROR c.p.o.a.h.OfferControllerAdvice -
+                ErrorAtributes(error=Exception: Offer Not Found, details=Id 88 Not Found)!
