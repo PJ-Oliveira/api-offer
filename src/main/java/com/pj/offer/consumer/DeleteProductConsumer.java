@@ -19,8 +19,10 @@ public class DeleteProductConsumer {
     @Autowired
     private ProductService productService;
 
+    public static final String QUEUE = "Product";
+
     @JsonIgnoreProperties
-    @RabbitListener(queues = RabbitMQConfig.QUEUE, containerFactory = "offerContainerFactory")
+    @RabbitListener(queues = QUEUE, containerFactory = "offerContainerFactory")
     public void listener(String message) {
         try {
             Product product = new ObjectMapper().configure(FAIL_ON_UNKNOWN_PROPERTIES, false).

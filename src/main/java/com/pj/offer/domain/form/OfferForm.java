@@ -17,26 +17,24 @@ import java.util.List;
 @ToString
 public class OfferForm implements Serializable{
 
-
-    private Long id;
-
+    @NotNull(message = "{field.products.not.null}")
     private List<ProductForm> products;
-
-    @NotNull(message = "A data de início da oferta é necessária")
+    @NotNull(message = "{field.inicio.not.null}")
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd", timezone = "GMT-03")
     @FutureOrPresent
     private LocalDate inicio;
-    @NotNull(message = "A data de fim da oferta é necessária")
+    @NotNull(message = "{field.fim.not.null}")
     @Future
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd", timezone = "GMT-03")
     private LocalDate fim;
-    @NotBlank(message = "A descrição da oferta é necessária")
+    @NotBlank(message = "{field.descricao.not.blank}")
     private String descricao;
     @Column(precision = 5, scale = 4)
-    @NotNull(message = "Informe um valor para o campo desconto")
-    @Range(min=1, max=50, message = "O desconto deve ser de no mínimo 1 e no máximo 50")
+    @NotNull(message = "{field.desconto.not.null}")
+    @Range(min=1, max=50, message = "{field.desconto.range}")
     @Positive
     private BigDecimal desconto;
+    @NotNull(message = "{field.active.not.null}")
     private Boolean active;
 
 }
