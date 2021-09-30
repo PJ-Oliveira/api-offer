@@ -4,7 +4,7 @@ Feature: Cucumber testing step definitions
     Given That, well, I can list all offer
     And I can create a newly offer too
     Then I can search for a another offer
-    Then If I'm tired of an offer, I can delete it as well. But be aware! If offer does not exist, an exception will be thrown
+    And If I want to, I can delete a offer as well
 
     Examples:
       | active | desconto | descricao   | fim          | inicio       | products                                      |

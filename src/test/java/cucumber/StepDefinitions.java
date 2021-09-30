@@ -38,7 +38,7 @@ public class StepDefinitions {
     private String url = "http://localhost";
     private RestTemplate restTemplate = new RestTemplate();
 
-    @Given("Well, I can list all offer")
+    @Given("That, well, I can list all offer")
     public void willListAllOffer(){
         String connection = url + ":" + port + "/offers/api/v1";
         List<Offer> allOffers = restTemplate.getForObject(connection, List.class);
@@ -47,7 +47,7 @@ public class StepDefinitions {
 
     }
 
-    @And("And, I can create a newly offer too")
+    @And("I can create a newly offer too")
     public void willSendAOffer(){
         String connection = url + ":" + port + "/offers/api/v1";
         Offer newOffer = new Offer();
@@ -67,24 +67,14 @@ public class StepDefinitions {
     public void iCanSearchForAnotherOffer(){
         String connection = url + ":" + port + "/offers/api/v1/" + 1l;
         Offer offer = restTemplate.getForObject(connection, Offer.class);
-        log.info("", offer);
+        log.info("{}!", offer);
         assertNotNull(offer);
     }
 
-    @Then("If I'm tired of an offer, I can delete it as well. But be aware!" +
-            "If offer does not exist, an exception will be thrown")
-    public void myOfferCanBeDeletedAsWell(){
+    @And("If I want to, I can delete a offer as well")
+    public void ifIWantToDelete(){
         String connection = url + ":" + port + "/offers/api/v1/" + 16;
         restTemplate.delete(connection);
-        log.error("if offer does not exist, then a exception will be thrown!");
     }
-
-
-
-
-
-
-
-
-
+    
 }
