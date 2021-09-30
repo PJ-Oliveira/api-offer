@@ -1,7 +1,7 @@
 Feature: Cucumber testing step definitions
  Scenario Outline:  My mentor wants to create a new offer.
    Given I can list all offer
-   And I am sending a offer to be created with active <true>, desconto <10.00>, descricao <descricao>, fim <"2031-12-31">, inicio <"2021-12-31">, products <"products": "name": "teste", "type": "testes">
+   And I am sending a offer to be created
    Then I should be able to see my newly offer
 
    Examples:

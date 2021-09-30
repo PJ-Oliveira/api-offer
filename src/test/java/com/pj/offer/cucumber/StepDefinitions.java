@@ -1,7 +1,6 @@
 package com.pj.offer.cucumber;
 
 import com.pj.offer.domain.model.Offer;
-import com.pj.offer.domain.model.Product;
 import io.cucumber.java.PendingException;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -12,7 +11,6 @@ import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.client.RestTemplate;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -27,20 +25,18 @@ public class StepDefinitions {
     @LocalServerPort
     private int port;
     private RestTemplate restTemplate = new RestTemplate();
-    private String postUrl = "http://localhost:8080/offers/api/v1";
+    private String url = "http://localhost:8080/offers/api/v1";
 
     @Given("I can list all offer")
     public void willListAllOffer(){
-        restTemplate.getForObject(postUrl, List.class);
-        List<Offer> allOffers = restTemplate.getForObject(postUrl, List.class);
+        restTemplate.getForObject(url, List.class);
+        List<Offer> allOffers = restTemplate.getForObject(url, List.class);
         log.info(allOffers);
         assertTrue(!allOffers.isEmpty());
 
     }
 
-    @Given("I am sending a offer to be created with active <true>, desconto <10.00>," +
-            "descricao <descricao>, fim <\"2031-12-31\">, inicio <\"2021-12-31\">," +
-            "products <\"products\": \"name\": \"teste\", \"type\": \"testes\">\n")
+    @Given("I am sending a offer to be created")
     public void willSendAOffer(){
         Offer newOffer = new Offer();
         newOffer.setActive(true);
@@ -48,17 +44,17 @@ public class StepDefinitions {
         newOffer.setFim(LocalDate.ofYearDay(2035, 30));
         newOffer.setInicio(LocalDate.of(2021, 12, 12));
         newOffer.setProducts(null);
-        Offer offer = restTemplate.postForObject(postUrl, newOffer, Offer.class);
+        Offer offer = restTemplate.postForObject(url, newOffer, Offer.class);
         log.info(offer);
         assertNotNull(offer);
-        throw new PendingException();
     }
 
 
     @Then("I should be able to see my newly offer")
     public void willBeAbleToSeeOffer(){
-
-        throw new PendingException();
+        Offer myOffer = restTemplate.getForObject(url, Offer.class);
+        log.info(myOffer);
+        assertNotNull(myOffer);
     }
 
 

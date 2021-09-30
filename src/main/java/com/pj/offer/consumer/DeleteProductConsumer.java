@@ -19,8 +19,10 @@ public class DeleteProductConsumer {
     @Autowired
     private ProductService productService;
 
+    public static final String QUEUE = "Product";
+
     @JsonIgnoreProperties
-    @RabbitListener(queues = RabbitMQConfig.QUEUE, containerFactory = "offerContainerFactory")
+    @RabbitListener(queues = QUEUE, containerFactory = "offerContainerFactory")
     public void listener(String message) {
         try {
             Product product = new ObjectMapper().configure(FAIL_ON_UNKNOWN_PROPERTIES, false).
@@ -28,7 +30,7 @@ public class DeleteProductConsumer {
             productService.deleteProductByIdProduct(product.getIdProduct());
             log.warn("If id " + product.getIdProduct() + "does not exist, it will catch a Exception");
         }catch (Exception exception) { exception.printStackTrace();
-        log.error("Exception " + exception + " caught.");
+            log.error("Exception " + exception + " caught.");
         }
     }
 }
