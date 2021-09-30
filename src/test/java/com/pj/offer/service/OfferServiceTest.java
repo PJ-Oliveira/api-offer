@@ -13,23 +13,33 @@ import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+
 import com.pj.offer.advice.exception.NotFoundException;
 import com.pj.offer.config.modelmapper.ModelMapperConfig;
 import com.pj.offer.domain.model.Offer;
 import com.pj.offer.domain.form.OfferForm;
+import com.pj.offer.domain.model.Product;
 import com.pj.offer.repository.OfferRepository;
+
+import java.math.BigDecimal;
+import java.time.LocalDate;
+
 import java.util.ArrayList;
 import java.util.Optional;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-@ContextConfiguration(classes = {OfferService.class, ModelMapper.class, ModelMapperConfig.class})
+@ContextConfiguration(classes = {OfferService.class, ModelMapper.class, ModelMapperConfig.class, OfferValidation.class})
 @ExtendWith(MockitoExtension.class)
 class OfferServiceTest {
 
@@ -44,12 +54,22 @@ class OfferServiceTest {
 
     @Test
     void save_WhenSaveOffer_ExpectedSuccess() {
+        when(this.modelMapper.map((Object) any(), (Class<Object>) any()))
+                .thenThrow(new NotFoundException("Exception!"));
+        assertThrows(NotFoundException.class, () -> this.offerService.save(ScenarioFactory.newOfferForm()));
+        verify(this.modelMapper).map((Object) any(), (Class<Object>) any());
+    }
+
+    @Test
+    void save_WhenSaveOffer_ExpectedSuccess2() {
         var offer = ScenarioFactory.newOffer();
-        OfferForm offerForm = new OfferForm();
-        when(this.offerRepository.save((any()))).thenReturn(offer);
-        this.offerValidation.validateDate(offer);
-        this.offerService.save(offerForm);
-        verify(this.offerRepository, times(1)).save(any());
+        doNothing().when(this.offerValidation).validateDate((Offer) offer);
+        when(this.offerRepository.save((Offer) offer)).thenThrow(new NotFoundException("Exception!"));
+        when(this.modelMapper.map((Object) any(), (Class<Object>) any())).thenReturn(offer);
+        assertThrows(NotFoundException.class, () -> this.offerService.save(ScenarioFactory.newOfferForm()));
+        verify(this.offerValidation).validateDate((Offer) offer);
+        verify(this.offerRepository).save((Offer) offer);
+        verify(this.modelMapper).map((Object) any(), (Class<Object>) any());
     }
 
     @Test
@@ -109,7 +129,7 @@ class OfferServiceTest {
     void getOfferByValidId_WhenFindOfferUnexpiredAndThrowingException_ExpectedSuccess1() {
         var offer = ScenarioFactory.emptyOffer();
         when(offerRepository.getOnlyUnexpiredOfferById(eq(offer.getId()))).thenReturn(Optional.empty());
-        assertThatThrownBy(()-> offerService.findOfferByValidId(offer.getId()))
+        assertThatThrownBy(() -> offerService.findOfferByValidId(offer.getId()))
                 .isInstanceOf(NotFoundException.class)
                 .hasMessageContaining("Id " + offer.getId() + " Not Found");
         verify(this.offerRepository, times(1)).getOnlyUnexpiredOfferById(offer.getId());

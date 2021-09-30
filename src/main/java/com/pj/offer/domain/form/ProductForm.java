@@ -9,6 +9,9 @@ import lombok.NoArgsConstructor;
 @Data
 public class ProductForm {
 
+
+//    @NotBlank(message = "{field.name.not.blank}")
     private String name;
+//    @NotBlank(message = "{field.type.not.blank}")
     private String type;
 }
