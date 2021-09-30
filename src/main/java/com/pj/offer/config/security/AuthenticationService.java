@@ -25,7 +25,7 @@ public class AuthenticationService implements UserDetailsService {
         log.warn("If {} does not exist, will throw exception!", username);
         if(user.isPresent()){
             return user.get();
-        } log.error("A exception was throw!");
+        } log.error("An exception was throw!");
         throw new UsernameNotFoundException("Invalid data!");
 
     }
