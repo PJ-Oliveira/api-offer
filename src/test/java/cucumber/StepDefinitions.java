@@ -76,5 +76,5 @@ public class StepDefinitions {
         String connection = url + ":" + port + "/offers/api/v1/" + 16;
         restTemplate.delete(connection);
     }
-    
+
 }
