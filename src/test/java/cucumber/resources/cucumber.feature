@@ -9,5 +9,4 @@ Feature: Cucumber testing step definitions
   Scenario: A little more of tests
     Given that I can perform authentication
     And I can create an inactive offer and make it active
-
-
+    Then Sometimes I wonder if that specific offer still exists

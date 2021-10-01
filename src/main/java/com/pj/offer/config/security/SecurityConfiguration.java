@@ -45,6 +45,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, "/offers/api/v1").permitAll()
                 .antMatchers(HttpMethod.DELETE, "/offers/api/v1/*").permitAll()
                 .antMatchers(HttpMethod.PUT, "/offers/api/v1/*").permitAll()
+                .antMatchers(HttpMethod.GET, "/offers/api/v1/exist/*").permitAll()
 
                 .anyRequest().authenticated()
                 .and().csrf().disable()

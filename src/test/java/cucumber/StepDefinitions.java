@@ -31,6 +31,7 @@ public class StepDefinitions {
     @Given("That, well, I can list all offer")
     public void willListAllOffer(){
         String connection = URL + ":" + port + "/offers/api/v1";
+        log.info("{}!", connection);
         List<Offer> allOffers = restTemplate.getForObject(connection, List.class);
         log.info("{}!", allOffers);
         assertTrue(!allOffers.isEmpty());
@@ -40,6 +41,7 @@ public class StepDefinitions {
     @Then("I can search for a another offer")
     public void iCanSearchForAnotherOffer(){
         String connection = URL + ":" + port + "/offers/api/v1/" + 1l;
+        log.info("{}!", connection);
         Offer offer = restTemplate.getForObject(connection, Offer.class);
         log.info("{}!", offer);
         assertNotNull(offer);
@@ -48,6 +50,7 @@ public class StepDefinitions {
     @And("I can create a newly offer too")
     public void willSendAOffer(){
         String connection = URL + ":" + port + "/offers/api/v1";
+        log.info("{}!", connection);
         var newOffer = ScenarioFactoryCucumber.offerCucumber();
         Offer offerSaved = restTemplate.postForObject(connection, newOffer, Offer.class);
         log.info("{}!", offerSaved);
@@ -61,6 +64,7 @@ public class StepDefinitions {
         Offer offerSaved = restTemplate.postForObject(connection, newOffer, Offer.class);
         log.info("{}!", offerSaved);
         connection = connection + "/" + offerSaved.getId();
+        log.info("{}!", connection);
         restTemplate.delete(connection);
     }
 
@@ -68,6 +72,7 @@ public class StepDefinitions {
     @Given("that I can perform authentication")
     public void iPerformAuthenticationOpForWithBody() {
         String connection = URL + ":" + port + "/authentication";
+        log.info("{}!", connection);
         var newUser = ScenarioFactoryCucumber.userToBeUsed();
         User userUsed = restTemplate.postForObject(connection, newUser, User.class);
         log.info("{}!", userUsed);
@@ -84,8 +89,17 @@ public class StepDefinitions {
         assertNotNull(offerSaved);
         connection = connection + "/" + offerSaved.getId();
         restTemplate.put(connection, offerSaved);
+        log.info("{}!", connection);
         assertNotNull(offerSaved);
     }
 
 
+    @Then("Sometimes I wonder if that specific offer still exists")
+    public void sometimesIWonderIfThatSpecificOfferStillExists() {
+        String connection = URL + ":" + port + "/offers/api/v1/" + "exist/" + 1l;
+        log.info("{}!", connection);
+        Offer offer = restTemplate.getForObject(connection, Offer.class);
+        log.info("{}!", offer);
+        assertNotNull(offer);
+    }
 }
