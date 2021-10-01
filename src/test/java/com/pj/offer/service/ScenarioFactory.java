@@ -1,5 +1,6 @@
 package com.pj.offer.service;
 import com.pj.offer.domain.form.OfferForm;
+import com.pj.offer.domain.form.ProductForm;
 import com.pj.offer.domain.model.Offer;
 import com.pj.offer.domain.model.Product;
 import org.springframework.data.domain.Page;
@@ -41,6 +42,8 @@ public class ScenarioFactory {
         offer.setInicio(LocalDate.of(2021, 12, 12));
         offer.setActive(true);
         offer.setDescricao("Descrição");
+        List<Product> products = new ArrayList<Product>();
+        offer.setProducts(products);
         return offer;
     }
 

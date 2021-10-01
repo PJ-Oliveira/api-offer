@@ -1,15 +1,22 @@
 package cucumber;
 import com.pj.offer.domain.model.Offer;
 import com.pj.offer.domain.model.Product;
+import com.pj.offer.domain.model.User;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class ScenarioContextOfTheTests {
+public class ScenarioFactoryCucumber {
 
-
+    public static User userToBeUsed(){
+        User newUser = new User();
+        newUser.setUsername("admin");
+        newUser.setPassword("12345");
+        return newUser;
+    }
 
 
     public static Offer offerCucumber(){

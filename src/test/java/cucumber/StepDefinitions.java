@@ -20,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ContextConfiguration(classes = OfferApplication.class)
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
-public class StepDefinitionsOfTheTests {
+public class StepDefinitions {
 
     @LocalServerPort
     private int port;
@@ -47,16 +47,16 @@ public class StepDefinitionsOfTheTests {
     @And("I can create a newly offer too")
     public void willSendAOffer(){
         String connection = URL + ":" + port + "/offers/api/v1";
-        var newOffer = ScenarioContextOfTheTests.offerCucumber();
+        var newOffer = ScenarioFactoryCucumber.offerCucumber();
         Offer offerSaved = restTemplate.postForObject(connection, newOffer, Offer.class);
         log.info("{}!", offerSaved);
         assertNotNull(offerSaved);
     }
 
-    @Then("If I want to, I can delete a offer as well")
+    @Then("If I want to, I can create and I can delte a offer as well")
     public void ifIWantToDelete(){
         String connection = URL + ":" + port + "/offers/api/v1";
-        var newOffer = ScenarioContextOfTheTests.offerCucumber();
+        var newOffer = ScenarioFactoryCucumber.offerCucumber();
         Offer offerSaved = restTemplate.postForObject(connection, newOffer, Offer.class);
         log.info("{}!", offerSaved);
         connection = connection + "/" + offerSaved.getId();
