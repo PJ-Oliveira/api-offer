@@ -24,13 +24,12 @@ public class StepDefinitionsOfTheTests {
 
     @LocalServerPort
     private int port;
-    private String url = "http://localhost";
+    private final String URL = "http://localhost";
     private RestTemplate restTemplate = new RestTemplate();
-
 
     @Given("That, well, I can list all offer")
     public void willListAllOffer(){
-        String connection = url + ":" + port + "/offers/api/v1";
+        String connection = URL + ":" + port + "/offers/api/v1";
         List<Offer> allOffers = restTemplate.getForObject(connection, List.class);
         log.info("{}!", allOffers);
         assertTrue(!allOffers.isEmpty());
@@ -39,25 +38,28 @@ public class StepDefinitionsOfTheTests {
 
     @Then("I can search for a another offer")
     public void iCanSearchForAnotherOffer(){
-        String connection = url + ":" + port + "/offers/api/v1/" + 1l;
+        String connection = URL + ":" + port + "/offers/api/v1/" + 1l;
         Offer offer = restTemplate.getForObject(connection, Offer.class);
         log.info("{}!", offer);
         assertNotNull(offer);
     }
 
     @And("I can create a newly offer too")
-    public Offer willSendAOffer(){
-        String connection = url + ":" + port + "/offers/api/v1";
+    public void willSendAOffer(){
+        String connection = URL + ":" + port + "/offers/api/v1";
         var newOffer = ScenarioContextOfTheTests.offerCucumber();
         Offer offerSaved = restTemplate.postForObject(connection, newOffer, Offer.class);
         log.info("{}!", offerSaved);
         assertNotNull(offerSaved);
-        return offerSaved;
     }
 
     @Then("If I want to, I can delete a offer as well")
     public void ifIWantToDelete(){
-        String connection = url + ":" + port + "/offers/api/v1/" + willSendAOffer().getId();
+        String connection = URL + ":" + port + "/offers/api/v1";
+        var newOffer = ScenarioContextOfTheTests.offerCucumber();
+        Offer offerSaved = restTemplate.postForObject(connection, newOffer, Offer.class);
+        log.info("{}!", offerSaved);
+        connection = connection + "/" + offerSaved.getId();
         restTemplate.delete(connection);
     }
 }

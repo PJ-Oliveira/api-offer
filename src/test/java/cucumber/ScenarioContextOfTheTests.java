@@ -10,6 +10,8 @@ import java.util.List;
 public class ScenarioContextOfTheTests {
 
 
+
+
     public static Offer offerCucumber(){
         Offer newOffer = new Offer();
         newOffer.setActive(true);
