@@ -18,6 +18,18 @@ public class ScenarioFactoryCucumber {
         return newUser;
     }
 
+    public static Offer offerInactive(){
+        Offer newOffer = new Offer();
+        newOffer.setActive(false);
+        newOffer.setDescricao("descricao");
+        newOffer.setFim(LocalDate.ofYearDay(2035, 30));
+        newOffer.setInicio(LocalDate.of(2021, 12, 12));
+        newOffer.setDesconto(BigDecimal.valueOf(1L));
+        List<Product> products = new ArrayList<Product>();
+        newOffer.setProducts(products);
+        return newOffer;
+    }
+
 
     public static Offer offerCucumber(){
         Offer newOffer = new Offer();

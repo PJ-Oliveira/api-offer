@@ -65,8 +65,8 @@ public class ScenarioFactory {
 
     public static Offer fimIsEqualToInicio(){
         Offer offer = new Offer();
-        offer.setFim(LocalDate.ofYearDay(2020, 30)); //fim
-        offer.setInicio(LocalDate.ofYearDay(2020, 30)); //inicio
+        offer.setFim(LocalDate.ofYearDay(2020, 30));
+        offer.setInicio(LocalDate.ofYearDay(2020, 30));
         return offer;
     }
 
