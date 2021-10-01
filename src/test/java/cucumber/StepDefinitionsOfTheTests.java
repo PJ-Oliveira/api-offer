@@ -58,7 +58,6 @@ public class StepDefinitionsOfTheTests {
     @Then("If I want to, I can delete a offer as well")
     public void ifIWantToDelete(){
         String connection = url + ":" + port + "/offers/api/v1/" + willSendAOffer().getId();
-        var newOffer = ScenarioContextOfTheTests.offerCucumber();
         restTemplate.delete(connection);
     }
 }
