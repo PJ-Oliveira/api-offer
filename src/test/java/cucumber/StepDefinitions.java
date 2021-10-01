@@ -1,17 +1,11 @@
 package cucumber;
 
 import com.pj.offer.OfferApplication;
-import com.pj.offer.advice.exception.OfferException;
 import com.pj.offer.domain.model.Offer;
 import com.pj.offer.domain.model.User;
-import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
-import io.restassured.RestAssured;
-import io.restassured.path.json.JsonPath;
-import io.restassured.response.Response;
-import io.restassured.specification.RequestSpecification;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -20,9 +14,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.client.RestTemplate;
 import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.doThrow;
+
 
 @Slf4j
 @ContextConfiguration(classes = OfferApplication.class)
