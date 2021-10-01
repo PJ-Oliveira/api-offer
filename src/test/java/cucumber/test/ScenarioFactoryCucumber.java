@@ -1,4 +1,4 @@
-package cucumber;
+package cucumber.test;
 import com.pj.offer.domain.model.Offer;
 import com.pj.offer.domain.model.Product;
 import com.pj.offer.domain.model.User;

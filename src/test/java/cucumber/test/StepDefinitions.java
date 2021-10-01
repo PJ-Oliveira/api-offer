@@ -1,4 +1,4 @@
-package cucumber;
+package cucumber.test;
 
 import com.pj.offer.OfferApplication;
 import com.pj.offer.domain.model.Offer;

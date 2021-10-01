@@ -33,7 +33,6 @@ public class OfferController {
 
     @Autowired
     private OfferService offerService;
-    //info, warn, error
 
     @GetMapping("/{id}")
     @ApiOperation(httpMethod = "GET", notes = "Busque a oferta pelo seu respectivo ID",
