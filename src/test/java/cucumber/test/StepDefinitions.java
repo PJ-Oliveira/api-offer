@@ -13,8 +13,11 @@ import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.client.RestTemplate;
+
 import java.util.List;
-import static org.junit.jupiter.api.Assertions.*;
+
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 @Slf4j
@@ -68,7 +71,6 @@ public class StepDefinitions {
         restTemplate.delete(connection);
     }
 
-
     @Given("that I can perform authentication")
     public void iPerformAuthenticationOpForWithBody() {
         String connection = URL + ":" + port + "/authentication";
@@ -78,7 +80,6 @@ public class StepDefinitions {
         log.info("{}!", userUsed);
         assertNotNull(userUsed);
     }
-
 
     @And("I can create an inactive offer and make it active")
     public void maybeIForgotTheIntegrityOfTheData() {
@@ -92,7 +93,6 @@ public class StepDefinitions {
         log.info("{}!", connection);
         assertNotNull(offerSaved);
     }
-
 
     @Then("Sometimes I wonder if that specific offer still exists")
     public void sometimesIWonderIfThatSpecificOfferStillExists() {
