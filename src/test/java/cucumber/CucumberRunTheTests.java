@@ -10,7 +10,7 @@ import org.springframework.test.context.ContextConfiguration;
 @RunWith(Cucumber.class)
 @CucumberOptions(
         plugin = {"pretty", "json:target/cucumber.json"},
-        features = "src/test/java/resources/cucumber.feature")
-public class CucumberRunnerTest {
+        features = "src/test/java/cucumber/resources/cucumber.feature")
+public class CucumberRunTheTests {
 
 }

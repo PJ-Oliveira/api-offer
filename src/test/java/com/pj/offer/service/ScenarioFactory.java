@@ -14,6 +14,9 @@ import java.util.List;
 public class ScenarioFactory {
 
 
+
+
+
     public static OfferForm newOfferForm(){
         OfferForm offerForm = new OfferForm();
         offerForm.setDesconto(BigDecimal.valueOf(1L));
