@@ -58,7 +58,7 @@ public class StepDefinitions {
         assertNotNull(offerSaved);
     }
 
-    @Then("If I want to, I can create and I can delte a offer as well")
+    @Then("If I want to, I can create and I can delete a offer as well")
     public void ifIWantToDelete(){
         String connection = URL + ":" + port + "/offers/api/v1";
         var newOffer = ScenarioFactoryCucumber.offerCucumber();
