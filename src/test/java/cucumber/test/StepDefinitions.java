@@ -36,7 +36,6 @@ public class StepDefinitions {
         List<Offer> allOffers = restTemplate.getForObject(connection, List.class);
         log.info("{}!", allOffers);
         assertTrue(!allOffers.isEmpty());
-
     }
 
     @Then("I can search for a another offer")
@@ -67,6 +66,7 @@ public class StepDefinitions {
         connection = connection + "/" + offerSaved.getId();
         log.info("{}!", connection);
         restTemplate.delete(connection);
+
     }
 
     @Given("that I can perform authentication")
@@ -87,7 +87,7 @@ public class StepDefinitions {
         log.info("{}!", offerSaved);
         assertNotNull(offerSaved);
         connection = connection + "/" + offerSaved.getId();
-        restTemplate.put(connection, offerSaved);
+        restTemplate.put(connection, offerSaved.getId());
         log.info("{}!", connection);
         assertNotNull(offerSaved);
     }
