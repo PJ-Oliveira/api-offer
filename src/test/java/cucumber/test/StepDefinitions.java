@@ -70,7 +70,7 @@ public class StepDefinitions {
     }
 
     @Given("that I can perform authentication")
-    public void iPerformAuthenticationOpForWithBody() {
+    public void iCanPerformAuthentication() {
         String connection = URL + ":" + port + "/authentication";
         log.info("{}!", connection);
         var newUser = ScenarioFactoryCucumber.userToBeUsed();
