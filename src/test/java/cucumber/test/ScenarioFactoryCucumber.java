@@ -1,8 +1,8 @@
 package cucumber.test;
+
 import com.pj.offer.domain.model.Offer;
 import com.pj.offer.domain.model.Product;
 import com.pj.offer.domain.model.User;
-
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -29,7 +29,6 @@ public class ScenarioFactoryCucumber {
         newOffer.setProducts(products);
         return newOffer;
     }
-
 
     public static Offer offerCucumber(){
         Offer newOffer = new Offer();

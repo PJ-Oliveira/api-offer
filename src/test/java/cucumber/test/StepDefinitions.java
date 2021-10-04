@@ -13,9 +13,7 @@ import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.client.RestTemplate;
-
 import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -82,7 +80,7 @@ public class StepDefinitions {
     }
 
     @And("I can create an inactive offer and make it active")
-    public void maybeIForgotTheIntegrityOfTheData() {
+    public void iCanCreateAnInactiveOffer() {
         String connection = URL + ":" + port + "/offers/api/v1";
         var offerInactive = ScenarioFactoryCucumber.offerInactive();
         Offer offerSaved = restTemplate.postForObject(connection, offerInactive, Offer.class);
