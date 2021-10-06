@@ -1,23 +1,23 @@
 package com.pj.offer.config.batch;
 
+import com.pj.offer.config.batch.processor.OfferItemProcessor;
 import com.pj.offer.domain.model.Offer;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
-import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
-import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
-import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
+import org.springframework.batch.core.configuration.annotation.*;
 import org.springframework.batch.core.launch.support.RunIdIncrementer;
-import org.springframework.batch.item.ItemReader;
-import org.springframework.batch.item.ItemWriter;
-import org.springframework.batch.item.database.JdbcBatchItemWriter;
-import org.springframework.batch.item.database.builder.JdbcBatchItemWriterBuilder;
-import org.springframework.batch.item.file.FlatFileItemReader;
-import org.springframework.batch.item.file.builder.FlatFileItemReaderBuilder;
+import org.springframework.batch.item.database.JdbcCursorItemReader;
+import org.springframework.batch.item.file.FlatFileItemWriter;
+import org.springframework.batch.item.file.transform.BeanWrapperFieldExtractor;
+import org.springframework.batch.item.file.transform.DelimitedLineAggregator;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.io.Resource;
+import org.springframework.context.annotation.Primary;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 import javax.sql.DataSource;
 
@@ -31,48 +31,82 @@ public class SpringBatchConfig {
     @Autowired
     public StepBuilderFactory stepBuilderFactory;
 
-    @Value("${file.input}")
-    private String fileInput;
-
     @Bean
-    FlatFileItemReader<Offer> fileItemReader(@Value("${file.input}") Resource resource)throws Exception{
-        return new FlatFileItemReaderBuilder<Offer>()
-                .name("offers.csv")
-                .resource(resource)
-                .targetType(Offer.class)
-                .delimited().delimiter(",").names(new String[]{"products", "inicio", "fim", "descricao", "desconto", "active"})
-                .build();
+    @ConfigurationProperties(prefix = "datasource.consumerappointment")
+    public DataSource consumerAppointmentDataSource() {
+        return DataSourceBuilder.create().build();
     }
 
     @Bean
-    JdbcBatchItemWriter<Offer> jdbcBatchItemWriter(DataSource dataSource){
-        return new JdbcBatchItemWriterBuilder<Offer>()
-                .dataSource(dataSource)
-                .sql("insert into OFFER(PRODUCTS, INICIO, FIM, DESCRICAO, DESCONTO, ACTIVE) (:products, :inicio, :fim, :descricao, :desconto, :active)")
-                .beanMapped()
-                .build();
+    public BatchConfigurer configurer(DataSource batchDataSource){
+        return new DefaultBatchConfigurer(batchDataSource);
+    }
+
+
+    @Primary
+    @Bean
+    @ConfigurationProperties(prefix = "datasource.batch")
+    public DataSource dataSource(){
+        final DriverManagerDataSource driverManagerDataSource = new DriverManagerDataSource();
+        driverManagerDataSource.setDriverClassName("org.postgresql.Driver");
+        driverManagerDataSource.setUrl("jdbc:postgresql://localhost:5432/offer");
+        driverManagerDataSource.setUsername("postgres");
+        driverManagerDataSource.setPassword("12345");
+
+        return driverManagerDataSource;
     }
 
 
     @Bean
-    Job job (JobBuilderFactory jobBuilderFactory,
-             StepBuilderFactory stepBuilderFactory,
-             ItemReader<? extends Offer> itemReader,
-             ItemWriter<? super Offer> itemWriter) {
-
-        Step step = stepBuilderFactory.get("ETL-file-load")
-                .<Offer, Offer>chunk(100)
-                .reader(itemReader)
-                //.processor(itemProcessor)
-                .writer(itemWriter)
-                .build();
-
-
-        return jobBuilderFactory.get("etl")
-                .incrementer(new RunIdIncrementer())
-                .start(step)
-                .build();
+    public JdbcCursorItemReader<Offer> reader(){
+        JdbcCursorItemReader<Offer> reader = new JdbcCursorItemReader<>();
+        reader.setDataSource(dataSource());
+        reader.setSql("SELECT * FROM public.offer");
+        reader.setRowMapper(new OfferRowMapper());
+        return reader;
     }
+
+
+    public OfferItemProcessor processor(){
+        return new OfferItemProcessor();
+
+    }
+
+    @Bean
+    public FlatFileItemWriter<Offer> flatFileItemWriter(){
+        FlatFileItemWriter<Offer> flatFileItemWriter = new FlatFileItemWriter<Offer>();
+        flatFileItemWriter.setResource(new ClassPathResource("output.csv"));
+
+        DelimitedLineAggregator<Offer> agregator = new DelimitedLineAggregator<Offer>();
+        agregator.setDelimiter(",");
+
+        BeanWrapperFieldExtractor<Offer> fieldExtractor = new BeanWrapperFieldExtractor<Offer>();
+        fieldExtractor.setNames(new String[]{"id", "inicio", "fim", "descricao", "desconto", "active"});
+        agregator.setFieldExtractor(fieldExtractor);
+
+        flatFileItemWriter.setLineAggregator(agregator);
+        return flatFileItemWriter;
+    }
+
+
+    @Bean
+    public Step executeStep(){
+        return stepBuilderFactory.get("executeStep").<Offer, Offer>chunk(10)
+                .reader(reader())
+                .processor(processor())
+                .writer(flatFileItemWriter())
+                .build();
+
+    }
+
+    @Bean
+    public Job exportOfferJob(){
+        return jobBuilderFactory.get("exportOfferJob").incrementer(new RunIdIncrementer()).flow(executeStep()).end().build();
+    }
+
+
+
+
 
 }
 

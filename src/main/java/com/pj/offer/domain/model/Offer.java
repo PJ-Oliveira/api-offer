@@ -1,5 +1,9 @@
 package com.pj.offer.domain.model;
-import lombok.*;
+
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -11,7 +15,6 @@ import java.util.List;
 @Table
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
 @Setter
 @ToString
 public class Offer implements Serializable {
@@ -34,4 +37,31 @@ public class Offer implements Serializable {
     private BigDecimal desconto;
     private Boolean active;
 
+    public Long getId() {
+        return this.id;
+    }
+
+    public List<Product> getProducts() {
+        return this.products;
+    }
+
+    public LocalDate getInicio() {
+        return this.inicio;
+    }
+
+    public LocalDate getFim() {
+        return this.fim;
+    }
+
+    public String getDescricao() {
+        return this.descricao;
+    }
+
+    public BigDecimal getDesconto() {
+        return this.desconto;
+    }
+
+    public Boolean getActive() {
+        return this.active;
+    }
 }
