@@ -1,4 +1,6 @@
 package com.pj.offer.service;
+import com.pj.offer.domain.form.OfferForm;
+import com.pj.offer.domain.form.ProductForm;
 import com.pj.offer.domain.model.Offer;
 import com.pj.offer.domain.model.Product;
 import org.springframework.data.domain.Page;
@@ -11,6 +13,16 @@ import java.util.List;
 
 
 public class ScenarioFactory {
+
+    public static OfferForm newOfferForm(){
+        OfferForm offerForm = new OfferForm();
+        offerForm.setDesconto(BigDecimal.valueOf(1L));
+        offerForm.setFim(LocalDate.ofYearDay(2035, 30));
+        offerForm.setInicio(LocalDate.of(2021, 12, 12));
+        offerForm.setActive(true);
+        offerForm.setDescricao("Descrição");
+        return offerForm;
+    }
 
 
     public static Product newProduct() {
@@ -30,6 +42,8 @@ public class ScenarioFactory {
         offer.setInicio(LocalDate.of(2021, 12, 12));
         offer.setActive(true);
         offer.setDescricao("Descrição");
+        List<Product> products = new ArrayList<Product>();
+        offer.setProducts(products);
         return offer;
     }
 
@@ -51,8 +65,8 @@ public class ScenarioFactory {
 
     public static Offer fimIsEqualToInicio(){
         Offer offer = new Offer();
-        offer.setFim(LocalDate.ofYearDay(2020, 30)); //fim
-        offer.setInicio(LocalDate.ofYearDay(2020, 30)); //inicio
+        offer.setFim(LocalDate.ofYearDay(2020, 30));
+        offer.setInicio(LocalDate.ofYearDay(2020, 30));
         return offer;
     }
 

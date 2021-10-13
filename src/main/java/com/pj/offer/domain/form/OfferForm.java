@@ -17,8 +17,10 @@ import java.util.List;
 @ToString
 public class OfferForm implements Serializable{
 
+
     @NotNull(message = "{field.products.not.null}")
     private List<ProductForm> products;
+
     @NotNull(message = "{field.inicio.not.null}")
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd", timezone = "GMT-03")
     @FutureOrPresent

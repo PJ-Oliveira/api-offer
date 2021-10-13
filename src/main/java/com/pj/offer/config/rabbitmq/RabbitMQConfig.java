@@ -14,7 +14,6 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class RabbitMQConfig {
-
     public static final String QUEUE = "Product";
     public static final String EXCHANGE = "message_exchange";
     public static final String ROUNTING_KEY = "message_routingKey";
@@ -25,7 +24,6 @@ public class RabbitMQConfig {
     private String username;
     @Value("${spring-rabbitmq-password}")
     private String password;
-
 
     @Bean
     public Queue queue(){

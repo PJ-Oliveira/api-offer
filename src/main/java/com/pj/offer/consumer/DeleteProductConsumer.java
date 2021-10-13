@@ -30,7 +30,7 @@ public class DeleteProductConsumer {
             productService.deleteProductByIdProduct(product.getIdProduct());
             log.warn("If id " + product.getIdProduct() + "does not exist, it will catch a Exception");
         }catch (Exception exception) { exception.printStackTrace();
-        log.error("Exception " + exception + " caught.");
+            log.error("Exception " + exception + " caught.");
         }
     }
 }

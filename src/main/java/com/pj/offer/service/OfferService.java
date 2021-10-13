@@ -42,7 +42,7 @@ public class OfferService {
     public List<OfferDto> findAll(Pageable pageable){
         Page<Offer> offerPage = offerRepository.findAll(pageable);
         log.info("All offer will be listed in a pageable way");
-        log.warn("If offers does not exist at all, then a exception will be thrown");
+        log.warn("If offers does not exist at all, then an exception will be thrown");
         List<Offer> offer = offerPage.getContent();
         log.info("{}", offer);
         return offer.stream().map(x -> modelMapper.map(x, OfferDto.class)).collect(Collectors.toList());
@@ -51,14 +51,14 @@ public class OfferService {
     public void deleteOffer(Long id){
         Offer offer = offerRepository.getById(id);
         log.info("Such offer will be deleted: {}!", id);
-        log.warn("If {} does not exist, then a exception will be thrown!", id);
+        log.warn("If {} does not exist, then an exception will be thrown!", id);
         this.offerRepository.deleteById(id);
         log.info("Offer {} successfully deleted", id);
     }
 
     public Optional<Offer> getOptionalOfferByValidId(Long id) {
         log.info("Id {} will be search for!", id);
-        log.warn("If {} does not exist, then a exception will be thrown!", id);
+        log.warn("If {} does not exist, then an exception will be thrown!", id);
         return offerRepository.getOnlyUnexpiredOfferById(id);
     }
 
